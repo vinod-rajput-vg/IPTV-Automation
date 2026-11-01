@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Build channels.json from the generator's public channel catalog.
+"""Build channels.json and category TXT playlists from the public channel catalog.
 
-This intentionally does not imitate browser sessions, bypass access controls,
-or attempt to resolve protected playback tokens. If api.php is unavailable to
-a plain HTTP client, the workflow fails rather than publishing stale IDs.
+This does not imitate browser sessions, bypass access controls, or resolve
+protected playback tokens. If api.php is unavailable to a plain HTTP client,
+the workflow fails rather than publishing stale IDs.
 """
 
 from __future__ import annotations
@@ -18,15 +18,34 @@ from zoneinfo import ZoneInfo
 
 BASE_URL = "https://rkdy-linkgen.wasmer.app"
 CATALOG_URL = f"{BASE_URL}/api.php"
-OUTPUT_FILE = Path("channels.json")
+JSON_OUTPUT = Path("channels.json")
+TXT_OUTPUT = Path("infotainment.txt")
 
 TARGETS = {
-    "DISCOVERY HINDI": "Discovery HD",
-    "SONY BBC EARTH": "Sony BBC Earth HD",
-    "ANIMAL PLANET | IN": "Animal Planet HD",
-    "NATGEO WILD HINDI": "Nat Geo Wild HD",
-    "NATIONAL GEOGRAPHIC HD | IN": "National Geographic HD",
-    "HISTORY HINDI": "History TV18 HD",
+    "DISCOVERY HINDI": {
+        "name": "Discovery HD",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/082c33fedac20343e59eb52d7d13a139.png",
+    },
+    "SONY BBC EARTH": {
+        "name": "Sony BBC Earth HD",
+        "logo": "https://d2ljy97uzhlwv2.cloudfront.net/sonypicturesnetworksindia/logo/32_254.png",
+    },
+    "ANIMAL PLANET | IN": {
+        "name": "Animal Planet HD",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/36d31ab0f2693fcdc87bcb4ffec3bcb8.png",
+    },
+    "NATGEO WILD HINDI": {
+        "name": "Nat Geo Wild HD",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/c6b17fad2bf31a052f3dd2c688ae3257.png",
+    },
+    "NATIONAL GEOGRAPHIC HD | IN": {
+        "name": "National Geographic HD",
+        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/a59081e5d6c95ca73f6f89855fb37a18.png",
+    },
+    "HISTORY HINDI": {
+        "name": "History TV18 HD",
+        "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/history-tv18-hd-in.png",
+    },
 }
 
 
@@ -62,7 +81,7 @@ def fetch_catalog() -> list[dict]:
     return payload
 
 
-def build_output(catalog: list[dict]) -> dict:
+def find_targets(catalog: list[dict]) -> list[tuple[str, dict, dict]]:
     by_name: dict[str, dict] = {}
     for channel in catalog:
         if not isinstance(channel, dict):
@@ -75,18 +94,27 @@ def build_output(catalog: list[dict]) -> dict:
     if missing:
         raise RuntimeError("Missing target channel(s): " + ", ".join(missing))
 
-    channels = []
-    for catalog_name, display_name in TARGETS.items():
+    result = []
+    for catalog_name, metadata in TARGETS.items():
         channel = by_name[catalog_name]
         channel_id = str(channel.get("id", "")).strip()
         if not channel_id:
-            raise RuntimeError(f"{display_name} has no catalog ID.")
+            raise RuntimeError(f"{metadata['name']} has no catalog ID.")
+        result.append((catalog_name, channel, metadata))
 
+    return result
+
+
+def build_json(targets: list[tuple[str, dict, dict]]) -> dict:
+    channels = []
+    for _, channel, metadata in targets:
+        channel_id = str(channel["id"]).strip()
         channels.append(
             {
-                "name": display_name,
+                "name": metadata["name"],
                 "id": channel_id,
                 "group": str(channel.get("group", "")),
+                "logo": metadata["logo"],
                 "url": f"{BASE_URL}/play.php?id={channel_id}",
             }
         )
@@ -101,15 +129,31 @@ def build_output(catalog: list[dict]) -> dict:
     }
 
 
+def build_txt(targets: list[tuple[str, dict, dict]]) -> str:
+    entries = []
+    for _, channel, metadata in targets:
+        channel_id = str(channel["id"]).strip()
+        stream_url = f"{BASE_URL}/play.php?id={channel_id}"
+        entries.append(
+            f"{metadata['name']}\n{metadata['logo']}\n{stream_url}"
+        )
+    return "\n\n".join(entries) + "\n"
+
+
 def main() -> int:
     try:
         catalog = fetch_catalog()
-        result = build_output(catalog)
-        OUTPUT_FILE.write_text(
+        targets = find_targets(catalog)
+        result = build_json(targets)
+
+        JSON_OUTPUT.write_text(
             json.dumps(result, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
         )
-        print(f"Wrote {len(result['channels'])} channel URLs to {OUTPUT_FILE}.")
+        TXT_OUTPUT.write_text(build_txt(targets), encoding="utf-8")
+
+        print(f"Wrote {len(result['channels'])} channel URLs to {JSON_OUTPUT}.")
+        print(f"Wrote category playlist to {TXT_OUTPUT}.")
         return 0
     except Exception as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
