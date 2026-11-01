@@ -22,30 +22,13 @@ OUTPUT_DIR = Path("Output")
 JSON_OUTPUT = OUTPUT_DIR / "channels.json"
 
 TARGETS = {
-    "DISCOVERY HINDI": {
-        "name": "Discovery HD",
-        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/082c33fedac20343e59eb52d7d13a139.png",
-    },
-    "SONY BBC EARTH": {
-        "name": "Sony BBC Earth HD",
-        "logo": "https://d2ljy97uzhlwv2.cloudfront.net/sonypicturesnetworksindia/logo/32_254.png",
-    },
-    "ANIMAL PLANET | IN": {
-        "name": "Animal Planet HD",
-        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/36d31ab0f2693fcdc87bcb4ffec3bcb8.png",
-    },
-    "NATGEO WILD HINDI": {
-        "name": "Nat Geo Wild HD",
-        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/c6b17fad2bf31a052f3dd2c688ae3257.png",
-    },
-    "NATIONAL GEOGRAPHIC HD | IN": {
-        "name": "National Geographic HD",
-        "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/a59081e5d6c95ca73f6f89855fb37a18.png",
-    },
-    "HISTORY HINDI": {
-        "name": "History TV18 HD",
-        "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/history-tv18-hd-in.png",
-    },
+    "DISCOVERY HINDI": {"name": "Discovery HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/082c33fedac20343e59eb52d7d13a139.png"},
+    "SONY BBC EARTH": {"name": "Sony BBC Earth HD", "logo": "https://d2ljy97uzhlwv2.cloudfront.net/sonypicturesnetworksindia/logo/32_254.png"},
+    "ANIMAL PLANET | IN": {"name": "Animal Planet HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/36d31ab0f2693fcdc87bcb4ffec3bcb8.png"},
+    "NATGEO WILD HINDI": {"name": "Nat Geo Wild HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/c6b17fad2bf31a052f3dd2c688ae3257.png"},
+    "NATIONAL GEOGRAPHIC HD | IN": {"name": "National Geographic HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/a59081e5d6c95ca73f6f89855fb37a18.png"},
+    "HISTORY HINDI": {"name": "History TV18 HD", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/history-tv18-hd-in.png"},
+
     "SONY MAX": {"name": "Sony Max HD", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-hd-in.png"},
     "SONY MAX 2": {"name": "Sony Max 2", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-2-in.png"},
     "AND PICTURES": {"name": "&Pictures HD", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/and-pictures-hd-in.png"},
