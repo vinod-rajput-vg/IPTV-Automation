@@ -22,7 +22,11 @@ OUTPUT_FILE = Path("channels.json")
 
 TARGETS = {
     "DISCOVERY HINDI": "Discovery HD",
-    "SONY BBC EARTH": "Sony BBC Earth HD",
+    "SONY BBC EARTH": "Sony BBC Earth HD"
+    "ANIMAL PLANET | IN": "Animal Planet HD"
+    "NATGEO WILD HINDI": "Nat Geo Wild HD"
+    "NATIONAL GEOGRAPHIC HD | IN": "National Geographic HD"
+    "HISTORY HINDI": "History TV18 HD,
 }
 
 
