@@ -18,8 +18,8 @@ from zoneinfo import ZoneInfo
 
 BASE_URL = "https://rkdy-linkgen.wasmer.app"
 CATALOG_URL = f"{BASE_URL}/api.php"
-JSON_OUTPUT = Path("channels.json")
-TXT_OUTPUT = Path("infotainment.txt")
+JSON_OUTPUT = Path("Output/channels.json")
+TXT_OUTPUT = Path("Output/infotainment.txt")
 
 TARGETS = {
     "DISCOVERY HINDI": {
@@ -146,7 +146,7 @@ def main() -> int:
         targets = find_targets(catalog)
         result = build_json(targets)
 
-        JSON_OUTPUT.write_text(
+        JSON_OUTPUT.parent.mkdir(parents=True, exist_ok=True)\n\n        JSON_OUTPUT.write_text(
             json.dumps(result, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
         )
