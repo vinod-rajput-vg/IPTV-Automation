@@ -1,0 +1,2840 @@
+    "KRISHNA BHAJAN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "AASTHA BHAJAN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "AASTHA TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "AASTHA TV USA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "AASTHA TV UK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ARIHANT": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "BABULNATH TEMPLE MUMBAI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "LORD BUDDHA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DISHA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DIVYA TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MORNING GANESH BHAJANS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HARE KRISHNA TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HARE KRISHNA PRAVACHAN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "BHAKTI SAGAR 2": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "EPIC": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ISHWAR TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "JINVANI TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DARSHAN 24": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MATVMH1 SHRADDHA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "OM SHANTI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SADHNA CHANNEL": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SATSANG": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SANTVANI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SARV DHARAM": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SANSKAR": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SANSKAR UK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SARV DHARM SANG": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SHUBH": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SHUBHSANDESH": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SOHAM TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "PARAS TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "PEACE OF MIND": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "PRARTHANA BHAWAN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SHRI HANUMAN MANDIR": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SANKHAYA TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDU HERITAGE CENTER": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDU SABHA TEMPLE": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "BHAKHTI SPECIAL 1": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "BHAKHTI SPECIAL 2": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "IS TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SHRI SAIBABA LIVE DARSHAN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SHRI RAM KATHA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SWAR SHREE": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "VIVEK CHUNMANI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MAHAMANDLESHWAR SARASWATI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "IMPORTANT KATHA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "CHINMAYA CHANNEL": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SHREE SOMNATH TEMPLE": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SHRI MAHAKALESHWAR JYOTIRLINGA TEMPLE": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "WHATS NEW | WATCH TV....": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "AAJ TAK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "AAJ TAK..": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "INDIA TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "INDIA TV.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "REPUBLIC BHARAT": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "REPUBLIC BHARAT.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "REPUBLIC TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "REPUBLIC TV..": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ABP NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ABP NEWS.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "TV9 BHARAT": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "TV9 BHARATVARSH.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE NEWS.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "INDIA TODAY": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "INDIA TODAY.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "TIMES NOW": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "TIMES NOW.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "TIMES NOW  NAV BHARAT": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "TIMES NOW  NAV BHARAT.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "TIMES NOW WORLD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NEWS 18 INDIA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NEWS 18 INDIA.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "INDIA NEWS.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "INDIA NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NDTV INDIA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NDTV 24X7": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MEDIA ONE NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "CNBC AAWAZ": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "CNN NEWS 18": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "WION NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE BUSINESS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NEWS 24": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "K NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "K NEWS INDIA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ET NOW": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MIRROR NOW": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NEWS NATION": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "IBC 24": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NDTV GOOD TIMES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NDTV PROFIT": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DD NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NEWS 1 INDIA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ANAADI NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "IND 24X7": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "INDIA 24X7": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "INDIA NEWS HARYANA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "INDIA NEWS RAJASTHAN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "INDIA NEWS MP": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "IND 24 NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "JANTA TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "JK 24X7 NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "KASHISH NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ANB NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "BANSAL NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NEWS 18 BIHAR": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NEWS 18 MP & CHATTISGARH": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NEWS 18 RAJASTHAN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NEWS 18 MP UK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NEWS STATE MP CHG": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NEWS X INDIA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NEWS 11": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NETWORK 10 NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STV HARYANA NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SWADESH NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "TOTAL TV HARYANA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "TAAZA NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "JAI MAHARASHTRA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SADHNA PRIME NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SUDARSHAN NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE HINDUSTAN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE NEWS BIHAR": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE NEWS MP & CHG": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE NEWS RAJASTHAN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "BHARAT SAMACHAR": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DD INDIA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI KHABAR": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "INH 247": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SADHNA NEWS PLUS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GOOD NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ARYAN TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MKN NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NEWS 24 MPCG": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NEWS STATE UP UK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NONSTOP SAMACHAR": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "WHATS NEW | WATCH TV.....": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "BIGG BOSS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "BIGG BOSS BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "BIGG BOSS UK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "BIGG BOSS EAST": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "BIGG BOSS WEST": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 THE TRAITORS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR PLUS HD USA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "UTSAV PLUS HD UK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "UTSAV PLUS FHD BK UK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR PLUS HD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR PLUS BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR BHARAT HD USA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR BHARAT HD UK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR BHARAT HD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR BHARAT BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONY TV USA HD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONY TV CANADA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONY TV UK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONY TV HD | UK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONY TV HD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONY TV BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONY PAL": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONY PAL USA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONY WAH": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONY KAL": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SAB TV USA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SAB TV UK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SAB TV UK BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SAB TV HD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SAB TV BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "AAPKA COLORS HD USA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "AAPKA COLORS CANADA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "COLORS UK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "COLORS UK BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "COLORS HD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "COLORS BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "COLORS RISHTEY": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "COLORS RISHTEY US": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "COLORS RISHTEY UK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "COLORS INFINITY": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE TV USA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE TV CANADA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE TV UK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE TV HD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE TV BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE WORLD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE ANMOL": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE ZEST": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE ANMOL CINEMA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE 5": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "AND TV USA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "AND TV CANADA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "AND TV BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "AND PICTURES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "AND PICTURES USA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DANGAL TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DD NATIONAL IN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "9X JALWA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "9XM": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MTV INDIA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "BIG MAGIC GANGA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "B4U MUSIC CANADA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "B4U MUSIC UK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "B4U KADAK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MUSIC INDIA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HAREKRISHNA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZOOM": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MTV HD | IN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "JUS HINDI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZING | IN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "INSYNC MUSIC": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SHOWBOX": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZING": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "CINEPLEX": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "TLC | IN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DISCOVERY HINDI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DISCOVERY WORLD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DISCOVERY SCIENCE INDIA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DISCOVERY TURBO": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HISTORY HINDI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HISTORY TV 18 ENGLISH": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "TRAVEL XP ENGLISH": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "TRAVEL XP HINDI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONY BBC EARTH": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONY PIX": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NATIONAL GEOGRAPHIC HD | IN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NATGEO HINDI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NATGEO WILD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NATGEO WILD HINDI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ANIMAL PLANET | IN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ANIMAL PLANET HINDI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "INVESTIAGATION DESCOVERY HINDI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "FOOD FOOD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR UTSAV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "E 24": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "EPIC HD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "TV ASIA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MN PLUS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MNX": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MOVIES NOW": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ROMEDY NOW": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR MOVIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR MOVIES SELECT": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR PRAVAH": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR PRAVAH MOVIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NIMBARK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "RAJYA SABHA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZOOM US": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NAVBHARAT": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GOOD NEWS TODAY": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "LOK SABHA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GOLDMINES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SHRADDHA TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "CINEPLEX USA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZING TV US": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "B4U MUSIC USA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "INH 24X7": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DANGAL TV 2": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GREEN CHILLIES TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "FOOD XP": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "CNBC TV 18 PRIME": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DNN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "JAN TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "KHABAR FAST": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DD BIHAR": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DD BHARATI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DD MADHYA PRADESH": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DD NATIONAL | IN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DD RAJASTHAN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DD UP": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "XXTREAME JOBS HINDI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SOUTH STATION": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SAI LEELA TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ALL TIME MOVIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DISHOOM MOVIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "BOLLYWOOD CLASSIC.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "BOLLYWOOD FILMS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NH BOLLY RAGA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "UTSAV GOLD UK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR GOLD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR GOLD BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR GOLD 2": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR GOLD 2 BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR GOLD SELECT": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR GOLD SELECT BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR GOLD USA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR GOLD ROMANCE": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR GOLD THRILLS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONY MAX USA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONY MAX UK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONY MAX": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONY MAX BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONY MAX 2": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONY MAX 2 BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONYMAX 2 UK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE CINEMA USA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE CINEMA UK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE CINEMA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE CINEMA BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE ACTION": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE CLASSIC": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE BOLLYWOOD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GOLD MINES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GOLDMINES BOLLYWOOD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "B4U MOVIES USA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "B4U MOVIES UK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "B4U MOVIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "B4U MOVIES BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR UTSAV MOVIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MANORANJHAN TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MANORANJHAN GRAND": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MANORANJHAN MOVIES SD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "AND XPLOR": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "COLORS CINEPLEX UK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "COLORS CINEPLEX": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "COLORS INFINITY | IN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MH ONE DIL SE": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SHUBH CINEMA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "COLORS CINEPLEX USA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SHEMAROO BOLLYWOOD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "BOLLYWOOD MASALA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MAHUA PLAY": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MAHAA MAX": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI UPCOMING MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI LATEST MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI NETFLIX MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI AMAZON MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI DISNEY MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI BOX OFFICE COLLECTION (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "FILMFARE WINNING MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI SUPERHIT MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI CLASSIC BLOCKBUSTER (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI ALL TIME HIT MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI ACTION MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI ADVENTURE MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI COMEDY MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI CRIME MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI FAMILY MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI HISTORICAL MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI FANTASY MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI ROMANTIC MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI SUSPENCEFUL MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI THRILLER MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI SUBTITLE 2026 - 2020 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI SUBTITLE 2019 - 2010 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI SUBTITLE 2009 - 2000 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI SUBTITLE BEFORE 2000 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI OLD COLLECTION 1 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI OLD COLLECTION 2 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI OLD COLLECTION 3 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI OLD COLLECTION 4 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI ENGLISH DUBBED MOVIES 1 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI ENGLISH DUBBED MOVIES 2 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI ENGLISH DUBBED MOVIES 3 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI ENGLISH DUBBED MOVIES 4 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI ENGLISH DUBBED MOVIES 5 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI SOUTH DUBBED MOVIES 1 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI SOUTH DUBBED MOVIES 2 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI SOUTH DUBBED MOVIES 3 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI SOUTH DUBBED MOVIES 4 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI SOUTH DUBBED MOVIES 5 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2025 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2024 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2023 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2022 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2021 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2020 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2019 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2018 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2017 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2016 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2015 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2014 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2013 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2012 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2011 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2010 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2009 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2008 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2007 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2006 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2005 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2004 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2003 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2002 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2001 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MOVIES 2000 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "CNBC TV 18 PRIME.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K HINDI OTT UPCOMING SERIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K ZEE5 NEW SERIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K ZEE5 TRENDING 2026": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K ZEE5 TRENDING 2025": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K ZEE5 MOST WATCHED SERIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K ZEE5 ALL TIME FAVOURITE SERIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K SONYLIV NEW SERIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K SONYLIV TRENDING 2026": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K SONYLIV TRENDING 2025": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K SONYLIV MOST WATCHED SERIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K SONYLIV ALL TIME FAVOURITE SERIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K DISNEY HINDI NEW SERIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K DISNEY HINDI TRENDING 2026": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K DISNEY HINDI TRENDING 2025": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K DISNEY HINDI MOST WATCHED SERIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K DISNEY HINDI ALL TIME FAVOURITE SERIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K NETFLIX HINDI NEW SERIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K NETFLIX HINDI TRENDING 2026": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K NETFLIX HINDI TRENDING 2025": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K NETFLIX HINDI MOST WATCHED SERIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K NETFLIX HINDI ALL TIME FAVOURITE SERIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K AMAZON PRIME HINDI NEW SERIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K AMAZON PRIME HINDI TRENDING 2026": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K AMAZON PRIME HINDI TRENDING 2025": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K AMAZON PRIME HINDI MOST WATCHED SERIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K AMAZON PRIME HINDI ALL TIME FAVOURITE SERIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K JIO CINEMA NEW SERIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K JIO CINEMA TRENDING 2026": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K JIO CINEMA TRENDING 2025": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K JIO CINEMA MOST WATCHED SERIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "4K JIO CINEMA ALL TIME FAVOURITE SERIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | AMITABH BACHCHAN (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | SHAH RUKH KHAN (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | AAMIR KHAN (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | SALMAN KHAN (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | AKSHAY KUMAR (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | AJAY DEVGAN (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | SANJAY DUTT (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | RANVEER SINGH (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | ANIL KAPOOR (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | SAIF ALI KHAN (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | JOHN ABRAHAM (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | SUNIEL SHETTY (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | SUNNY DEOL (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | HRITHIK ROSHAN (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | EMRAAN HASHMI (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | SHAHID KAPOOR (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | JOHNNY LEVER (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | AKSHAYE KHANNA (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | NAWAZUDDIN SIDDIQUI (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | ARSHAD WARSI (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | RANBIR KAPOOR (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | VARUN DHAWAN (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | ALIA BHATT (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | KAREENA KAPOOR KHAN (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | KATRINA KAIF (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | SHRADDHA KAPOOR (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | SONAM KAPOOR (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | DEEPIKA PADUKONE (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | AISHWARYA RAI (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | RANI MUKERJI (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | MADHURI DIXIT (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | KAJOL (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | KARISMA KAPOOR (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | RAVEENA TANDON (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | JUHI CHAWLA (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | PRIYANKA CHOPRA (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | KANGANA RANAUT (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | LARA DUTTA (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | BOMAN IRANI (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | AYUSHMANN KHURRANA (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | BOBBY DEOL (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | ARJUN RAMPAL (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | PREM CHOPRA (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | PANKAJ TRIPATHI (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | ADITYA ROY KAPUR (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | DHARMENDRA (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | FEROZ KHAN (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | NANA PATEKAR 4K": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | GOVINDA (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | IRRFAN KHAN (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | ASHUTOSH RANA  (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | DILIP KUMAR (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | RAJESH KHANNA (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | DEV ANAND (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | SIDHARTH MALHOTRA (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | KARTIK AARYAN (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ACTOR | RAJ KAPOOR (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "CARTOON NETWORK FHD | IN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DISCOVERY KIDS | IN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DISNEY JUNIOR | IN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DISNEY TV | IN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HUNGAMA TV | IN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NICK | IN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "POGO | IN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONIC | IN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NICK JR | IN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "KIDS NURSERY RYHMES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24/7 DORAEMON": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24/7 OGGY AND THE COCKROACHES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24/7 CHACHA BHATIJA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24/7 CHHOTA BHEEM": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24/7 CHIKOO AUR BUNTY": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24/7 GATTU BATTU": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24/7 KEYMON ACHE": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24/7 KICKO AND SUPER SPEEDO": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24/7 LITTLE SINGHAM": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24/7 MIGHTY RAJU": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24/7 SUPER BHEEM": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24/7 MOTU PATLU": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24/7 LITTLE KRISHNA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24/7 VIR THE ROBOT BOY": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24/7 ROLL NO 21": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24/7 KID KRRISH": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24/7 MICKEY MOUSE": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24/7 TOM AND JERRY.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24/7 SHINCHAN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI KIDS LATEST MOVIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI KIDS MOVIES 2024 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI KIDS MOVIES 2023 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI KIDS MOVIES 2022 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI KIDS MOVIES 2021 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI KIDS MOVIES 2020 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI KIDS MOVIES 2019 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI KIDS MOVIES 2018 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI KIDS MOVIES 2017 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI KIDS MOVIES 2016 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI KIDS MOVIES 2015 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI KIDS MOVIES 2014 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI KIDS MOVIES 2013 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI KIDS NETFLIX MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI KIDS AMAZON MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SUPER HUNGAMA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "COKE STUDIO 4K": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SHOW BOX | IN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "INSYNC MUSIC.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MUSIC INDIA.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "9XM.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "9X JALWA.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZING.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "E 24.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZOOM.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZOOM US.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "B4U MUSIC": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "B4U MUSIC CANADA.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "B4U MUSIC USA.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "B4U MUSIC UK.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI TOP TRENDING MUSIC (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI SONGS 2026 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI MASHUP (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI ROMANTIC (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI ALL TIME HIT (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HINDI CLASSIC SONGS (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ARIJIT SINGH": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "HIMESH RESHAMMIYA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "LATA MANGESKHAR": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NEHA KAKKAR": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONU KAKKR": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONU NIGAM": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ABHIJEET BHATTACHARYA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MUHAMMAD RAFI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SHAAN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "KAILASH KHER": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SUNIDHI CHAUHAN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "KUMAR SANU": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "KISHORE KUMAR": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MOHIT CHAUHAN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ADNAN SAMI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ASHA BHOSLE": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "KANIKA KAPOOR": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "BADSHAH.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ARMAAN MALIK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SHREYA GHOSHAL": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SUKHWINDER SINGH.": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "K K": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "AR RAHMAN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "JAVED ALI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "LUCKY ALI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "AMIT KUMAR": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "JUBIN NAUTIYAL": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "RICHA SHARMA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ANKIT TIWARI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DARSHAN RAVAL": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "VISHAL MISHRA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 KAPIL SHARMA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 THE GREAT INDIAN KAPIL SHOW": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 KHICHDI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 TAARAK MEHTA KA OOLTAH CHASHMAH": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 KUMKUM BHAGYA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 CID": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 FIR": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 BALIKA VADHU": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 GHAR KI LAKHSHMI BATIYAAN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 YEH RISHTA KYA KHELATA HA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 DILL MILL GAYYE": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 DIYA AUR BAATI HUM": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 JAMAI RAJA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 KITANI MOHABBAT HA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 PAVITRA RISHTA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 SASURAL SIMAR KA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7  BANOO MA TARI DULHAN": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 SAAT PHERE": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 KULLFI KUMARR BAJEWALA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 IZHQBAAAZ": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 BEYHADH": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 SHAKTI ASSTITVA KE EHSAAS KI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 KUCH RANG PYAR KE AISE BHI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 AAHAT": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 PARINEETII": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24x7 MANGAL LAKSHMI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24/7 PUSHPA IMPOSSIBLE": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "24/7 DABANGII MULGII AAYI RE AAYI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "COLORS MARATHI USA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "COLORS MARATHI HD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "COLORS MARATHI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SUN MARATHI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONY MARATHI HD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONY MARATHI USA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR PRAVAH HD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR PRAVAH BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "STAR PRAVAH US": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE MARATHI USA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE MARATHI HD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE MARATHI BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE TALKIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE TALKIES BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE TALKIES US": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE YUVA MARATHI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE 24 TAAS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "FAKT MARATHI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SAAM TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "9X JHAKAAS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NEWS 18 MARATHI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ABP MAJHA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NEWS 18 LOKMAT": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DD SAHYADRI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "LOKSHAHI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SANGEET TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONIC MARATHI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "TV9 MAHARASHTRA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "TV9 MARATHI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "PRAVAH PICTURE": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "TULJA BHAVANI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SHEMAROO MARATHABANI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MAIBOLI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SUN MARATHI BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SONY MARATHI BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MARATHI UPCOMING MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MARATHI LATEST MOVIES 2026 4K": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MARATHI CRIME MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MARATHI COMEDY MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MARATHI BOX OFFICE MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MARATHI ROMANTIC MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MARATHI THRILLER MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MARATHI MOVIES 2025 - 2024 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MARATHI MOVIES 2023 - 2022 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MARATHI MOVIES 2021 - 2020 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MARATHI MOVIES 2019 - 2018 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MARATHI MOVIES 2017 - 2016 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MARATHI MOVIES 2015 - 2014 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "COLORS GUJARATI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "COLORS GUJARATI BK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "COLORS GUJARATI CINEMA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "CLASSIC CINEMA HD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "CINEMA 1 HD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ZEE 24 KALAK": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "KARTAVYA TV ( SPIRITUAL )": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DD GIRNAR": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DIGISHALA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GS TV | GUJ": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "LAKSHYA TV ( SPIRITUAL )": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SHIKSHA TV ( SPIRITUAL )": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "AASTHA GUJARATI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NIMBARK TV HD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GUJARAT FIRST": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GUJARAT SAMACHAR TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "VTV NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GUJARAT FIRST 24X7": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "MANTAVYA NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NEWS CAPITAL": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "SANDESH NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "INDIA NEWS GUJARAT": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "CNBC BAZAAR": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "KALYAN TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "VALAM TV": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "NEWS18 GUJARATI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "ABP ASMITA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "TV9 GUJARAT": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "TV9 GUJARATI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GJ NEWS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GUJARATI UPCOMING MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GUJARATI LATEST MOVIES 2026 (4k)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GUJARATI COMEDY MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GUJARATI ACTION MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GUJARATI CRIME MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GUJARATI ROMANTIC MOVIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GUJARATI MOVIES 2025 - 2024 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GUJARATI MOVIES 2023 - 2022 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GUJARATI MOVIES 2021 - 2020 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GUJARATI MOVIES 2019 - 2018 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GUJARATI MOVIES 2017  -  2016 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GUJARATI MOVIES 2015 - 2014 (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "VITTHAL TEEDI (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "YAMRAJ CALLING (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "VAAT VAAT MAA ADLA BADLI (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GOTI SODA (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "CUTTING (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GUJARATI ROMANTIC SERIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GUJARATI COMEDY SERIES (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GUJARATI COMEDY NATOK (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GUJARATI DRAMA NATOK (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "GUJARATI ROMANTIC NATOK (4K)": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DIWALI AARTI": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DIWALI BHAJANS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DIWALI BANDI CHHOR SHABAD": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DIWALI BANDI CHHOR DIWAS KATHA": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DIWALI BOLLYWOOD MOVIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DIWALI PUNJABI MOVIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DIWALI HINDI KIDS STORIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DIWALI PUNABI KIDS STORIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DIWALI TAMIL KIDS STORIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DIWALI TELUGU KID STORIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DIWALI HINDI SHORT FILMS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DIWALI HINDI SERIES": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DIWALI HINDI SONGS": {
+        "name": "Blank",
+        "logo": "Blank"
+    },
+    "DIWALI PUNJABI SONGS": {
+        "name": "Blank",
+        "logo": "Blank"
+    }
