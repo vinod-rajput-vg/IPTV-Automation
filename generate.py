@@ -46,8 +46,8 @@ TARGETS = {
     "HISTORY HINDI": {"name": "History TV18 HD", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/history-tv18-hd-in.png"},
 
     "ZEE TV HD": {"name": "Zee TV HD", "logo": "https://commons.wikimedia.org/wiki/File:Zee_TV_HD_2025.svg"},
-    "STAR PLUS HD": {"name": "Star Plus HD": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/35b759b6ec89c654df9e4374e9548cbd.png"},
-    "BIGG BOSS": {"name": "Bigg Boss": "https://upload.wikimedia.org/wikipedia/en/d/da/Bigg_Boss_Hindi_TV_Series_Logo.jpg"},
+    "STAR PLUS HD": {"name": "Star Plus HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/35b759b6ec89c654df9e4374e9548cbd.png"},
+    "BIGG BOSS": {"name": "Bigg Boss", "logo": "https://upload.wikimedia.org/wikipedia/en/d/da/Bigg_Boss_Hindi_TV_Series_Logo.jpg"},
 }
 
 # Assign channels to your own playlist categories here. These keys must match
@@ -79,9 +79,9 @@ CATEGORY_TARGETS = {
         "HISTORY HINDI",
     ],
         "drama": [
-        "ZEE TV HD"
-        "STAR PLUS HD"
-        "BIGG BOSS"
+        "ZEE TV HD",
+        "STAR PLUS HD",
+        "BIGG BOSS",
         ],
 }
 
