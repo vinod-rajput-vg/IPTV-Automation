@@ -11,11 +11,6 @@ GitHub Actions runs at 12:05 AM and 12:05 PM India Standard Time (IST):
 
 Run manually from **Actions → Refresh channel URLs → Run workflow**.
 
-## Channels
-
-- Discovery Hindi
-- Sony BBC Earth
-
 ## Output
 
 The workflow writes current catalog IDs and corresponding `play.php?id=...` URLs to `channels.json`, then commits the file only when it changes.
