@@ -22,13 +22,6 @@ OUTPUT_DIR = Path("Output")
 JSON_OUTPUT = OUTPUT_DIR / "channels.json"
 
 TARGETS = {
-    "DISCOVERY HINDI": {"name": "Discovery HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/082c33fedac20343e59eb52d7d13a139.png"},
-    "SONY BBC EARTH": {"name": "Sony BBC Earth HD", "logo": "https://d2ljy97uzhlwv2.cloudfront.net/sonypicturesnetworksindia/logo/32_254.png"},
-    "ANIMAL PLANET | IN": {"name": "Animal Planet HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/36d31ab0f2693fcdc87bcb4ffec3bcb8.png"},
-    "NATGEO WILD HINDI": {"name": "Nat Geo Wild HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/c6b17fad2bf31a052f3dd2c688ae3257.png"},
-    "NATIONAL GEOGRAPHIC HD | IN": {"name": "National Geographic HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/a59081e5d6c95ca73f6f89855fb37a18.png"},
-    "HISTORY HINDI": {"name": "History TV18 HD", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/history-tv18-hd-in.png"},
-
     "SONY MAX": {"name": "Sony Max HD", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-hd-in.png"},
     "SONY MAX 2": {"name": "Sony Max 2", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-2-in.png"},
     "AND PICTURES": {"name": "&Pictures HD", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/and-pictures-hd-in.png"},
@@ -44,19 +37,22 @@ TARGETS = {
     "STAR UTSAV MOVIES": {"name": "Star Utsav Movies", "logo": "https://intvschedule.com/logo/star-utsav-movies.webp"},
     "ZEE ANMOL CINEMA": {"name": "Zee Anmol Cinema", "logo": "https://images.weserv.nl/?url=https://tv-site.b-cdn.net/images/channel-logo/zee-anmol-cinema.png"},
     "COLORS CINEPLEX": {"name": "Colors Cineplex", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/fa1e0b003da3eaef8602cbfb2833231f.png"},
+
+        "DISCOVERY HINDI": {"name": "Discovery HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/082c33fedac20343e59eb52d7d13a139.png"},
+    "SONY BBC EARTH": {"name": "Sony BBC Earth HD", "logo": "https://d2ljy97uzhlwv2.cloudfront.net/sonypicturesnetworksindia/logo/32_254.png"},
+    "ANIMAL PLANET | IN": {"name": "Animal Planet HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/36d31ab0f2693fcdc87bcb4ffec3bcb8.png"},
+    "NATGEO WILD HINDI": {"name": "Nat Geo Wild HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/c6b17fad2bf31a052f3dd2c688ae3257.png"},
+    "NATIONAL GEOGRAPHIC HD | IN": {"name": "National Geographic HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/a59081e5d6c95ca73f6f89855fb37a18.png"},
+    "HISTORY HINDI": {"name": "History TV18 HD", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/history-tv18-hd-in.png"},
+
+    "ZEE TV HD": {"name": "Zee TV HD", "logo": "https://commons.wikimedia.org/wiki/File:Zee_TV_HD_2025.svg"},
+    "STAR PLUS HD": {"name": "Star Plus HD": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/35b759b6ec89c654df9e4374e9548cbd.png"},
+    "BIGG BOSS": {"name": "Bigg Boss": "https://upload.wikimedia.org/wikipedia/en/d/da/Bigg_Boss_Hindi_TV_Series_Logo.jpg"},
 }
 
 # Assign channels to your own playlist categories here. These keys must match
 # the catalog names in TARGETS. Empty categories are skipped (no blank files).
 CATEGORY_TARGETS = {
-    "infotainment": [
-        "DISCOVERY HINDI",
-        "SONY BBC EARTH",
-        "ANIMAL PLANET | IN",
-        "NATGEO WILD HINDI",
-        "NATIONAL GEOGRAPHIC HD | IN",
-        "HISTORY HINDI",
-    ],
     "entertainment": [
         "SONY MAX",
         "SONY MAX 2",
@@ -74,7 +70,19 @@ CATEGORY_TARGETS = {
         "ZEE ANMOL CINEMA",
         "COLORS CINEPLEX",
     ],
-    "news": [],
+        "infotainment": [
+        "DISCOVERY HINDI",
+        "SONY BBC EARTH",
+        "ANIMAL PLANET | IN",
+        "NATGEO WILD HINDI",
+        "NATIONAL GEOGRAPHIC HD | IN",
+        "HISTORY HINDI",
+    ],
+        "drama": [
+        "ZEE TV HD"
+        "STAR PLUS HD"
+        "BIGG BOSS"
+        ],
 }
 
 
