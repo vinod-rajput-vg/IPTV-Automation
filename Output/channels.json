@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-01T19:54:06+05:30",
+  "updated_at": "2026-11-01T20:00:03+05:30",
   "source": "https://rkdy-linkgen.wasmer.app/api.php",
   "channels": [
     {
@@ -153,7 +153,7 @@
       "name": "Zee TV HD",
       "id": "c7454f8b7edd1f5fe9a0",
       "group": "HINDI | TV",
-      "logo": "https://commons.wikimedia.org/wiki/File:Zee_TV_HD_2025.svg",
+      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/zee-tv-hd-in.png",
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=c7454f8b7edd1f5fe9a0"
     },
     {
