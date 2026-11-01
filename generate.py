@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build channels.json and category TXT playlists from the public channel catalog.
+"""Build channels.json and manually categorized TXT playlists from the public catalog.
 
 This does not imitate browser sessions, bypass access controls, or resolve
 protected playback tokens. If api.php is unavailable to a plain HTTP client,
@@ -18,8 +18,8 @@ from zoneinfo import ZoneInfo
 
 BASE_URL = "https://rkdy-linkgen.wasmer.app"
 CATALOG_URL = f"{BASE_URL}/api.php"
-JSON_OUTPUT = Path("Output/channels.json")
-TXT_OUTPUT = Path("Output/infotainment.txt")
+OUTPUT_DIR = Path("Output")
+JSON_OUTPUT = OUTPUT_DIR / "channels.json"
 
 TARGETS = {
     "DISCOVERY HINDI": {
@@ -46,6 +46,21 @@ TARGETS = {
         "name": "History TV18 HD",
         "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/history-tv18-hd-in.png",
     },
+}
+
+# Assign channels to your own playlist categories here. These keys must match
+# the catalog names in TARGETS. Empty categories are skipped (no blank files).
+CATEGORY_TARGETS = {
+    "infotainment": [
+        "DISCOVERY HINDI",
+        "SONY BBC EARTH",
+        "ANIMAL PLANET | IN",
+        "NATGEO WILD HINDI",
+        "NATIONAL GEOGRAPHIC HD | IN",
+        "HISTORY HINDI",
+    ],
+    "entertainment": [],
+    "news": [],
 }
 
 
@@ -134,10 +149,34 @@ def build_txt(targets: list[tuple[str, dict, dict]]) -> str:
     for _, channel, metadata in targets:
         channel_id = str(channel["id"]).strip()
         stream_url = f"{BASE_URL}/play.php?id={channel_id}"
-        entries.append(
-            f"{metadata['name']}\n{metadata['logo']}\n{stream_url}"
-        )
-    return "\n\n".join(entries) + "\n"
+        entries.append(f"{metadata['name']}\n{metadata['logo']}\n{stream_url}")
+    return "\n\n".join(entries) + ("\n" if entries else "")
+
+
+def build_category_playlists(
+    targets: list[tuple[str, dict, dict]],
+) -> dict[Path, str]:
+    targets_by_name = {catalog_name: (channel, metadata) for catalog_name, channel, metadata in targets}
+    playlists = {}
+
+    for category, channel_names in CATEGORY_TARGETS.items():
+        entries = []
+        for catalog_name in channel_names:
+            if catalog_name not in targets_by_name:
+                raise RuntimeError(
+                    f"Category '{category}' references unknown target '{catalog_name}'."
+                )
+            channel, metadata = targets_by_name[catalog_name]
+            channel_id = str(channel["id"]).strip()
+            stream_url = f"{BASE_URL}/play.php?id={channel_id}"
+            entries.append(
+                f"{metadata['name']}\n{metadata['logo']}\n{stream_url}"
+            )
+
+        if entries:
+            playlists[OUTPUT_DIR / f"{category}.txt"] = "\n\n".join(entries) + "\n"
+
+    return playlists
 
 
 def main() -> int:
@@ -145,17 +184,20 @@ def main() -> int:
         catalog = fetch_catalog()
         targets = find_targets(catalog)
         result = build_json(targets)
+        playlists = build_category_playlists(targets)
 
-        JSON_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-
+        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
         JSON_OUTPUT.write_text(
             json.dumps(result, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
         )
-        TXT_OUTPUT.write_text(build_txt(targets), encoding="utf-8")
+
+        for path, content in playlists.items():
+            path.write_text(content, encoding="utf-8")
 
         print(f"Wrote {len(result['channels'])} channel URLs to {JSON_OUTPUT}.")
-        print(f"Wrote category playlist to {TXT_OUTPUT}.")
+        for path in playlists:
+            print(f"Wrote category playlist to {path}.")
         return 0
     except Exception as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
