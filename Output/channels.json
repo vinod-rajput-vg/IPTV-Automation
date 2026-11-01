@@ -1,49 +1,7 @@
 {
-  "updated_at": "2026-11-01T19:47:34+05:30",
+  "updated_at": "2026-11-01T19:54:06+05:30",
   "source": "https://rkdy-linkgen.wasmer.app/api.php",
   "channels": [
-    {
-      "name": "Discovery HD",
-      "id": "ca21a5a1e003cbe09b29",
-      "group": "HINDI | TV",
-      "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/082c33fedac20343e59eb52d7d13a139.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=ca21a5a1e003cbe09b29"
-    },
-    {
-      "name": "Sony BBC Earth HD",
-      "id": "228ad9edbcb4ce663784",
-      "group": "HINDI | TV",
-      "logo": "https://d2ljy97uzhlwv2.cloudfront.net/sonypicturesnetworksindia/logo/32_254.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=228ad9edbcb4ce663784"
-    },
-    {
-      "name": "Animal Planet HD",
-      "id": "155c979fa959a9ec3b27",
-      "group": "HINDI | TV",
-      "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/36d31ab0f2693fcdc87bcb4ffec3bcb8.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=155c979fa959a9ec3b27"
-    },
-    {
-      "name": "Nat Geo Wild HD",
-      "id": "d2f1dbb104aa69c2aa11",
-      "group": "HINDI | TV",
-      "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/c6b17fad2bf31a052f3dd2c688ae3257.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=d2f1dbb104aa69c2aa11"
-    },
-    {
-      "name": "National Geographic HD",
-      "id": "204a2dd6e22d51cf5568",
-      "group": "HINDI | TV",
-      "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/a59081e5d6c95ca73f6f89855fb37a18.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=204a2dd6e22d51cf5568"
-    },
-    {
-      "name": "History TV18 HD",
-      "id": "a175c1ed5618179569e9",
-      "group": "HINDI | TV",
-      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/history-tv18-hd-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=a175c1ed5618179569e9"
-    },
     {
       "name": "Sony Max HD",
       "id": "bc10ccc32d897cdb6260",
@@ -148,6 +106,69 @@
       "group": "HINDI | CINEMA",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/fa1e0b003da3eaef8602cbfb2833231f.png",
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=c17c1da7cfb72cfd55cf"
+    },
+    {
+      "name": "Discovery HD",
+      "id": "ca21a5a1e003cbe09b29",
+      "group": "HINDI | TV",
+      "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/082c33fedac20343e59eb52d7d13a139.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=ca21a5a1e003cbe09b29"
+    },
+    {
+      "name": "Sony BBC Earth HD",
+      "id": "228ad9edbcb4ce663784",
+      "group": "HINDI | TV",
+      "logo": "https://d2ljy97uzhlwv2.cloudfront.net/sonypicturesnetworksindia/logo/32_254.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=228ad9edbcb4ce663784"
+    },
+    {
+      "name": "Animal Planet HD",
+      "id": "155c979fa959a9ec3b27",
+      "group": "HINDI | TV",
+      "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/36d31ab0f2693fcdc87bcb4ffec3bcb8.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=155c979fa959a9ec3b27"
+    },
+    {
+      "name": "Nat Geo Wild HD",
+      "id": "d2f1dbb104aa69c2aa11",
+      "group": "HINDI | TV",
+      "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/c6b17fad2bf31a052f3dd2c688ae3257.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=d2f1dbb104aa69c2aa11"
+    },
+    {
+      "name": "National Geographic HD",
+      "id": "204a2dd6e22d51cf5568",
+      "group": "HINDI | TV",
+      "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/a59081e5d6c95ca73f6f89855fb37a18.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=204a2dd6e22d51cf5568"
+    },
+    {
+      "name": "History TV18 HD",
+      "id": "a175c1ed5618179569e9",
+      "group": "HINDI | TV",
+      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/history-tv18-hd-in.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=a175c1ed5618179569e9"
+    },
+    {
+      "name": "Zee TV HD",
+      "id": "c7454f8b7edd1f5fe9a0",
+      "group": "HINDI | TV",
+      "logo": "https://commons.wikimedia.org/wiki/File:Zee_TV_HD_2025.svg",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=c7454f8b7edd1f5fe9a0"
+    },
+    {
+      "name": "Star Plus HD",
+      "id": "d351d5fd8d687456193c",
+      "group": "HINDI | TV",
+      "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/35b759b6ec89c654df9e4374e9548cbd.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=d351d5fd8d687456193c"
+    },
+    {
+      "name": "Bigg Boss",
+      "id": "99469e2edbacf8cf1d1e",
+      "group": "HINDI | TV",
+      "logo": "https://upload.wikimedia.org/wikipedia/en/d/da/Bigg_Boss_Hindi_TV_Series_Logo.jpg",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=99469e2edbacf8cf1d1e"
     }
   ]
 }
