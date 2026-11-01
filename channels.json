@@ -1,7 +1,6 @@
 {
-  "updated_at": null,
-  "status": "unverified",
-  "note": "Initial catalog IDs supplied by the user. The scheduled workflow will replace this file only after it can fetch and validate the live api.php catalog.",
+  "updated_at": "2026-11-01T17:47:10+05:30",
+  "source": "https://rkdy-linkgen.wasmer.app/api.php",
   "channels": [
     {
       "name": "Discovery Hindi",
