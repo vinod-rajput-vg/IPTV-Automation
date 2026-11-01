@@ -21,8 +21,8 @@ CATALOG_URL = f"{BASE_URL}/api.php"
 OUTPUT_FILE = Path("channels.json")
 
 TARGETS = {
-    "DISCOVERY HINDI": "Discovery Hindi",
-    "SONY BBC EARTH": "Sony BBC Earth",
+    "DISCOVERY HINDI": "Discovery HD",
+    "SONY BBC EARTH": "Sony BBC Earth HD",
 }
 
 
