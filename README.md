@@ -4,10 +4,10 @@ Refreshes catalog IDs and constructs channel URLs for two configured channels.
 
 ## Schedule
 
-GitHub Actions runs at 12:02 AM and 12:02 PM India Standard Time (IST):
+GitHub Actions runs at 12:05 AM and 12:05 PM India Standard Time (IST):
 
-- 18:32 UTC daily = 12:02 AM IST (next calendar day)
-- 06:32 UTC daily = 12:02 PM IST
+- 18:35 UTC daily = 12:05 AM IST (next calendar day)
+- 06:35 UTC daily = 12:05 PM IST
 
 Run manually from **Actions → Refresh channel URLs → Run workflow**.
 
