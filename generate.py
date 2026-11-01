@@ -26,7 +26,7 @@ TARGETS = {
     "ANIMAL PLANET | IN": "Animal Planet HD"
     "NATGEO WILD HINDI": "Nat Geo Wild HD"
     "NATIONAL GEOGRAPHIC HD | IN": "National Geographic HD"
-    "HISTORY HINDI": "History TV18 HD,
+    "HISTORY HINDI": "History TV18 HD",
 }
 
 
