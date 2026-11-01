@@ -1,0 +1,19 @@
+{
+  "updated_at": null,
+  "status": "unverified",
+  "note": "Initial catalog IDs supplied by the user. The scheduled workflow will replace this file only after it can fetch and validate the live api.php catalog.",
+  "channels": [
+    {
+      "name": "Discovery Hindi",
+      "id": "ca21a5a1e003cbe09b29",
+      "group": "HINDI | TV",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=ca21a5a1e003cbe09b29"
+    },
+    {
+      "name": "Sony BBC Earth",
+      "id": "228ad9edbcb4ce663784",
+      "group": "HINDI | TV",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=228ad9edbcb4ce663784"
+    }
+  ]
+}
