@@ -31,18 +31,20 @@ jobs:
       - name: Build latest channel URL list
         run: python generate.py
 
-      - name: Commit and push channel list
+      - name: Commit and push channel lists
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           cp channels.json /tmp/channels.generated.json
+          cp infotainment.txt /tmp/infotainment.generated.txt
 
           git fetch origin main
           git reset --hard origin/main
 
           cp /tmp/channels.generated.json channels.json
-          git add channels.json
+          cp /tmp/infotainment.generated.txt infotainment.txt
+          git add channels.json infotainment.txt
 
           if git diff --cached --quiet; then
             echo "No channel changes detected. Creating an empty test commit."
