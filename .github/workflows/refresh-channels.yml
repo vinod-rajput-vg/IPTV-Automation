@@ -2,10 +2,10 @@ name: Refresh channel URLs
 
 on:
   schedule:
-    # 12:02 AM IST = 18:32 UTC on the previous day
-    - cron: "32 18 * * *"
-    # 12:02 PM IST = 06:32 UTC
-    - cron: "32 6 * * *"
+    # 12:05 AM IST = 18:35 UTC on the previous day
+    - cron: "35 18 * * *"
+    # 12:05 PM IST = 06:35 UTC
+    - cron: "35 6 * * *"
   workflow_dispatch:
 
 permissions:
