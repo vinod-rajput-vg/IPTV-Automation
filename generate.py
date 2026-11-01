@@ -146,7 +146,9 @@ def main() -> int:
         targets = find_targets(catalog)
         result = build_json(targets)
 
-        JSON_OUTPUT.parent.mkdir(parents=True, exist_ok=True)\n\n        JSON_OUTPUT.write_text(
+        JSON_OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+
+        JSON_OUTPUT.write_text(
             json.dumps(result, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8",
         )
