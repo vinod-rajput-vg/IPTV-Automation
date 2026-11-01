@@ -22,35 +22,28 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Build latest channel URL list
+      - name: Generate JSON and category TXT playlist
         run: python generate.py
 
-      - name: Commit and push channel lists
+      - name: Commit and push generated files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          cp channels.json /tmp/channels.generated.json
-          cp infotainment.txt /tmp/infotainment.generated.txt
-
-          git fetch origin main
-          git reset --hard origin/main
-
-          cp /tmp/channels.generated.json channels.json
-          cp /tmp/infotainment.generated.txt infotainment.txt
           git add channels.json infotainment.txt
 
           if git diff --cached --quiet; then
-            echo "No channel changes detected. Creating an empty test commit."
-            git commit --allow-empty -m "Test: refresh channel URLs"
-          else
-            git commit -m "Refresh channel URLs"
+            echo "No generated playlist changes detected."
+            exit 0
           fi
 
+          git commit -m "Refresh channel URLs"
           git push origin HEAD:main
