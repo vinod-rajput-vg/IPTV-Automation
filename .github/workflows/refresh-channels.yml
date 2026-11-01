@@ -1,0 +1,44 @@
+name: Refresh channel URLs
+
+on:
+  schedule:
+    # 12:02 AM IST = 18:32 UTC on the previous day
+    - cron: "32 18 * * *"
+    # 12:02 PM IST = 06:32 UTC
+    - cron: "32 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-channels
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build latest channel URL list
+        run: python generate.py
+
+      - name: Commit updated channel list
+        run: |
+          if git diff --quiet -- channels.json; then
+            echo "No channel changes detected."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add channels.json
+          git commit -m "Refresh channel URLs"
+          git push
