@@ -1,0 +1,42 @@
+{
+  "updated_at": "2026-11-01T18:18:07+05:30",
+  "source": "https://rkdy-linkgen.wasmer.app/api.php",
+  "channels": [
+    {
+      "name": "Discovery HD",
+      "id": "ca21a5a1e003cbe09b29",
+      "group": "HINDI | TV",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=ca21a5a1e003cbe09b29"
+    },
+    {
+      "name": "Sony BBC Earth HD",
+      "id": "228ad9edbcb4ce663784",
+      "group": "HINDI | TV",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=228ad9edbcb4ce663784"
+    },
+    {
+      "name": "Animal Planet HD",
+      "id": "155c979fa959a9ec3b27",
+      "group": "HINDI | TV",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=155c979fa959a9ec3b27"
+    },
+    {
+      "name": "Nat Geo Wild HD",
+      "id": "d2f1dbb104aa69c2aa11",
+      "group": "HINDI | TV",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=d2f1dbb104aa69c2aa11"
+    },
+    {
+      "name": "National Geographic HD",
+      "id": "204a2dd6e22d51cf5568",
+      "group": "HINDI | TV",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=204a2dd6e22d51cf5568"
+    },
+    {
+      "name": "History TV18 HD",
+      "id": "a175c1ed5618179569e9",
+      "group": "HINDI | TV",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=a175c1ed5618179569e9"
+    }
+  ]
+}
