@@ -31,11 +31,17 @@ jobs:
       - name: Build latest channel URL list
         run: python generate.py
 
-      - name: Commit updated channel list
+      - name: Commit and push channel list
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+          cp channels.json /tmp/channels.generated.json
+
+          git fetch origin main
+          git reset --hard origin/main
+
+          cp /tmp/channels.generated.json channels.json
           git add channels.json
 
           if git diff --cached --quiet; then
@@ -44,8 +50,5 @@ jobs:
           else
             git commit -m "Refresh channel URLs"
           fi
-
-          git fetch origin main
-          git rebase origin/main
 
           git push origin HEAD:main
