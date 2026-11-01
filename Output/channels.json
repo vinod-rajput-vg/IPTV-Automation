@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-01T18:27:30+05:30",
+  "updated_at": "2026-11-01T18:58:32+05:30",
   "source": "https://rkdy-linkgen.wasmer.app/api.php",
   "channels": [
     {
@@ -43,6 +43,111 @@
       "group": "HINDI | TV",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/history-tv18-hd-in.png",
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=a175c1ed5618179569e9"
+    },
+    {
+      "name": "Sony Max",
+      "id": "bc10ccc32d897cdb6260",
+      "group": "HINDI | CINEMA",
+      "logo": "",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=bc10ccc32d897cdb6260"
+    },
+    {
+      "name": "Sony Max 2",
+      "id": "bc03b6dfbbefbffeefe3",
+      "group": "HINDI | CINEMA",
+      "logo": "",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=bc03b6dfbbefbffeefe3"
+    },
+    {
+      "name": "&Pictures",
+      "id": "0c12106e5c14c39f972d",
+      "group": "HINDI | TV",
+      "logo": "",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=0c12106e5c14c39f972d"
+    },
+    {
+      "name": "Star Gold",
+      "id": "857898f6a7a6802884e5",
+      "group": "HINDI | CINEMA",
+      "logo": "",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=857898f6a7a6802884e5"
+    },
+    {
+      "name": "Star Gold 2",
+      "id": "9ef613c8121b7eb83175",
+      "group": "HINDI | CINEMA",
+      "logo": "",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=9ef613c8121b7eb83175"
+    },
+    {
+      "name": "Star Gold Thrills",
+      "id": "eb8f047b681379db5d5f",
+      "group": "HINDI | CINEMA",
+      "logo": "",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=eb8f047b681379db5d5f"
+    },
+    {
+      "name": "Star Gold Romance",
+      "id": "b9ee6cddb155ca33c51d",
+      "group": "HINDI | CINEMA",
+      "logo": "",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=b9ee6cddb155ca33c51d"
+    },
+    {
+      "name": "Zee Cinema",
+      "id": "ddc6ab5914c9200aab6b",
+      "group": "HINDI | CINEMA",
+      "logo": "",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=ddc6ab5914c9200aab6b"
+    },
+    {
+      "name": "Zee Action",
+      "id": "45e3ec8068590f9ffe81",
+      "group": "HINDI | CINEMA",
+      "logo": "",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=45e3ec8068590f9ffe81"
+    },
+    {
+      "name": "Zee Classic",
+      "id": "04191122202da6c32a83",
+      "group": "HINDI | CINEMA",
+      "logo": "",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=04191122202da6c32a83"
+    },
+    {
+      "name": "Zee Bollywood",
+      "id": "2dc81733077e656666fa",
+      "group": "HINDI | CINEMA",
+      "logo": "",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=2dc81733077e656666fa"
+    },
+    {
+      "name": "Sony Wah",
+      "id": "152ef85f91bcef2b4e0a",
+      "group": "HINDI | TV",
+      "logo": "",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=152ef85f91bcef2b4e0a"
+    },
+    {
+      "name": "Star Utsav Movies",
+      "id": "b2e2a1483b437023babb",
+      "group": "HINDI | CINEMA",
+      "logo": "",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=b2e2a1483b437023babb"
+    },
+    {
+      "name": "Zee Anmol Cinema",
+      "id": "9e0f043c1d23b78ca96c",
+      "group": "HINDI | TV",
+      "logo": "",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=9e0f043c1d23b78ca96c"
+    },
+    {
+      "name": "Colors Cineplex",
+      "id": "c17c1da7cfb72cfd55cf",
+      "group": "HINDI | CINEMA",
+      "logo": "",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=c17c1da7cfb72cfd55cf"
     }
   ]
 }
