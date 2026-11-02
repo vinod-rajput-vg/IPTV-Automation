@@ -22,11 +22,11 @@ OUTPUT_DIR = Path("Output")
 JSON_OUTPUT = OUTPUT_DIR / "channels.json"
 
 TARGETS = {
-    "AND PICTURES": {"name": "&Pictures HD", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/and-pictures-hd-in.png"},
     "STAR GOLD": {"name": "Star Gold HD", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/star-gold-hd-in.png"},
     "STAR GOLD 2": {"name": "Star Gold 2 HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/8bd0df3e5ad35c9b42efa4a720c3680c.png"},
     "STAR GOLD THRILLS": {"name": "Star Gold Thrills", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/6fd63a1a3719b03299aa45daedad36ed.png"},
     "STAR GOLD ROMANCE": {"name": "Star Gold Romance", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/904285d71367035368f9ac8bf8b8f03c.png"},
+    "AND PICTURES": {"name": "&Pictures HD", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/and-pictures-hd-in.png"},
     "SONY MAX": {"name": "Sony Max HD", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-hd-in.png"},
     "SONY MAX 2": {"name": "Sony Max 2", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-2-in.png"},
     "ZEE CINEMA": {"name": "Zee Cinema", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/zee-cinema-in.png"},
