@@ -59,7 +59,7 @@ TARGETS = {
     "ABP NEWS": {"name": "ABP News", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/abp-news-in.png"},
     "INDIA TV": {"name": "India TV", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/india-tv-in.png"},
 
-    "NICK | IN": {"name": "Nickelodeon", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/nick-in.png"},
+    "NICK | IN": {"name": "Nick HD+", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/nick-in.png"},
     "SONIC | IN": {"name": "Sonic", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/nickelodeon-sonic-in.png"},
     "POGO | IN": {"name": "Pogo", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/pogo-in.png"},
     "CARTOON NETWORK FHD | IN": {"name": "Cartoon Network", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/cartoon-network-in.png"},
