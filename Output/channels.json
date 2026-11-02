@@ -1,21 +1,7 @@
 {
-  "updated_at": "2026-11-02T12:03:20+05:30",
+  "updated_at": "2026-11-02T12:09:20+05:30",
   "source": "https://rkdy-linkgen.wasmer.app/api.php",
   "channels": [
-    {
-      "name": "Sony Max HD",
-      "id": "79fe698560e193100748",
-      "group": "HINDI | CINEMA",
-      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-hd-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=79fe698560e193100748"
-    },
-    {
-      "name": "Sony Max 2",
-      "id": "f69e421665c4f5ef1e61",
-      "group": "HINDI | CINEMA",
-      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-2-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=f69e421665c4f5ef1e61"
-    },
     {
       "name": "&Pictures HD",
       "id": "781847cd2dab746754cc",
@@ -50,6 +36,20 @@
       "group": "HINDI | CINEMA",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/904285d71367035368f9ac8bf8b8f03c.png",
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=11af329f81a60d1483fa"
+    },
+    {
+      "name": "Sony Max HD",
+      "id": "79fe698560e193100748",
+      "group": "HINDI | CINEMA",
+      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-hd-in.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=79fe698560e193100748"
+    },
+    {
+      "name": "Sony Max 2",
+      "id": "f69e421665c4f5ef1e61",
+      "group": "HINDI | CINEMA",
+      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-2-in.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=f69e421665c4f5ef1e61"
     },
     {
       "name": "Zee Cinema",
