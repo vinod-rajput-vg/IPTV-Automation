@@ -1,14 +1,7 @@
 {
-  "updated_at": "2026-11-02T18:56:34+05:30",
+  "updated_at": "2026-11-02T19:04:07+05:30",
   "source": "https://rkdy-linkgen.wasmer.app/api.php",
   "channels": [
-    {
-      "name": "&Pictures HD",
-      "id": "1635473e2a644bfb1b88",
-      "group": "HINDI | TV",
-      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/and-pictures-hd-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=1635473e2a644bfb1b88"
-    },
     {
       "name": "Star Gold HD",
       "id": "61ae24643739c69d6454",
@@ -36,6 +29,13 @@
       "group": "HINDI | CINEMA",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/904285d71367035368f9ac8bf8b8f03c.png",
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=f1f4e4c0477ecc58f71c"
+    },
+    {
+      "name": "&Pictures HD",
+      "id": "1635473e2a644bfb1b88",
+      "group": "HINDI | TV",
+      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/and-pictures-hd-in.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=1635473e2a644bfb1b88"
     },
     {
       "name": "Sony Max HD",
