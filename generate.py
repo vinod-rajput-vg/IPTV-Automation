@@ -119,16 +119,16 @@ CATEGORY_TARGETS = {
         "INDIA TV",
     ],
     "kids": [
-        "NICK | IN"
-        "SONIC | IN"
-        "POGO | IN"
-        "CARTOON NETWORK FHD | IN"
-        "SUPER HUNGAMA"
-        "HUNGAMA TV | IN"
-        "24/7 OGGY AND THE COCKROACHES"
-        "24/7 DORAEMON"
-        "24/7 MOTU PATLU"
-        "24/7 CHHOTA BHEEM"
+        "NICK | IN",
+        "SONIC | IN",
+        "POGO | IN",
+        "CARTOON NETWORK FHD | IN",
+        "SUPER HUNGAMA",
+        "HUNGAMA TV | IN",
+        "24/7 OGGY AND THE COCKROACHES",
+        "24/7 DORAEMON",
+        "24/7 MOTU PATLU",
+        "24/7 CHHOTA BHEEM",
     ],
     "drama": [
         "ZEE TV HD",
