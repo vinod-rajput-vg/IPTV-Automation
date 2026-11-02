@@ -79,13 +79,13 @@ TARGETS = {
 # the catalog names in TARGETS. Empty categories are skipped (no blank files).
 CATEGORY_TARGETS = {
     "entertainment": [
-        "SONY MAX",
-        "SONY MAX 2",
         "AND PICTURES",
         "STAR GOLD",
         "STAR GOLD 2",
         "STAR GOLD THRILLS",
         "STAR GOLD ROMANCE",
+        "SONY MAX",
+        "SONY MAX 2",
         "ZEE CINEMA",
         "ZEE ACTION",
         "ZEE CLASSIC",
