@@ -1,174 +1,174 @@
 {
-  "updated_at": "2026-11-02T03:46:43+05:30",
+  "updated_at": "2026-11-02T09:12:09+05:30",
   "source": "https://rkdy-linkgen.wasmer.app/api.php",
   "channels": [
     {
       "name": "Sony Max HD",
-      "id": "a34662a1e3de7332ad84",
+      "id": "27ead22949cfd8dc7fa1",
       "group": "HINDI | CINEMA",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-hd-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=a34662a1e3de7332ad84"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=27ead22949cfd8dc7fa1"
     },
     {
       "name": "Sony Max 2",
-      "id": "10b30052c734d3cc54b5",
+      "id": "447dff15ae495044fbf5",
       "group": "HINDI | CINEMA",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-2-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=10b30052c734d3cc54b5"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=447dff15ae495044fbf5"
     },
     {
       "name": "&Pictures HD",
-      "id": "4a890e1fdb6de6023a7e",
+      "id": "7c99648030a1ea82da47",
       "group": "HINDI | TV",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/and-pictures-hd-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=4a890e1fdb6de6023a7e"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=7c99648030a1ea82da47"
     },
     {
       "name": "Star Gold HD",
-      "id": "fcc12f25bfa00da4d41a",
+      "id": "36b963993091fec22cda",
       "group": "HINDI | CINEMA",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/star-gold-hd-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=fcc12f25bfa00da4d41a"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=36b963993091fec22cda"
     },
     {
       "name": "Star Gold 2 HD",
-      "id": "eb1bc0b12f233c39dfa1",
+      "id": "eee4ff4f32ca409c7f3e",
       "group": "HINDI | CINEMA",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/8bd0df3e5ad35c9b42efa4a720c3680c.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=eb1bc0b12f233c39dfa1"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=eee4ff4f32ca409c7f3e"
     },
     {
       "name": "Star Gold Thrills",
-      "id": "9153866be53cdf57c9ad",
+      "id": "e6b7f6754ac8b7c05284",
       "group": "HINDI | CINEMA",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/6fd63a1a3719b03299aa45daedad36ed.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=9153866be53cdf57c9ad"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=e6b7f6754ac8b7c05284"
     },
     {
       "name": "Star Gold Romance",
-      "id": "537b7d5355c1be9ab636",
+      "id": "f7e0b95553a88d9b723c",
       "group": "HINDI | CINEMA",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/904285d71367035368f9ac8bf8b8f03c.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=537b7d5355c1be9ab636"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=f7e0b95553a88d9b723c"
     },
     {
       "name": "Zee Cinema",
-      "id": "130658e94960a2d590e7",
+      "id": "7d91326e0c82739aa3b8",
       "group": "HINDI | CINEMA",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/zee-cinema-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=130658e94960a2d590e7"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=7d91326e0c82739aa3b8"
     },
     {
       "name": "Zee Action",
-      "id": "51bdc18194b5380251c4",
+      "id": "1a9b5ac2aa9e709e5e8f",
       "group": "HINDI | CINEMA",
       "logo": "https://images.weserv.nl/?url=https://tv-site.b-cdn.net/images/channel-logo/zee-action.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=51bdc18194b5380251c4"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=1a9b5ac2aa9e709e5e8f"
     },
     {
       "name": "Zee Classic",
-      "id": "6730fe57f338deb061d0",
+      "id": "ec370bfba63fbc8c7d86",
       "group": "HINDI | CINEMA",
       "logo": "https://images.weserv.nl/?url=https://tv-site.b-cdn.net/images/channel-logo/zee-classic.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=6730fe57f338deb061d0"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=ec370bfba63fbc8c7d86"
     },
     {
       "name": "Zee Bollywood",
-      "id": "e71d3e6141f8ac1e382f",
+      "id": "5ed0d85c56594f534e33",
       "group": "HINDI | CINEMA",
       "logo": "https://images.weserv.nl/?url=https://tv-site.b-cdn.net/images/channel-logo/zee-bollywood.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=e71d3e6141f8ac1e382f"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=5ed0d85c56594f534e33"
     },
     {
       "name": "Sony Wah",
-      "id": "6e766bf0b61d2af42b2b",
+      "id": "ca44479bee814429122f",
       "group": "HINDI | TV",
       "logo": "https://d2ljy97uzhlwv2.cloudfront.net/sonypicturesnetworksindia/logo/10_258.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=6e766bf0b61d2af42b2b"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=ca44479bee814429122f"
     },
     {
       "name": "Star Utsav Movies",
-      "id": "d4ba84c5216b07acf73b",
+      "id": "d9af8afb5b14e7e0ae06",
       "group": "HINDI | CINEMA",
       "logo": "https://intvschedule.com/logo/star-utsav-movies.webp",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=d4ba84c5216b07acf73b"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=d9af8afb5b14e7e0ae06"
     },
     {
       "name": "Zee Anmol Cinema",
-      "id": "2090861a01d70f1771d8",
+      "id": "e0fed4b0f48aabfa6f90",
       "group": "HINDI | TV",
       "logo": "https://images.weserv.nl/?url=https://tv-site.b-cdn.net/images/channel-logo/zee-anmol-cinema.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=2090861a01d70f1771d8"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=e0fed4b0f48aabfa6f90"
     },
     {
       "name": "Colors Cineplex",
-      "id": "c647b106f37647af832c",
+      "id": "829b6406654644b2463c",
       "group": "HINDI | CINEMA",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/fa1e0b003da3eaef8602cbfb2833231f.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=c647b106f37647af832c"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=829b6406654644b2463c"
     },
     {
       "name": "Discovery HD",
-      "id": "15bb482929f79d65906c",
+      "id": "f2ced4716d3e9b5c46b8",
       "group": "HINDI | TV",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/082c33fedac20343e59eb52d7d13a139.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=15bb482929f79d65906c"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=f2ced4716d3e9b5c46b8"
     },
     {
       "name": "Sony BBC Earth HD",
-      "id": "63287472a8fcdbd1fa5d",
+      "id": "c415a631d40ae4e0fa86",
       "group": "HINDI | TV",
       "logo": "https://d2ljy97uzhlwv2.cloudfront.net/sonypicturesnetworksindia/logo/32_254.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=63287472a8fcdbd1fa5d"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=c415a631d40ae4e0fa86"
     },
     {
       "name": "Animal Planet HD",
-      "id": "f9e378bfe31611a9b3a0",
+      "id": "b00d5c6adafab68f5507",
       "group": "HINDI | TV",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/36d31ab0f2693fcdc87bcb4ffec3bcb8.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=f9e378bfe31611a9b3a0"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=b00d5c6adafab68f5507"
     },
     {
       "name": "Nat Geo Wild HD",
-      "id": "d706d90b38ef0f0a716a",
+      "id": "c9e77d9b3ff43377542e",
       "group": "HINDI | TV",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/c6b17fad2bf31a052f3dd2c688ae3257.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=d706d90b38ef0f0a716a"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=c9e77d9b3ff43377542e"
     },
     {
       "name": "National Geographic HD",
-      "id": "855144724b54bc762052",
+      "id": "d43e8cd4ff7189302801",
       "group": "HINDI | TV",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/a59081e5d6c95ca73f6f89855fb37a18.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=855144724b54bc762052"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=d43e8cd4ff7189302801"
     },
     {
       "name": "History TV18 HD",
-      "id": "3733d590dc182fb48226",
+      "id": "01886eec927f61b5f5d2",
       "group": "HINDI | TV",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/history-tv18-hd-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=3733d590dc182fb48226"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=01886eec927f61b5f5d2"
     },
     {
       "name": "Zee TV HD",
-      "id": "ba32e9511338da1a7ba5",
+      "id": "b71b09b4342d0b86a87f",
       "group": "HINDI | TV",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/zee-tv-hd-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=ba32e9511338da1a7ba5"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=b71b09b4342d0b86a87f"
     },
     {
       "name": "Star Plus HD",
-      "id": "1eb8f16c00af0ce7b71d",
+      "id": "652e78d1f49ac2f7e5e2",
       "group": "HINDI | TV",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/35b759b6ec89c654df9e4374e9548cbd.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=1eb8f16c00af0ce7b71d"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=652e78d1f49ac2f7e5e2"
     },
     {
       "name": "Bigg Boss",
-      "id": "d1e53dd8c3b2663fa6b1",
+      "id": "1c58a71e6a73498b4257",
       "group": "HINDI | TV",
       "logo": "https://upload.wikimedia.org/wikipedia/en/d/da/Bigg_Boss_Hindi_TV_Series_Logo.jpg",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=d1e53dd8c3b2663fa6b1"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=1c58a71e6a73498b4257"
     }
   ]
 }
