@@ -38,12 +38,37 @@ TARGETS = {
     "ZEE ANMOL CINEMA": {"name": "Zee Anmol Cinema", "logo": "https://images.weserv.nl/?url=https://tv-site.b-cdn.net/images/channel-logo/zee-anmol-cinema.png"},
     "COLORS CINEPLEX": {"name": "Colors Cineplex", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/fa1e0b003da3eaef8602cbfb2833231f.png"},
 
-        "DISCOVERY HINDI": {"name": "Discovery HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/082c33fedac20343e59eb52d7d13a139.png"},
+    "DISCOVERY HINDI": {"name": "Discovery HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/082c33fedac20343e59eb52d7d13a139.png"},
     "SONY BBC EARTH": {"name": "Sony BBC Earth HD", "logo": "https://d2ljy97uzhlwv2.cloudfront.net/sonypicturesnetworksindia/logo/32_254.png"},
     "ANIMAL PLANET | IN": {"name": "Animal Planet HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/36d31ab0f2693fcdc87bcb4ffec3bcb8.png"},
     "NATGEO WILD HINDI": {"name": "Nat Geo Wild HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/c6b17fad2bf31a052f3dd2c688ae3257.png"},
     "NATIONAL GEOGRAPHIC HD | IN": {"name": "National Geographic HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/a59081e5d6c95ca73f6f89855fb37a18.png"},
     "HISTORY HINDI": {"name": "History TV18 HD", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/history-tv18-hd-in.png"},
+
+    "TV9 BHARATVARSH.": {"name": "Tv9 Bharatvarsh", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/tv9-bharatvarsh-in.png"},
+    "TIMES NOW  NAV BHARAT": {"name": "Times Now Navbharat", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/bc00f1e02773b93ec36890b5a4ef7ece.png"},
+    "NDTV INDIA": {"name": "NDTV India", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/b69d5a23fcfa02d4c2f47e958c704b46.png"},
+    "DD NEWS": {"name": "DD News", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/16dfa4cb5cb300bfad994dc6acb44c76.png"},
+    "TV9 GUJARATI": {"name": "Tv9 Gujarati", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/f344ea2f99c67074b52150e40cc30c24.png"},
+    "TV9 MARATHI": {"name": "Tv9 Marathi", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/cbfc396076a82705258fb3b019b1153b.png"},
+    "ZEE 24 KALAK": {"name": "Zee 24 Kalak", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/zee-24-kalak-in.png"},
+    "ZEE 24 TAAS": {"name": "Zee 24 Taas", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/zee-24-taas-in.png"},
+    "REPUBLIC BHARAT": {"name": "Republic Bharat", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/republic-bharat-tv-in.png"},
+    "NEWS NATION": {"name": "News Nation", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/cd40fe9e8db4c7662414c19f09e38857.png"},
+    "AAJ TAK": {"name": "Aaj Tak", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/aaj-tak-in.png"},
+    "ABP NEWS": {"name": "ABP News", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/abp-news-in.png"},
+    "INDIA TV": {"name": "India TV", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/india-tv-in.png"},
+
+    "NICK | IN": {"name": "Nickelodeon", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/nick-in.png"},
+    "SONIC | IN": {"name": "Sonic", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/nickelodeon-sonic-in.png"},
+    "POGO | IN": {"name": "Pogo", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/pogo-in.png"},
+    "CARTOON NETWORK FHD | IN": {"name": "Cartoon Network", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/cartoon-network-in.png"},
+    "SUPER HUNGAMA": {"name": "Super Hungama", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/super-hungama-in.png"},
+    "HUNGAMA TV | IN": {"name": "Hungama TV", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/hungama-in.png"},
+    "24/7 OGGY AND THE COCKROACHES": {"name": "Oggy And The Cockroaches 24/7", "logo": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Oggy_and_the_Cockroaches_Logo.webp"},
+    "24/7 DORAEMON": {"name": "Doraemon 24/7", "logo": "https://upload.wikimedia.org/wikipedia/en/c/c8/Doraemon_volume_1_cover.jpg"},
+    "24/7 MOTU PATLU": {"name": "Motu Patlu 24/7", "logo": "https://upload.wikimedia.org/wikipedia/en/3/3b/Motu_Patlu.Jpg"},
+    "24/7 CHHOTA BHEEM": {"name": "Chota Bheem 24/7", "logo": "https://upload.wikimedia.org/wikipedia/en/f/f9/Chhota_Bheem.jpg"},
 
     "ZEE TV HD": {"name": "Zee TV HD", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/zee-tv-hd-in.png"},
     "STAR PLUS HD": {"name": "Star Plus HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/35b759b6ec89c654df9e4374e9548cbd.png"},
@@ -70,7 +95,7 @@ CATEGORY_TARGETS = {
         "ZEE ANMOL CINEMA",
         "COLORS CINEPLEX",
     ],
-        "infotainment": [
+    "infotainment": [
         "DISCOVERY HINDI",
         "SONY BBC EARTH",
         "ANIMAL PLANET | IN",
@@ -78,11 +103,38 @@ CATEGORY_TARGETS = {
         "NATIONAL GEOGRAPHIC HD | IN",
         "HISTORY HINDI",
     ],
-        "drama": [
+    "news": [
+        "TV9 BHARATVARSH.",
+        "TIMES NOW  NAV BHARAT",
+        "NDTV INDIA",
+        "DD NEWS",
+        "TV9 GUJARATI",
+        "TV9 MARATHI",
+        "ZEE 24 KALAK",
+        "ZEE 24 TAAS",
+        "REPUBLIC BHARAT",
+        "NEWS NATION",
+        "AAJ TAK",
+        "ABP NEWS",
+        "INDIA TV",
+    ],
+    "kids": [
+        "NICK | IN"
+        "SONIC | IN"
+        "POGO | IN"
+        "CARTOON NETWORK FHD | IN"
+        "SUPER HUNGAMA"
+        "HUNGAMA TV | IN"
+        "24/7 OGGY AND THE COCKROACHES"
+        "24/7 DORAEMON"
+        "24/7 MOTU PATLU"
+        "24/7 CHHOTA BHEEM"
+    ],
+    "drama": [
         "ZEE TV HD",
         "STAR PLUS HD",
         "BIGG BOSS",
-        ],
+    ],
 }
 
 
