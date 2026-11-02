@@ -1,7 +1,3 @@
-&Pictures HD
-https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/and-pictures-hd-in.png
-https://rkdy-linkgen.wasmer.app/play.php?id=1635473e2a644bfb1b88
-
 Star Gold HD
 https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/star-gold-hd-in.png
 https://rkdy-linkgen.wasmer.app/play.php?id=61ae24643739c69d6454
@@ -17,6 +13,10 @@ https://rkdy-linkgen.wasmer.app/play.php?id=f88e4b8558796d665b15
 Star Gold Romance
 https://jiotvimages.cdn.jio.com/dare_images/images/channel/904285d71367035368f9ac8bf8b8f03c.png
 https://rkdy-linkgen.wasmer.app/play.php?id=f1f4e4c0477ecc58f71c
+
+&Pictures HD
+https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/and-pictures-hd-in.png
+https://rkdy-linkgen.wasmer.app/play.php?id=1635473e2a644bfb1b88
 
 Sony Max HD
 https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-hd-in.png
