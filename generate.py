@@ -79,21 +79,14 @@ def parse_channel_overrides(value: str) -> dict[str, dict]:
         if not line or line.startswith("#"):
             continue
 
-        # Channel IDs may contain spaces. Parse from the right:
-        # the final token is the logo URL, the previous token is the server,
-        # and the token(s) before that are the display name. The catalog key
-        # is matched against known TARGETS entries using the longest prefix.
+        # Match the catalog key first, then read the server at its fixed
+        # position. Display names can contain spaces; logo URLs are one token.
         parts = line.split()
         if len(parts) < 4:
             raise ValueError(
                 "Invalid channel override. Expected: "
                 "CATALOG_KEY SERVER DISPLAY_NAME LOGO_URL"
             )
-
-        logo = parts[-1]
-        server = parts[-2]
-        if server not in ("1", "2"):
-            raise ValueError(f"Invalid server in channel override: {line}")
 
         matched_key = next(
             (
@@ -105,9 +98,16 @@ def parse_channel_overrides(value: str) -> dict[str, dict]:
         if matched_key is None:
             raise ValueError(f"Unknown catalog key in channel override: {line}")
 
-        display_name = " ".join(
-            parts[len(matched_key.split()) + 1:-1]
-        )
+        server_index = len(matched_key.split())
+        server = parts[server_index]
+        if server not in ("1", "2"):
+            raise ValueError(f"Invalid server in channel override: {line}")
+
+        display_name = " ".join(parts[server_index + 1:-1])
+        logo = parts[-1]
+        if logo.startswith("[") and "](" in logo and logo.endswith(")"):
+            logo = logo.split("](", 1)[1][:-1]
+
         if not display_name:
             raise ValueError(f"Missing display name in channel override: {line}")
 
@@ -118,7 +118,6 @@ def parse_channel_overrides(value: str) -> dict[str, dict]:
         }
     return overrides
 
-CHANNEL_OVERRIDES_BY_NAME = parse_channel_overrides(CHANNEL_OVERRIDES)
 DEFAULT_SERVER_PRIORITY = (1, 2)
 
 TARGETS = {
@@ -170,6 +169,8 @@ TARGETS = {
     "STAR PLUS HD": {"name": "Star Plus HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/35b759b6ec89c654df9e4374e9548cbd.png"},
     "BIGG BOSS": {"name": "Bigg Boss", "logo": "https://upload.wikimedia.org/wikipedia/en/d/da/Bigg_Boss_Hindi_TV_Series_Logo.jpg"},
 }
+
+CHANNEL_OVERRIDES_BY_NAME = parse_channel_overrides(CHANNEL_OVERRIDES)
 
 # Assign channels to your own playlist categories here. These keys must match
 # the catalog names in TARGETS. Empty categories are skipped (no blank files).
