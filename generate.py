@@ -335,7 +335,7 @@ def build_json(targets: list[tuple[str, dict, dict]], server_id: int) -> dict:
         channels.append(
             {
                 "name": metadata["name"],
-                "id": channel_id,
+                "id": f'"{channel_id}"',
                 "group": str(channel.get("group", "")),
                 "logo": metadata["logo"],
                 "url": f"{BASE_URL}/play.php?id={channel_id}",
@@ -357,7 +357,7 @@ def build_txt(targets: list[tuple[str, dict, dict]]) -> str:
     for _, channel, metadata in targets:
         channel_id = str(channel["id"]).strip()
         stream_url = f"{BASE_URL}/play.php?id={channel_id}"
-        entries.append(f"{metadata['name']}\n{metadata['logo']}\n{stream_url}")
+        entries.append(f'{metadata["name"]}\n{metadata["logo"]}\n"{stream_url}"')
     return "\n\n".join(entries) + ("\n" if entries else "")
 
 
@@ -413,7 +413,7 @@ def build_category_playlists(
                 if SHOW_SERVER_IN_TXT else channel_name
             )
             entries.append(
-                f"{display_name}\n{channel_logo}\n{stream_url}"
+                f'{display_name}\n{channel_logo}\n"{stream_url}"'
             )
 
         if entries:
