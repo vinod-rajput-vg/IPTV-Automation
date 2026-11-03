@@ -19,9 +19,7 @@ from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 BASE_URL = "https://rkdy-linkgen.wasmer.app"
-CATALOG_URL_TEMPLATE = f"{BASE_URL}/api.php?server={{server_id}}"
 OUTPUT_DIR = Path("Output")
-JSON_OUTPUT = OUTPUT_DIR / "channels.json"
 
 TARGETS = {
     "STAR GOLD": {"name": "Star Gold HD", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/star-gold-hd-in.png"},
@@ -286,7 +284,8 @@ def build_category_playlists(
             )
 
         if entries:
-            playlists[OUTPUT_DIR / f"server_{server_id}_{category}.txt"] = "\n\n".join(entries) + "\n"
+            output_name = f"{category}.txt" if server_id == 1 else f"server_{server_id}_{category}.txt"
+            playlists[OUTPUT_DIR / output_name] = "\n\n".join(entries) + "\n"
 
     return playlists
 
@@ -333,7 +332,7 @@ def main() -> int:
             )
             outputs[json_path] = json.dumps(
                 result, ensure_ascii=False, indent=2,
-            ) + "\\n"
+            ) + "\n"
             outputs.update(playlists)
             generated_count += len(result["channels"])
 
