@@ -7,6 +7,7 @@ on:
     # 12:05 PM IST = 06:35 UTC
     - cron: "35 6 * * *"
   workflow_dispatch:
+  pull_request:
 
 permissions:
   contents: write
@@ -22,18 +23,21 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-        with:
-          ref: main
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
+      - name: Run regression tests
+        run: python -m unittest discover -s tests -v
+
       - name: Generate JSON and category TXT playlist
+        if: github.event_name != 'pull_request'
         run: python generate.py
 
       - name: Commit and push generated files
+        if: github.event_name != 'pull_request'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

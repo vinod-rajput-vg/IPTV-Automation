@@ -9,7 +9,9 @@ the workflow fails rather than publishing stale IDs.
 from __future__ import annotations
 
 import json
+import os
 import sys
+import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.error import HTTPError, URLError
@@ -170,25 +172,54 @@ def fetch_catalog() -> list[dict]:
     return payload
 
 
+def normalize_name(value: object) -> str:
+    """Normalize channel names without changing meaningful punctuation."""
+    return " ".join(str(value or "").split()).upper()
+
+
 def find_targets(catalog: list[dict]) -> list[tuple[str, dict, dict]]:
+    targets_by_normalized_name = {
+        normalize_name(name): name for name in TARGETS
+    }
     by_name: dict[str, dict] = {}
+    duplicates: set[str] = set()
+
     for channel in catalog:
         if not isinstance(channel, dict):
             continue
-        name = str(channel.get("name", "")).strip().upper()
-        if name in TARGETS:
-            by_name[name] = channel
 
-    missing = [name for name in TARGETS if name not in by_name]
+        name = normalize_name(channel.get("name", ""))
+        if name not in targets_by_normalized_name:
+            continue
+
+        if name in by_name:
+            duplicates.add(targets_by_normalized_name[name])
+            continue
+
+        by_name[name] = channel
+
+    if duplicates:
+        raise RuntimeError(
+            "Duplicate target channel records found: "
+            + ", ".join(sorted(duplicates))
+        )
+
+    missing = [
+        name for normalized, name in targets_by_normalized_name.items()
+        if normalized not in by_name
+    ]
     if missing:
         raise RuntimeError("Missing target channel(s): " + ", ".join(missing))
 
     result = []
     for catalog_name, metadata in TARGETS.items():
-        channel = by_name[catalog_name]
+        channel = by_name[normalize_name(catalog_name)]
         channel_id = str(channel.get("id", "")).strip()
         if not channel_id:
             raise RuntimeError(f"{metadata['name']} has no catalog ID.")
+        if any(character.isspace() for character in channel_id):
+            raise RuntimeError(f"{metadata['name']} has an invalid catalog ID.")
+
         result.append((catalog_name, channel, metadata))
 
     return result
@@ -253,6 +284,32 @@ def build_category_playlists(
     return playlists
 
 
+def write_outputs_atomically(outputs: dict[Path, str]) -> None:
+    """Stage every output beside its destination, then replace destination files."""
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    staged: dict[Path, Path] = {}
+
+    try:
+        for destination, data in outputs.items():
+            with tempfile.NamedTemporaryFile(
+                mode="w",
+                encoding="utf-8",
+                newline="",
+                dir=destination.parent,
+                prefix=f".{destination.name}.",
+                suffix=".tmp",
+                delete=False,
+            ) as temporary:
+                temporary.write(data)
+                staged[destination] = Path(temporary.name)
+
+        for destination, temporary in staged.items():
+            os.replace(temporary, destination)
+    finally:
+        for temporary in staged.values():
+            temporary.unlink(missing_ok=True)
+
+
 def main() -> int:
     try:
         catalog = fetch_catalog()
@@ -260,14 +317,11 @@ def main() -> int:
         result = build_json(targets)
         playlists = build_category_playlists(targets)
 
-        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-        JSON_OUTPUT.write_text(
-            json.dumps(result, ensure_ascii=False, indent=2) + "\n",
-            encoding="utf-8",
-        )
-
-        for path, content in playlists.items():
-            path.write_text(content, encoding="utf-8")
+        outputs = {
+            JSON_OUTPUT: json.dumps(result, ensure_ascii=False, indent=2) + "\n",
+            **playlists,
+        }
+        write_outputs_atomically(outputs)
 
         print(f"Wrote {len(result['channels'])} channel URLs to {JSON_OUTPUT}.")
         for path in playlists:
