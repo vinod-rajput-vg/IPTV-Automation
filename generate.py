@@ -9,6 +9,7 @@ the workflow fails rather than publishing stale IDs.
 from __future__ import annotations
 
 import json
+import re
 import os
 import sys
 import tempfile
@@ -81,6 +82,7 @@ def parse_channel_overrides(value: str) -> dict[str, dict]:
 
         # Match the catalog key first, then read the server at its fixed
         # position. Display names can contain spaces; logo URLs are one token.
+        line = re.sub(r"\[([^\]]+)\]\((https?://[^)]+)\)", r"\2", line)
         parts = line.split()
         if len(parts) < 4:
             raise ValueError(
@@ -91,7 +93,7 @@ def parse_channel_overrides(value: str) -> dict[str, dict]:
         matched_key = next(
             (
                 key for key in sorted(TARGETS, key=len, reverse=True)
-                if " ".join(parts[:len(key.split())]) == key
+                if parts[:len(key.split())] == key.split()
             ),
             None,
         )
