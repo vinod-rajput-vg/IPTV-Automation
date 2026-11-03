@@ -50,4 +50,9 @@ jobs:
           fi
 
           git commit -m "Refresh channel URLs"
+
+          # The remote may have received another commit during this workflow.
+          # Rebase this generated commit onto the latest main before pushing.
+          git fetch origin main
+          git rebase origin/main
           git push origin HEAD:main
