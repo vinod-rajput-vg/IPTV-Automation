@@ -21,6 +21,14 @@ from zoneinfo import ZoneInfo
 BASE_URL = "https://rkdy-linkgen.wasmer.app"
 OUTPUT_DIR = Path("Output")
 
+# Show the source server in category TXT channel names.
+SHOW_SERVER_IN_TXT = True
+
+# Preferred source for duplicate channel names: map catalog key to server 1 or 2.
+# Unlisted channels default to server 1, then server 2.
+CHANNEL_SERVER_PREFERENCE = {}
+DEFAULT_SERVER_PRIORITY = (1, 2)
+
 TARGETS = {
     "STAR GOLD HD INDIA": {"name": "Star Gold HD", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/star-gold-hd-in.png"},
     "STAR GOLD 2": {"name": "Star Gold 2 HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/8bd0df3e5ad35c9b42efa4a720c3680c.png"},
@@ -261,11 +269,21 @@ def build_txt(targets: list[tuple[str, dict, dict]]) -> str:
 def build_category_playlists(
     server_targets: list[list[tuple[str, dict, dict]]],
 ) -> dict[Path, str]:
-    """Merge both servers into separate category TXT files without duplicate names."""
+    """Merge servers into category TXT files using configurable source preference."""
     targets_by_name = {}
-    for targets in server_targets:
+    for server_id, targets in enumerate(server_targets, start=1):
         for catalog_name, channel, metadata in targets:
-            targets_by_name.setdefault(catalog_name, (channel, metadata))
+            preference = CHANNEL_SERVER_PREFERENCE.get(catalog_name)
+            current = targets_by_name.get(catalog_name)
+            if current is None:
+                targets_by_name[catalog_name] = (server_id, channel, metadata)
+                continue
+
+            current_server_id = current[0]
+            priority = (preference,) if preference in (1, 2) else DEFAULT_SERVER_PRIORITY
+            if server_id in priority and current_server_id in priority:
+                if priority.index(server_id) < priority.index(current_server_id):
+                    targets_by_name[catalog_name] = (server_id, channel, metadata)
 
     playlists = {}
     for category, channel_names in CATEGORY_TARGETS.items():
@@ -276,7 +294,7 @@ def build_category_playlists(
             if catalog_name not in targets_by_name:
                 continue
 
-            channel, metadata = targets_by_name[catalog_name]
+            server_id, channel, metadata = targets_by_name[catalog_name]
             normalized_name = normalize_name(metadata["name"])
             if normalized_name in seen_names:
                 continue
@@ -284,8 +302,12 @@ def build_category_playlists(
 
             channel_id = str(channel["id"]).strip()
             stream_url = f"{BASE_URL}/play.php?id={channel_id}"
+            display_name = (
+                f"{metadata['name']} (Server {server_id})"
+                if SHOW_SERVER_IN_TXT else metadata["name"]
+            )
             entries.append(
-                f"{metadata['name']}\n{metadata['logo']}\n{stream_url}"
+                f"{display_name}\n{metadata['logo']}\n{stream_url}"
             )
 
         if entries:
