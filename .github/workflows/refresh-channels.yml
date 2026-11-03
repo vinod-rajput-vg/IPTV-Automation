@@ -29,6 +29,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Validate Python syntax
+        run: python -m py_compile generate.py
+
       - name: Generate JSON and category TXT playlist
         if: github.event_name != 'pull_request'
         run: python generate.py
