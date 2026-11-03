@@ -439,7 +439,7 @@ def load_category_files() -> dict[str, list[dict]]:
         entries = []
         for index in range(0, len(lines), 3):
             header, display_name, logo = lines[index:index + 3]
-            match = re.fullmatch(r'"(.+?)"\\s+([12])', header)
+            match = re.fullmatch(r'"(.+?)"\s+([12])', header)
             if not match:
                 raise ValueError(
                     f'Invalid channel header in {category_file}: {header}'
@@ -449,7 +449,7 @@ def load_category_files() -> dict[str, list[dict]]:
             catalog_name = " ".join(catalog_name.split())
             if not display_name:
                 raise ValueError(f"Missing display name in {category_file}: {header}")
-            if not re.fullmatch(r"https?://\\S+", logo):
+            if not re.fullmatch(r"https?://\S+", logo):
                 raise ValueError(f"Invalid logo URL in {category_file}: {logo}")
 
             entries.append({
@@ -516,11 +516,11 @@ def build_category_playlists(
                 if SHOW_SERVER_IN_TXT else channel_name
             )
             entries.append(
-                f'{display_name}\\n{channel_logo}\\n"{stream_url}"'
+                f'{display_name}\n{channel_logo}\n"{stream_url}"'
             )
 
         playlists[OUTPUT_DIR / f"{category}.txt"] = (
-            "\\n\\n".join(entries) + ("\\n" if entries else "")
+            "\n\n".join(entries) + ("\n" if entries else "")
         )
 
     return playlists
