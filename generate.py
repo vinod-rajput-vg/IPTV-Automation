@@ -292,62 +292,7 @@ CHANNEL_OVERRIDES_BY_NAME = parse_channel_overrides(CHANNEL_OVERRIDES)
 
 # Assign channels to your own playlist categories here. These keys must match
 # the catalog names in TARGETS. Empty categories are skipped (no blank files).
-CATEGORY_TARGETS = {
-    "entertainment": [
-        "STAR GOLD HD INDIA",
-        "STAR GOLD 2",
-        "STAR GOLD THRILLS",
-        "STAR GOLD ROMANCE",
-        "AND PICTURES",
-        "SONY MAX",
-        "SONY MAX 2",
-        "ZEE CINEMA",
-        "SONY WAH",
-        "STAR UTSAV MOVIES",
-        "ZEE ANMOL CINEMA",
-        "COLORS CINEPLEX",
-    ],
-    "infotainment": [
-        "DISCOVERY HINDI",
-        "SONY BBC EARTH",
-        "ANIMAL PLANET | IN",
-        "NATGEO WILD HINDI",
-        "NATIONAL GEOGRAPHIC HD | IN",
-        "HISTORY HINDI",
-    ],
-    "news": [
-        "TV9 BHARATVARSH.",
-        "TIMES NOW  NAV BHARAT",
-        "NDTV INDIA",
-        "DD NEWS",
-        "TV9 GUJARATI",
-        "TV9 MARATHI",
-        "ZEE 24 KALAK",
-        "ZEE 24 TAAS",
-        "REPUBLIC BHARAT",
-        "NEWS NATION",
-        "AAJ TAK",
-        "ABP NEWS",
-        "INDIA TV",
-    ],
-    "kids": [
-        "NICK | IN",
-        "SONIC | IN",
-        "POGO | IN",
-        "CARTOON NETWORK FHD | IN",
-        "SUPER HUNGAMA",
-        "HUNGAMA TV | IN",
-        "24/7 OGGY AND THE COCKROACHES",
-        "24/7 DORAEMON",
-        "24/7 MOTU PATLU",
-        "24/7 CHHOTA BHEEM",
-    ],
-    "drama": [
-        "ZEE TV HD",
-        "STAR PLUS HD",
-        "BIGG BOSS",
-    ],
-}
+CATEGORY_DIR = Path("Sorted Channels")
 
 
 def fetch_catalog(server_id: int) -> list[dict]:
@@ -477,10 +422,52 @@ def build_txt(targets: list[tuple[str, dict, dict]]) -> str:
     return "\n\n".join(entries) + ("\n" if entries else "")
 
 
+def load_category_files() -> dict[str, list[dict]]:
+    """Load every category and channel entry from Sorted Channels/*.txt."""
+    categories = {}
+
+    if not CATEGORY_DIR.is_dir():
+        raise RuntimeError(f"Category directory not found: {CATEGORY_DIR}")
+
+    for category_file in sorted(CATEGORY_DIR.glob("*.txt")):
+        lines = [line.strip() for line in category_file.read_text(encoding="utf-8").splitlines() if line.strip()]
+        if len(lines) % 3:
+            raise ValueError(
+                f"{category_file} must contain three non-empty lines per channel."
+            )
+
+        entries = []
+        for index in range(0, len(lines), 3):
+            header, display_name, logo = lines[index:index + 3]
+            match = re.fullmatch(r'"(.+?)"\\s+([12])', header)
+            if not match:
+                raise ValueError(
+                    f'Invalid channel header in {category_file}: {header}'
+                )
+
+            catalog_name, server = match.groups()
+            catalog_name = " ".join(catalog_name.split())
+            if not display_name:
+                raise ValueError(f"Missing display name in {category_file}: {header}")
+            if not re.fullmatch(r"https?://\\S+", logo):
+                raise ValueError(f"Invalid logo URL in {category_file}: {logo}")
+
+            entries.append({
+                "key": catalog_name,
+                "server": int(server),
+                "name": display_name,
+                "logo": logo,
+            })
+
+        categories[category_file.stem] = entries
+
+    return categories
+
+
 def build_category_playlists(
     server_targets: list[list[tuple[str, dict, dict]]],
 ) -> dict[Path, str]:
-    """Merge servers into category TXT files using configurable source preference."""
+    """Generate a playlist for every category file found in Sorted Channels."""
     targets_by_name = {}
     for server_id, targets in enumerate(server_targets, start=1):
         for catalog_name, channel, metadata in targets:
@@ -505,37 +492,36 @@ def build_category_playlists(
                 targets_by_name[catalog_name] = (server_id, channel, metadata)
 
     playlists = {}
-    for category, channel_names in CATEGORY_TARGETS.items():
+    for category, category_entries in load_category_files().items():
         entries = []
         seen_names: set[str] = set()
 
-        for catalog_name in channel_names:
+        for category_entry in category_entries:
+            catalog_name = category_entry["key"]
             if catalog_name not in targets_by_name:
                 continue
 
             server_id, channel, metadata = targets_by_name[catalog_name]
-            normalized_name = normalize_name(metadata["name"])
+            normalized_name = normalize_name(category_entry["name"])
             if normalized_name in seen_names:
                 continue
             seen_names.add(normalized_name)
 
             channel_id = str(channel["id"]).strip()
             stream_url = f"{BASE_URL}/play.php?id={channel_id}"
-            override = CHANNEL_OVERRIDES_BY_NAME.get(catalog_name, {})
-            channel_name = override.get("name", metadata["name"])
-            channel_logo = override.get("logo", metadata["logo"])
+            channel_name = category_entry["name"]
+            channel_logo = category_entry["logo"]
             display_name = (
                 f"{channel_name} (Server {server_id})"
                 if SHOW_SERVER_IN_TXT else channel_name
             )
             entries.append(
-                f'{display_name}\n{channel_logo}\n"{stream_url}"'
+                f'{display_name}\\n{channel_logo}\\n"{stream_url}"'
             )
 
-        if entries:
-            playlists[OUTPUT_DIR / f"{category}.txt"] = (
-                "\n\n".join(entries) + "\n"
-            )
+        playlists[OUTPUT_DIR / f"{category}.txt"] = (
+            "\\n\\n".join(entries) + ("\\n" if entries else "")
+        )
 
     return playlists
 
