@@ -25,11 +25,7 @@ OUTPUT_DIR = Path("Output")
 # Show the source server in category TXT channel names.
 SHOW_SERVER_IN_TXT = True
 
-DEFAULT_SERVER_PRIORITY = (1, 2)
-
-CHANNEL_OVERRIDES_BY_NAME = {}
-
-# Categories and channel metadata are loaded from Sorted Channels/*.txt.
+# Channel metadata and category order are loaded from Sorted Channels/*.txt.
 CATEGORY_DIR = Path("Sorted Channels")
 
 
@@ -71,28 +67,25 @@ def normalize_name(value: object) -> str:
     return " ".join(str(value or "").split()).upper()
 
 
-def find_targets(
-    catalog: list[dict], require_all: bool = True,
-) -> list[tuple[str, dict, dict]]:
-    """Select catalog channels referenced by Sorted Channels category files."""
+def find_targets(catalog: list[dict]) -> list[tuple[str, dict, dict]]:
+    """Select catalog channels configured in Sorted Channels category files."""
     configured = {}
     for category_entries in load_category_files().values():
         for entry in category_entries:
             configured.setdefault(entry["key"], {
                 "name": entry["name"],
                 "logo": entry["logo"],
-                "server": entry["server"],
             })
 
     by_name = {}
     duplicates = set()
+    configured_names = {normalize_name(key): key for key in configured}
+
     for channel in catalog:
         if not isinstance(channel, dict):
             continue
         name = normalize_name(channel.get("name", ""))
-        configured_key = next(
-            (key for key in configured if normalize_name(key) == name), None
-        )
+        configured_key = configured_names.get(name)
         if configured_key is None:
             continue
         if name in by_name:
@@ -119,7 +112,6 @@ def find_targets(
     return result
 
 
-
 def build_json(targets: list[tuple[str, dict, dict]], server_id: int) -> dict:
     channels = []
     for _, channel, metadata in targets:
@@ -142,15 +134,6 @@ def build_json(targets: list[tuple[str, dict, dict]], server_id: int) -> dict:
         "source": f"{BASE_URL}/api.php?server={server_id}",
         "channels": channels,
     }
-
-
-def build_txt(targets: list[tuple[str, dict, dict]]) -> str:
-    entries = []
-    for _, channel, metadata in targets:
-        channel_id = str(channel["id"]).strip()
-        stream_url = f"{BASE_URL}/play.php?id={channel_id}"
-        entries.append(f'{metadata["name"]}\n{metadata["logo"]}\n"{stream_url}"')
-    return "\n\n".join(entries) + ("\n" if entries else "")
 
 
 def load_category_files() -> dict[str, list[dict]]:
@@ -198,29 +181,13 @@ def load_category_files() -> dict[str, list[dict]]:
 def build_category_playlists(
     server_targets: list[list[tuple[str, dict, dict]]],
 ) -> dict[Path, str]:
-    """Generate a playlist for every category file found in Sorted Channels."""
-    targets_by_name = {}
-    for server_id, targets in enumerate(server_targets, start=1):
-        for catalog_name, channel, metadata in targets:
-            override = CHANNEL_OVERRIDES_BY_NAME.get(catalog_name, {})
-            preferred_server = override.get("server")
-            priority = (
-                (preferred_server, 3 - preferred_server)
-                if preferred_server in (1, 2)
-                else DEFAULT_SERVER_PRIORITY
-            )
-            current = targets_by_name.get(catalog_name)
-            if current is None:
-                targets_by_name[catalog_name] = (server_id, channel, metadata)
-                continue
-
-            current_server_id = current[0]
-            if (
-                server_id in priority
-                and current_server_id in priority
-                and priority.index(server_id) < priority.index(current_server_id)
-            ):
-                targets_by_name[catalog_name] = (server_id, channel, metadata)
+    """Generate playlists, preferring the server specified in each category file."""
+    targets_by_server = []
+    for targets in server_targets:
+        targets_by_server.append({
+            catalog_name: (channel, metadata)
+            for catalog_name, channel, metadata in targets
+        })
 
     playlists = {}
     for category, category_entries in load_category_files().items():
@@ -229,10 +196,19 @@ def build_category_playlists(
 
         for category_entry in category_entries:
             catalog_name = category_entry["key"]
-            if catalog_name not in targets_by_name:
+            preferred_server = category_entry["server"]
+            preferred_index = preferred_server - 1
+            fallback_index = 1 - preferred_index
+
+            selected = targets_by_server[preferred_index].get(catalog_name)
+            server_id = preferred_server
+            if selected is None:
+                selected = targets_by_server[fallback_index].get(catalog_name)
+                server_id = fallback_index + 1
+            if selected is None:
                 continue
 
-            server_id, channel, metadata = targets_by_name[catalog_name]
+            channel, _metadata = selected
             normalized_name = normalize_name(category_entry["name"])
             if normalized_name in seen_names:
                 continue
@@ -246,9 +222,7 @@ def build_category_playlists(
                 f"{channel_name} (Server {server_id})"
                 if SHOW_SERVER_IN_TXT else channel_name
             )
-            entries.append(
-                f'{display_name}\n{channel_logo}\n"{stream_url}"'
-            )
+            entries.append(f'{display_name}\n{channel_logo}\n"{stream_url}"')
 
         playlists[OUTPUT_DIR / f"{category}.txt"] = (
             "\n\n".join(entries) + ("\n" if entries else "")
@@ -291,7 +265,7 @@ def main() -> int:
 
         for server_id in (1, 2):
             catalog = fetch_catalog(server_id)
-            targets = find_targets(catalog, require_all=False)
+            targets = find_targets(catalog)
             result = build_json(targets, server_id)
 
             json_path = OUTPUT_DIR / (
