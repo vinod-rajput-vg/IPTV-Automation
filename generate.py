@@ -81,57 +81,50 @@ def normalize_name(value: object) -> str:
 def find_targets(
     catalog: list[dict], require_all: bool = True,
 ) -> list[tuple[str, dict, dict]]:
-    targets_by_normalized_name = {
-        normalize_name(name): name for name in TARGETS
-    }
-    by_name: dict[str, dict] = {}
-    duplicates: set[str] = set()
+    """Select catalog channels referenced by Sorted Channels category files."""
+    configured = {}
+    for category_entries in load_category_files().values():
+        for entry in category_entries:
+            configured.setdefault(entry["key"], {
+                "name": entry["name"],
+                "logo": entry["logo"],
+                "server": entry["server"],
+            })
 
+    by_name = {}
+    duplicates = set()
     for channel in catalog:
         if not isinstance(channel, dict):
             continue
-
         name = normalize_name(channel.get("name", ""))
-        if name not in targets_by_normalized_name:
+        configured_key = next(
+            (key for key in configured if normalize_name(key) == name), None
+        )
+        if configured_key is None:
             continue
-
         if name in by_name:
-            duplicates.add(targets_by_normalized_name[name])
+            duplicates.add(configured_key)
             continue
-
         by_name[name] = channel
 
     if duplicates:
         raise RuntimeError(
-            "Duplicate target channel records found: "
+            "Duplicate configured channel records found: "
             + ", ".join(sorted(duplicates))
         )
 
-    missing = [
-        name for normalized, name in targets_by_normalized_name.items()
-        if normalized not in by_name
-    ]
-    if missing and require_all:
-        raise RuntimeError("Missing target channel(s): " + ", ".join(missing))
-
     result = []
-    for catalog_name, metadata in TARGETS.items():
-        normalized_name = normalize_name(catalog_name)
-        if normalized_name not in by_name:
+    for catalog_name, metadata in configured.items():
+        channel = by_name.get(normalize_name(catalog_name))
+        if channel is None:
             continue
-        channel = by_name[normalized_name]
         channel_id = str(channel.get("id", "")).strip()
-        if not channel_id:
-            raise RuntimeError(f"{metadata['name']} has no catalog ID.")
-        if any(character.isspace() for character in channel_id):
+        if not channel_id or any(character.isspace() for character in channel_id):
             raise RuntimeError(f"{metadata['name']} has an invalid catalog ID.")
-
         result.append((catalog_name, channel, metadata))
 
-    if not result:
-        raise RuntimeError("No configured target channels were found in this source.")
-
     return result
+
 
 
 def build_json(targets: list[tuple[str, dict, dict]], server_id: int) -> dict:
