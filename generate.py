@@ -285,12 +285,12 @@ def build_category_playlists(
             channel_id = str(channel["id"]).strip()
             stream_url = f"{BASE_URL}/play.php?id={channel_id}"
             entries.append(
-                f"{metadata['name']}\\n{metadata['logo']}\\n{stream_url}"
+                f"{metadata['name']}\n{metadata['logo']}\n{stream_url}"
             )
 
         if entries:
             playlists[OUTPUT_DIR / f"{category}.txt"] = (
-                "\\n\\n".join(entries) + "\\n"
+                "\n\n".join(entries) + "\n"
             )
 
     return playlists
