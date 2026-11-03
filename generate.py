@@ -275,10 +275,10 @@ def build_merged_txt(
             channel_id = str(channel["id"]).strip()
             stream_url = f"{BASE_URL}/play.php?id={channel_id}"
             entries.append(
-                f"{metadata['name']}\\n{metadata['logo']}\\n{stream_url}"
+                f"{metadata['name']}\n{metadata['logo']}\n{stream_url}"
             )
 
-    return "\\n\\n".join(entries) + ("\\n" if entries else "")
+    return "\n\n".join(entries) + ("\n" if entries else "")
 
 
 def write_outputs_atomically(outputs: dict[Path, str]) -> None:
@@ -323,7 +323,7 @@ def main() -> int:
             )
             outputs[json_path] = json.dumps(
                 result, ensure_ascii=False, indent=2,
-            ) + "\\n"
+            ) + "\n"
             server_targets.append(targets)
             generated_count += len(result["channels"])
 
