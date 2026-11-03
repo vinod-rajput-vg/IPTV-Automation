@@ -1,11 +1,11 @@
-Zee TV HD (Server 1)
+Zee TV HD
 https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/zee-tv-hd-in.png
 "https://rkdy-linkgen.wasmer.app/play.php?id=030dcbd0783d9480e64a"
 
-Star Plus HD (Server 1)
+Star Plus HD
 https://jiotvimages.cdn.jio.com/dare_images/images/channel/35b759b6ec89c654df9e4374e9548cbd.png
 "https://rkdy-linkgen.wasmer.app/play.php?id=63137d3c5aec696ec331"
 
-Bigg Boss (Server 1)
+Bigg Boss
 https://upload.wikimedia.org/wikipedia/en/d/da/Bigg_Boss_Hindi_TV_Series_Logo.jpg
 "https://rkdy-linkgen.wasmer.app/play.php?id=7a067a0c88dcfbc1dac1"
