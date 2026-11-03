@@ -24,9 +24,38 @@ OUTPUT_DIR = Path("Output")
 # Show the source server in category TXT channel names.
 SHOW_SERVER_IN_TXT = True
 
-# Preferred source for duplicate channel names: map catalog key to server 1 or 2.
-# Unlisted channels default to server 1, then server 2.
-CHANNEL_SERVER_PREFERENCE = {}
+# Channel overrides use this row format:
+# CATALOG_KEY SERVER DISPLAY_NAME LOGO_URL
+CHANNEL_OVERRIDES = """
+STAR GOLD HD INDIA 2 Star Gold HD logourl.com/png.pngs
+"""
+
+def parse_channel_overrides(value: str) -> dict[str, dict]:
+    overrides = {}
+    for line in value.splitlines():
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+
+        parts = line.split(maxsplit=3)
+        if len(parts) != 4:
+            raise ValueError(
+                "Invalid channel override. Expected: "
+                "CATALOG_KEY SERVER DISPLAY_NAME LOGO_URL"
+            )
+
+        catalog_key, server, display_name, logo = parts
+        if server not in ("1", "2"):
+            raise ValueError(f"Invalid server in channel override: {line}")
+
+        overrides[catalog_key] = {
+            "server": int(server),
+            "name": display_name,
+            "logo": logo,
+        }
+    return overrides
+
+CHANNEL_OVERRIDES_BY_NAME = parse_channel_overrides(CHANNEL_OVERRIDES)
 DEFAULT_SERVER_PRIORITY = (1, 2)
 
 TARGETS = {
@@ -273,17 +302,25 @@ def build_category_playlists(
     targets_by_name = {}
     for server_id, targets in enumerate(server_targets, start=1):
         for catalog_name, channel, metadata in targets:
-            preference = CHANNEL_SERVER_PREFERENCE.get(catalog_name)
+            override = CHANNEL_OVERRIDES_BY_NAME.get(catalog_name, {})
+            preferred_server = override.get("server")
+            priority = (
+                (preferred_server, 3 - preferred_server)
+                if preferred_server in (1, 2)
+                else DEFAULT_SERVER_PRIORITY
+            )
             current = targets_by_name.get(catalog_name)
             if current is None:
                 targets_by_name[catalog_name] = (server_id, channel, metadata)
                 continue
 
             current_server_id = current[0]
-            priority = (preference,) if preference in (1, 2) else DEFAULT_SERVER_PRIORITY
-            if server_id in priority and current_server_id in priority:
-                if priority.index(server_id) < priority.index(current_server_id):
-                    targets_by_name[catalog_name] = (server_id, channel, metadata)
+            if (
+                server_id in priority
+                and current_server_id in priority
+                and priority.index(server_id) < priority.index(current_server_id)
+            ):
+                targets_by_name[catalog_name] = (server_id, channel, metadata)
 
     playlists = {}
     for category, channel_names in CATEGORY_TARGETS.items():
@@ -302,12 +339,15 @@ def build_category_playlists(
 
             channel_id = str(channel["id"]).strip()
             stream_url = f"{BASE_URL}/play.php?id={channel_id}"
+            override = CHANNEL_OVERRIDES_BY_NAME.get(catalog_name, {})
+            channel_name = override.get("name", metadata["name"])
+            channel_logo = override.get("logo", metadata["logo"])
             display_name = (
-                f"{metadata['name']} (Server {server_id})"
-                if SHOW_SERVER_IN_TXT else metadata["name"]
+                f"{channel_name} (Server {server_id})"
+                if SHOW_SERVER_IN_TXT else channel_name
             )
             entries.append(
-                f"{display_name}\n{metadata['logo']}\n{stream_url}"
+                f"{display_name}\n{channel_logo}\n{stream_url}"
             )
 
         if entries:
