@@ -165,3 +165,7 @@ https://rkdy-linkgen.wasmer.app/play.php?id=63137d3c5aec696ec331
 Bigg Boss
 https://upload.wikimedia.org/wikipedia/en/d/da/Bigg_Boss_Hindi_TV_Series_Logo.jpg
 https://rkdy-linkgen.wasmer.app/play.php?id=7a067a0c88dcfbc1dac1
+
+Star Gold HD
+https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/star-gold-hd-in.png
+https://rkdy-linkgen.wasmer.app/play.php?id=487758b169f71eb8fcd1
