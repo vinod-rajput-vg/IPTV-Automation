@@ -75,7 +75,7 @@ TARGETS = {
 # the catalog names in TARGETS. Empty categories are skipped (no blank files).
 CATEGORY_TARGETS = {
     "entertainment": [
-        "STAR GOLD",
+        "STAR GOLD HD INDIA",
         "STAR GOLD 2",
         "STAR GOLD THRILLS",
         "STAR GOLD ROMANCE",
@@ -258,15 +258,25 @@ def build_txt(targets: list[tuple[str, dict, dict]]) -> str:
     return "\n\n".join(entries) + ("\n" if entries else "")
 
 
-def build_merged_txt(
+def build_category_playlists(
     server_targets: list[list[tuple[str, dict, dict]]],
-) -> str:
-    """Merge both server catalogs into one TXT, keeping the first unique channel name."""
-    entries = []
-    seen_names: set[str] = set()
-
+) -> dict[Path, str]:
+    """Merge both servers into separate category TXT files without duplicate names."""
+    targets_by_name = {}
     for targets in server_targets:
         for catalog_name, channel, metadata in targets:
+            targets_by_name.setdefault(catalog_name, (channel, metadata))
+
+    playlists = {}
+    for category, channel_names in CATEGORY_TARGETS.items():
+        entries = []
+        seen_names: set[str] = set()
+
+        for catalog_name in channel_names:
+            if catalog_name not in targets_by_name:
+                continue
+
+            channel, metadata = targets_by_name[catalog_name]
             normalized_name = normalize_name(metadata["name"])
             if normalized_name in seen_names:
                 continue
@@ -275,10 +285,15 @@ def build_merged_txt(
             channel_id = str(channel["id"]).strip()
             stream_url = f"{BASE_URL}/play.php?id={channel_id}"
             entries.append(
-                f"{metadata['name']}\n{metadata['logo']}\n{stream_url}"
+                f"{metadata['name']}\\n{metadata['logo']}\\n{stream_url}"
             )
 
-    return "\n\n".join(entries) + ("\n" if entries else "")
+        if entries:
+            playlists[OUTPUT_DIR / f"{category}.txt"] = (
+                "\\n\\n".join(entries) + "\\n"
+            )
+
+    return playlists
 
 
 def write_outputs_atomically(outputs: dict[Path, str]) -> None:
@@ -327,7 +342,7 @@ def main() -> int:
             server_targets.append(targets)
             generated_count += len(result["channels"])
 
-        outputs[OUTPUT_DIR / "channels.txt"] = build_merged_txt(server_targets)
+        outputs.update(build_category_playlists(server_targets))
 
         write_outputs_atomically(outputs)
 
