@@ -1,0 +1,51 @@
+"TV9 BHARATVARSH." 1
+Tv9 Bharatvarsh
+https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/tv9-bharatvarsh-in.png
+
+"TIMES NOW  NAV BHARAT" 1
+Times Now Navbharat
+https://jiotvimages.cdn.jio.com/dare_images/images/channel/bc00f1e02773b93ec36890b5a4ef7ece.png
+
+"NDTV INDIA" 1
+NDTV India
+https://jiotvimages.cdn.jio.com/dare_images/images/channel/b69d5a23fcfa02d4c2f47e958c704b46.png
+
+"DD NEWS" 1
+DD News
+https://jiotvimages.cdn.jio.com/dare_images/images/channel/16dfa4cb5cb300bfad994dc6acb44c76.png
+
+"TV9 GUJARATI" 1
+Tv9 Gujarati
+https://jiotvimages.cdn.jio.com/dare_images/images/channel/f344ea2f99c67074b52150e40cc30c24.png
+
+"TV9 MARATHI" 1
+Tv9 Marathi
+https://jiotvimages.cdn.jio.com/dare_images/images/channel/cbfc396076a82705258fb3b019b1153b.png
+
+"ZEE 24 KALAK" 1
+Zee 24 Kalak
+https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/zee-24-kalak-in.png
+
+"ZEE 24 TAAS" 1
+Zee 24 Taas
+https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/zee-24-taas-in.png
+
+"REPUBLIC BHARAT" 1
+Republic Bharat
+https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/republic-bharat-tv-in.png
+
+"NEWS NATION" 1
+News Nation
+https://jiotvimages.cdn.jio.com/dare_images/images/channel/cd40fe9e8db4c7662414c19f09e38857.png
+
+"AAJ TAK" 1
+Aaj Tak
+https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/aaj-tak-in.png
+
+"ABP NEWS" 1
+ABP News
+https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/abp-news-in.png
+
+"INDIA TV" 1
+India TV
+https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/india-tv-in.png
