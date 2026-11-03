@@ -222,7 +222,7 @@ def build_category_playlists(
                 f"{channel_name} (Server {server_id})"
                 if SHOW_SERVER_IN_TXT else channel_name
             )
-            entries.append(f'{display_name}\n{channel_logo}\n"{stream_url}"')
+            entries.append(f"{display_name}\n{channel_logo}\n{stream_url}")
 
         playlists[OUTPUT_DIR / f"{category}.txt"] = (
             "\n\n".join(entries) + ("\n" if entries else "")
