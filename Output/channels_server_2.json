@@ -1,7 +1,14 @@
 {
-  "updated_at": "2026-11-03T14:27:46+05:30",
+  "updated_at": "2026-11-03T14:39:24+05:30",
   "source": "https://rkdy-linkgen.wasmer.app/api.php?server=2",
   "channels": [
+    {
+      "name": "Star Gold HD",
+      "id": "487758b169f71eb8fcd1",
+      "group": "HINDI PREMIUM MOVIES",
+      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/star-gold-hd-in.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=487758b169f71eb8fcd1"
+    },
     {
       "name": "Star Gold 2 HD",
       "id": "a98ffbd387a61ac439a7",
@@ -22,27 +29,6 @@
       "group": "HINDI PREMIUM MOVIES",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/904285d71367035368f9ac8bf8b8f03c.png",
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=1e042a7d038a63c3e233"
-    },
-    {
-      "name": "Zee Action",
-      "id": "b763a34e4383e7972725",
-      "group": "HINDI PREMIUM MOVIES",
-      "logo": "https://images.weserv.nl/?url=https://tv-site.b-cdn.net/images/channel-logo/zee-action.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=b763a34e4383e7972725"
-    },
-    {
-      "name": "Zee Classic",
-      "id": "23b9ec5e2b01bb2a4997",
-      "group": "HINDI PREMIUM MOVIES",
-      "logo": "https://images.weserv.nl/?url=https://tv-site.b-cdn.net/images/channel-logo/zee-classic.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=23b9ec5e2b01bb2a4997"
-    },
-    {
-      "name": "Zee Bollywood",
-      "id": "7c71715877b294105b36",
-      "group": "HINDI PREMIUM MOVIES",
-      "logo": "https://images.weserv.nl/?url=https://tv-site.b-cdn.net/images/channel-logo/zee-bollywood.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=7c71715877b294105b36"
     },
     {
       "name": "Sony Wah",

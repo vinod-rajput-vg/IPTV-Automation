@@ -1,14 +1,7 @@
 {
-  "updated_at": "2026-11-03T14:27:44+05:30",
+  "updated_at": "2026-11-03T14:39:24+05:30",
   "source": "https://rkdy-linkgen.wasmer.app/api.php?server=1",
   "channels": [
-    {
-      "name": "Star Gold HD",
-      "id": "afb9396cfe8977b693f5",
-      "group": "HINDI | CINEMA",
-      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/star-gold-hd-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=afb9396cfe8977b693f5"
-    },
     {
       "name": "Star Gold 2 HD",
       "id": "70a5c4ae710c65a6b8c7",
@@ -31,13 +24,6 @@
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=8bd2533a544202b7c7fe"
     },
     {
-      "name": "&Pictures HD",
-      "id": "b9e1e427ab1fbe648a62",
-      "group": "HINDI | TV",
-      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/and-pictures-hd-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=b9e1e427ab1fbe648a62"
-    },
-    {
       "name": "Sony Max HD",
       "id": "ae12d110bf67fa5f80a4",
       "group": "HINDI | CINEMA",
@@ -57,27 +43,6 @@
       "group": "HINDI | CINEMA",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/zee-cinema-in.png",
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=f56c4c164128bbb97a50"
-    },
-    {
-      "name": "Zee Action",
-      "id": "54219e47dda7d890c5d0",
-      "group": "HINDI | CINEMA",
-      "logo": "https://images.weserv.nl/?url=https://tv-site.b-cdn.net/images/channel-logo/zee-action.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=54219e47dda7d890c5d0"
-    },
-    {
-      "name": "Zee Classic",
-      "id": "60fd0a219bc0462b797d",
-      "group": "HINDI | CINEMA",
-      "logo": "https://images.weserv.nl/?url=https://tv-site.b-cdn.net/images/channel-logo/zee-classic.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=60fd0a219bc0462b797d"
-    },
-    {
-      "name": "Zee Bollywood",
-      "id": "dd024d5697e4822246b9",
-      "group": "HINDI | CINEMA",
-      "logo": "https://images.weserv.nl/?url=https://tv-site.b-cdn.net/images/channel-logo/zee-bollywood.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=dd024d5697e4822246b9"
     },
     {
       "name": "Sony Wah",
