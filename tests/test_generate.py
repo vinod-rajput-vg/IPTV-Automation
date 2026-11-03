@@ -82,15 +82,21 @@ class GeneratorTests(unittest.TestCase):
         playlist = playlists[generate.OUTPUT_DIR / "entertainment.txt"]
 
         self.assertEqual(playlist.count(generate.TARGETS[first]["name"]), 1)
+        preferred_server = generate.CHANNEL_OVERRIDES_BY_NAME.get(first, {}).get(
+            "server", 1
+        )
+        selected_id = f"server-{preferred_server}-a"
+        unselected_id = f"server-{3 - preferred_server}-a"
+
         self.assertIn(
-            "https://rkdy-linkgen.wasmer.app/play.php?id=server-1-a",
+            f"https://rkdy-linkgen.wasmer.app/play.php?id={selected_id}",
             playlist,
         )
         self.assertIn(
             "https://rkdy-linkgen.wasmer.app/play.php?id=server-2-c",
             playlist,
         )
-        self.assertNotIn("server-2-a", playlist)
+        self.assertNotIn(unselected_id, playlist)
 
     def test_find_targets_rejects_source_without_any_configured_target(self):
         with self.assertRaisesRegex(RuntimeError, "No configured target"):
