@@ -1,0 +1,23 @@
+"DISCOVERY HINDI" 1
+Discovery HD
+https://jiotvimages.cdn.jio.com/dare_images/images/channel/082c33fedac20343e59eb52d7d13a139.png
+
+"SONY BBC EARTH" 1
+Sony BBC Earth HD
+https://d2ljy97uzhlwv2.cloudfront.net/sonypicturesnetworksindia/logo/32_254.png
+
+"ANIMAL PLANET | IN" 1
+Animal Planet HD
+https://jiotvimages.cdn.jio.com/dare_images/images/channel/36d31ab0f2693fcdc87bcb4ffec3bcb8.png
+
+"NATGEO WILD HINDI" 1
+Nat Geo Wild HD
+https://jiotvimages.cdn.jio.com/dare_images/images/channel/c6b17fad2bf31a052f3dd2c688ae3257.png
+
+"NATIONAL GEOGRAPHIC HD | IN" 1
+National Geographic HD
+https://jiotvimages.cdn.jio.com/dare_images/images/channel/a59081e5d6c95ca73f6f89855fb37a18.png
+
+"HISTORY HINDI" 1
+History TV18 HD
+https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/history-tv18-hd-in.png
