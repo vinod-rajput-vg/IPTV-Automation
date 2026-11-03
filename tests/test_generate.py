@@ -77,7 +77,7 @@ class GeneratorTests(unittest.TestCase):
 
         playlist = generate.build_merged_txt([first, second])
 
-        self.assertEqual(playlist.count("Channel A\\n"), 1)
+        self.assertEqual(playlist.count("Channel A\n"), 1)
         self.assertIn("https://rkdy-linkgen.wasmer.app/play.php?id=server-1-id", playlist)
         self.assertIn("https://rkdy-linkgen.wasmer.app/play.php?id=server-2-c", playlist)
         self.assertNotIn("server-2-id", playlist)
