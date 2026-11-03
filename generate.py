@@ -23,7 +23,7 @@ BASE_URL = "https://rkdy-linkgen.wasmer.app"
 OUTPUT_DIR = Path("Output")
 
 # Show the source server in category TXT channel names.
-SHOW_SERVER_IN_TXT = True
+SHOW_SERVER_IN_TXT = False
 
 # Channel metadata and category order are loaded from Sorted Channels/*.txt.
 CATEGORY_DIR = Path("Sorted Channels")
