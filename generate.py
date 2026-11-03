@@ -28,231 +28,195 @@ SHOW_SERVER_IN_TXT = True
 # Channel overrides use this four-line format:
 # CATALOG_KEY, DISPLAY_NAME, MARKDOWN_LOGO_URL, SERVER
 CHANNEL_OVERRIDES = """
-STAR GOLD HD INDIA
+"STAR GOLD HD INDIA" 2
 Star Gold HD
 [https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/star-gold-hd-in.png](https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/star-gold-hd-in.png)
-2
 
-STAR GOLD 2
+"STAR GOLD 2" 1
 Star Gold 2 HD
 [https://jiotvimages.cdn.jio.com/dare_images/images/channel/8bd0df3e5ad35c9b42efa4a720c3680c.png](https://jiotvimages.cdn.jio.com/dare_images/images/channel/8bd0df3e5ad35c9b42efa4a720c3680c.png)
-1
 
-STAR GOLD THRILLS
+"STAR GOLD THRILLS" 1
 Star Gold Thrills
 [https://jiotvimages.cdn.jio.com/dare_images/images/channel/6fd63a1a3719b03299aa45daedad36ed.png](https://jiotvimages.cdn.jio.com/dare_images/images/channel/6fd63a1a3719b03299aa45daedad36ed.png)
-1
 
-STAR GOLD ROMANCE
+"STAR GOLD ROMANCE" 1
 Star Gold Romance
 [https://jiotvimages.cdn.jio.com/dare_images/images/channel/904285d71367035368f9ac8bf8b8f03c.png](https://jiotvimages.cdn.jio.com/dare_images/images/channel/904285d71367035368f9ac8bf8b8f03c.png)
-1
 
-SONY MAX
+"SONY MAX" 1
 Sony Max HD
 [https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-hd-in.png](https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-hd-in.png)
-1
 
-SONY MAX 2
+"SONY MAX 2" 1
 Sony Max 2
 [https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-2-in.png](https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-2-in.png)
-1
 
-ZEE CINEMA
+"ZEE CINEMA" 1
 Zee Cinema
 [https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/zee-cinema-in.png](https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/zee-cinema-in.png)
-1
 
-SONY WAH
+"SONY WAH" 1
 Sony Wah
 [https://d2ljy97uzhlwv2.cloudfront.net/sonypicturesnetworksindia/logo/10_258.png](https://d2ljy97uzhlwv2.cloudfront.net/sonypicturesnetworksindia/logo/10_258.png)
-1
 
-STAR UTSAV MOVIES
+"STAR UTSAV MOVIES" 1
 Star Utsav Movies
 [https://intvschedule.com/logo/star-utsav-movies.webp](https://intvschedule.com/logo/star-utsav-movies.webp)
-1
 
-ZEE ANMOL CINEMA
+"ZEE ANMOL CINEMA" 1
 Zee Anmol Cinema
 [https://images.weserv.nl/?url=https://tv-site.b-cdn.net/images/channel-logo/zee-anmol-cinema.png](https://images.weserv.nl/?url=https://tv-site.b-cdn.net/images/channel-logo/zee-anmol-cinema.png)
-1
 
-COLORS CINEPLEX
+"COLORS CINEPLEX" 1
 Colors Cineplex
 [https://jiotvimages.cdn.jio.com/dare_images/images/channel/fa1e0b003da3eaef8602cbfb2833231f.png](https://jiotvimages.cdn.jio.com/dare_images/images/channel/fa1e0b003da3eaef8602cbfb2833231f.png)
-1
 
-DISCOVERY HINDI
+"DISCOVERY HINDI" 1
 Discovery HD
 [https://jiotvimages.cdn.jio.com/dare_images/images/channel/082c33fedac20343e59eb52d7d13a139.png](https://jiotvimages.cdn.jio.com/dare_images/images/channel/082c33fedac20343e59eb52d7d13a139.png)
-1
 
-SONY BBC EARTH
+"SONY BBC EARTH" 1
 Sony BBC Earth HD
 [https://d2ljy97uzhlwv2.cloudfront.net/sonypicturesnetworksindia/logo/32_254.png](https://d2ljy97uzhlwv2.cloudfront.net/sonypicturesnetworksindia/logo/32_254.png)
-1
 
-ANIMAL PLANET | IN
+"ANIMAL PLANET | IN" 1
 Animal Planet HD
 [https://jiotvimages.cdn.jio.com/dare_images/images/channel/36d31ab0f2693fcdc87bcb4ffec3bcb8.png](https://jiotvimages.cdn.jio.com/dare_images/images/channel/36d31ab0f2693fcdc87bcb4ffec3bcb8.png)
-1
 
-NATGEO WILD HINDI
+"NATGEO WILD HINDI" 1
 Nat Geo Wild HD
 [https://jiotvimages.cdn.jio.com/dare_images/images/channel/c6b17fad2bf31a052f3dd2c688ae3257.png](https://jiotvimages.cdn.jio.com/dare_images/images/channel/c6b17fad2bf31a052f3dd2c688ae3257.png)
-1
 
-NATIONAL GEOGRAPHIC HD | IN
+"NATIONAL GEOGRAPHIC HD | IN" 1
 National Geographic HD
 [https://jiotvimages.cdn.jio.com/dare_images/images/channel/a59081e5d6c95ca73f6f89855fb37a18.png](https://jiotvimages.cdn.jio.com/dare_images/images/channel/a59081e5d6c95ca73f6f89855fb37a18.png)
-1
 
-HISTORY HINDI
+"HISTORY HINDI" 1
 History TV18 HD
 [https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/history-tv18-hd-in.png](https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/history-tv18-hd-in.png)
-1
 
-TV9 BHARATVARSH.
+"TV9 BHARATVARSH." 1
 Tv9 Bharatvarsh
 [https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/tv9-bharatvarsh-in.png](https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/tv9-bharatvarsh-in.png)
-1
 
-TIMES NOW  NAV BHARAT
+"TIMES NOW  NAV BHARAT" 1
 Times Now Navbharat
 [https://jiotvimages.cdn.jio.com/dare_images/images/channel/bc00f1e02773b93ec36890b5a4ef7ece.png](https://jiotvimages.cdn.jio.com/dare_images/images/channel/bc00f1e02773b93ec36890b5a4ef7ece.png)
-1
 
-NDTV INDIA
+"NDTV INDIA" 1
 NDTV India
 [https://jiotvimages.cdn.jio.com/dare_images/images/channel/b69d5a23fcfa02d4c2f47e958c704b46.png](https://jiotvimages.cdn.jio.com/dare_images/images/channel/b69d5a23fcfa02d4c2f47e958c704b46.png)
-1
 
-DD NEWS
+"DD NEWS" 1
 DD News
 [https://jiotvimages.cdn.jio.com/dare_images/images/channel/16dfa4cb5cb300bfad994dc6acb44c76.png](https://jiotvimages.cdn.jio.com/dare_images/images/channel/16dfa4cb5cb300bfad994dc6acb44c76.png)
-1
 
-TV9 GUJARATI
+"TV9 GUJARATI" 1
 Tv9 Gujarati
 [https://jiotvimages.cdn.jio.com/dare_images/images/channel/f344ea2f99c67074b52150e40cc30c24.png](https://jiotvimages.cdn.jio.com/dare_images/images/channel/f344ea2f99c67074b52150e40cc30c24.png)
-1
 
-TV9 MARATHI
+"TV9 MARATHI" 1
 Tv9 Marathi
 [https://jiotvimages.cdn.jio.com/dare_images/images/channel/cbfc396076a82705258fb3b019b1153b.png](https://jiotvimages.cdn.jio.com/dare_images/images/channel/cbfc396076a82705258fb3b019b1153b.png)
-1
 
-ZEE 24 KALAK
+"ZEE 24 KALAK" 1
 Zee 24 Kalak
 [https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/zee-24-kalak-in.png](https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/zee-24-kalak-in.png)
-1
 
-ZEE 24 TAAS
+"ZEE 24 TAAS" 1
 Zee 24 Taas
 [https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/zee-24-taas-in.png](https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/zee-24-taas-in.png)
-1
 
-REPUBLIC BHARAT
+"REPUBLIC BHARAT" 1
 Republic Bharat
 [https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/republic-bharat-tv-in.png](https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/republic-bharat-tv-in.png)
-1
 
-NEWS NATION
+"NEWS NATION" 1
 News Nation
 [https://jiotvimages.cdn.jio.com/dare_images/images/channel/cd40fe9e8db4c7662414c19f09e38857.png](https://jiotvimages.cdn.jio.com/dare_images/images/channel/cd40fe9e8db4c7662414c19f09e38857.png)
-1
 
-AAJ TAK
+"AAJ TAK" 1
 Aaj Tak
 [https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/aaj-tak-in.png](https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/aaj-tak-in.png)
-1
 
-ABP NEWS
+"ABP NEWS" 1
 ABP News
 [https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/abp-news-in.png](https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/abp-news-in.png)
-1
 
-INDIA TV
+"INDIA TV" 1
 India TV
 [https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/india-tv-in.png](https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/india-tv-in.png)
-1
 
-NICK | IN
+"NICK | IN" 1
 Nick HD+
 [https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/nick-in.png](https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/nick-in.png)
-1
 
-SONIC | IN
+"SONIC | IN" 1
 Sonic
 [https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/nickelodeon-sonic-in.png](https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/nickelodeon-sonic-in.png)
-1
 
-POGO | IN
+"POGO | IN" 1
 Pogo
 [https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/pogo-in.png](https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/pogo-in.png)
-1
 
-CARTOON NETWORK FHD | IN
+"CARTOON NETWORK FHD | IN" 1
 Cartoon Network
 [https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/cartoon-network-in.png](https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/cartoon-network-in.png)
-1
 
-SUPER HUNGAMA
+"SUPER HUNGAMA" 1
 Super Hungama
 [https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/super-hungama-in.png](https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/super-hungama-in.png)
-1
 
-HUNGAMA TV | IN
+"HUNGAMA TV | IN" 1
 Hungama TV
 [https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/hungama-in.png](https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/hungama-in.png)
-1
 
-24/7 OGGY AND THE COCKROACHES
+"24/7 OGGY AND THE COCKROACHES" 1
 Oggy And The Cockroaches 24/7
 [https://upload.wikimedia.org/wikipedia/commons/3/3b/Oggy_and_the_Cockroaches_Logo.webp](https://upload.wikimedia.org/wikipedia/commons/3/3b/Oggy_and_the_Cockroaches_Logo.webp)
-1
 
-24/7 DORAEMON
+"24/7 DORAEMON" 1
 Doraemon 24/7
 [https://upload.wikimedia.org/wikipedia/en/c/c8/Doraemon_volume_1_cover.jpg](https://upload.wikimedia.org/wikipedia/en/c/c8/Doraemon_volume_1_cover.jpg)
-1
 
-24/7 MOTU PATLU
+"24/7 MOTU PATLU" 1
 Motu Patlu 24/7
 [https://upload.wikimedia.org/wikipedia/en/3/3b/Motu_Patlu.Jpg](https://upload.wikimedia.org/wikipedia/en/3/3b/Motu_Patlu.Jpg)
-1
 
-24/7 CHHOTA BHEEM
+"24/7 CHHOTA BHEEM" 1
 Chota Bheem 24/7
 [https://upload.wikimedia.org/wikipedia/en/f/f9/Chhota_Bheem.jpg](https://upload.wikimedia.org/wikipedia/en/f/f9/Chhota_Bheem.jpg)
-1
 
-ZEE TV HD
+"ZEE TV HD" 1
 Zee TV HD
 [https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/zee-tv-hd-in.png](https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/zee-tv-hd-in.png)
-1
 
-STAR PLUS HD
+"STAR PLUS HD" 1
 Star Plus HD
 [https://jiotvimages.cdn.jio.com/dare_images/images/channel/35b759b6ec89c654df9e4374e9548cbd.png](https://jiotvimages.cdn.jio.com/dare_images/images/channel/35b759b6ec89c654df9e4374e9548cbd.png)
-1
 
-BIGG BOSS
+"BIGG BOSS" 1
 Bigg Boss
 [https://upload.wikimedia.org/wikipedia/en/d/da/Bigg_Boss_Hindi_TV_Series_Logo.jpg](https://upload.wikimedia.org/wikipedia/en/d/da/Bigg_Boss_Hindi_TV_Series_Logo.jpg)
-1
 """
 
 def parse_channel_overrides(value: str) -> dict[str, dict]:
     overrides = {}
     lines = [line.strip() for line in value.splitlines() if line.strip()]
 
-    if len(lines) % 4:
-        raise ValueError("Channel overrides must contain four lines per entry.")
+    for line_index in range(0, len(lines), 3):
+        if line_index + 2 >= len(lines):
+            raise ValueError("Channel overrides must contain three lines per entry.")
 
-    for index in range(0, len(lines), 4):
-        matched_key, display_name, logo, server = lines[index:index + 4]
+        key_and_server, display_name, logo = lines[line_index:line_index + 3]
+        match = re.fullmatch(r'"(.+?)"\s+([12])', key_and_server)
+        if not match:
+            raise ValueError(
+                'Invalid override header. Expected: "CATALOG_KEY" SERVER'
+            )
+
+        matched_key, server = match.groups()
         logo_match = re.fullmatch(r"\[(https?://[^\]]+)\]\((https?://[^)]+)\)", logo)
         if logo_match:
             logo = logo_match.group(2)
@@ -262,8 +226,6 @@ def parse_channel_overrides(value: str) -> dict[str, dict]:
         matched_key = " ".join(matched_key.split())
         if matched_key not in TARGETS:
             raise ValueError(f"Unknown catalog key in channel override: {matched_key}")
-        if server not in ("1", "2"):
-            raise ValueError(f"Invalid server in channel override: {server}")
         if not display_name:
             raise ValueError(f"Missing display name in channel override: {matched_key}")
 
