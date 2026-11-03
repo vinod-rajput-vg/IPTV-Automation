@@ -37,18 +37,39 @@ def parse_channel_overrides(value: str) -> dict[str, dict]:
         if not line or line.startswith("#"):
             continue
 
-        parts = line.split(maxsplit=3)
-        if len(parts) != 4:
+        # Channel IDs may contain spaces. Parse from the right:
+        # the final token is the logo URL, the previous token is the server,
+        # and the token(s) before that are the display name. The catalog key
+        # is matched against known TARGETS entries using the longest prefix.
+        parts = line.split()
+        if len(parts) < 4:
             raise ValueError(
                 "Invalid channel override. Expected: "
                 "CATALOG_KEY SERVER DISPLAY_NAME LOGO_URL"
             )
 
-        catalog_key, server, display_name, logo = parts
+        logo = parts[-1]
+        server = parts[-2]
         if server not in ("1", "2"):
             raise ValueError(f"Invalid server in channel override: {line}")
 
-        overrides[catalog_key] = {
+        matched_key = next(
+            (
+                key for key in sorted(TARGETS, key=len, reverse=True)
+                if " ".join(parts[:len(key.split())]) == key
+            ),
+            None,
+        )
+        if matched_key is None:
+            raise ValueError(f"Unknown catalog key in channel override: {line}")
+
+        display_name = " ".join(
+            parts[len(matched_key.split()) + 1:-1]
+        )
+        if not display_name:
+            raise ValueError(f"Missing display name in channel override: {line}")
+
+        overrides[matched_key] = {
             "server": int(server),
             "name": display_name,
             "logo": logo,
