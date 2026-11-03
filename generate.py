@@ -19,7 +19,7 @@ from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 BASE_URL = "https://rkdy-linkgen.wasmer.app"
-CATALOG_URL = f"{BASE_URL}/api.php"
+CATALOG_URL_TEMPLATE = f"{BASE_URL}/api.php?server={{server_id}}"
 OUTPUT_DIR = Path("Output")
 JSON_OUTPUT = OUTPUT_DIR / "channels.json"
 
@@ -140,9 +140,10 @@ CATEGORY_TARGETS = {
 }
 
 
-def fetch_catalog() -> list[dict]:
+def fetch_catalog(server_id: int) -> list[dict]:
+    catalog_url = f"{BASE_URL}/api.php?server={server_id}"
     request = Request(
-        CATALOG_URL,
+        catalog_url,
         headers={
             "Accept": "application/json",
             "User-Agent": "IPTV-Automation/1.0 (+https://github.com/vinod-rajput-vg/IPTV-Automation)",
@@ -177,7 +178,9 @@ def normalize_name(value: object) -> str:
     return " ".join(str(value or "").split()).upper()
 
 
-def find_targets(catalog: list[dict]) -> list[tuple[str, dict, dict]]:
+def find_targets(
+    catalog: list[dict], require_all: bool = True,
+) -> list[tuple[str, dict, dict]]:
     targets_by_normalized_name = {
         normalize_name(name): name for name in TARGETS
     }
@@ -208,12 +211,15 @@ def find_targets(catalog: list[dict]) -> list[tuple[str, dict, dict]]:
         name for normalized, name in targets_by_normalized_name.items()
         if normalized not in by_name
     ]
-    if missing:
+    if missing and require_all:
         raise RuntimeError("Missing target channel(s): " + ", ".join(missing))
 
     result = []
     for catalog_name, metadata in TARGETS.items():
-        channel = by_name[normalize_name(catalog_name)]
+        normalized_name = normalize_name(catalog_name)
+        if normalized_name not in by_name:
+            continue
+        channel = by_name[normalized_name]
         channel_id = str(channel.get("id", "")).strip()
         if not channel_id:
             raise RuntimeError(f"{metadata['name']} has no catalog ID.")
@@ -222,10 +228,13 @@ def find_targets(catalog: list[dict]) -> list[tuple[str, dict, dict]]:
 
         result.append((catalog_name, channel, metadata))
 
+    if not result:
+        raise RuntimeError("No configured target channels were found in this source.")
+
     return result
 
 
-def build_json(targets: list[tuple[str, dict, dict]]) -> dict:
+def build_json(targets: list[tuple[str, dict, dict]], server_id: int) -> dict:
     channels = []
     for _, channel, metadata in targets:
         channel_id = str(channel["id"]).strip()
@@ -244,7 +253,7 @@ def build_json(targets: list[tuple[str, dict, dict]]) -> dict:
 
     return {
         "updated_at": now_ist.isoformat(timespec="seconds"),
-        "source": CATALOG_URL,
+        "source": f"{BASE_URL}/api.php?server={server_id}",
         "channels": channels,
     }
 
@@ -259,7 +268,7 @@ def build_txt(targets: list[tuple[str, dict, dict]]) -> str:
 
 
 def build_category_playlists(
-    targets: list[tuple[str, dict, dict]],
+    targets: list[tuple[str, dict, dict]], server_id: int,
 ) -> dict[Path, str]:
     targets_by_name = {catalog_name: (channel, metadata) for catalog_name, channel, metadata in targets}
     playlists = {}
@@ -268,9 +277,7 @@ def build_category_playlists(
         entries = []
         for catalog_name in channel_names:
             if catalog_name not in targets_by_name:
-                raise RuntimeError(
-                    f"Category '{category}' references unknown target '{catalog_name}'."
-                )
+                continue
             channel, metadata = targets_by_name[catalog_name]
             channel_id = str(channel["id"]).strip()
             stream_url = f"{BASE_URL}/play.php?id={channel_id}"
@@ -279,7 +286,7 @@ def build_category_playlists(
             )
 
         if entries:
-            playlists[OUTPUT_DIR / f"{category}.txt"] = "\n\n".join(entries) + "\n"
+            playlists[OUTPUT_DIR / f"server_{server_id}_{category}.txt"] = "\n\n".join(entries) + "\n"
 
     return playlists
 
@@ -312,25 +319,33 @@ def write_outputs_atomically(outputs: dict[Path, str]) -> None:
 
 def main() -> int:
     try:
-        catalog = fetch_catalog()
-        targets = find_targets(catalog)
-        result = build_json(targets)
-        playlists = build_category_playlists(targets)
+        outputs = {}
+        generated_count = 0
 
-        outputs = {
-            JSON_OUTPUT: json.dumps(result, ensure_ascii=False, indent=2) + "\n",
-            **playlists,
-        }
+        for server_id in (1, 2):
+            catalog = fetch_catalog(server_id)
+            targets = find_targets(catalog, require_all=False)
+            result = build_json(targets, server_id)
+            playlists = build_category_playlists(targets, server_id)
+
+            json_path = OUTPUT_DIR / (
+                "channels.json" if server_id == 1 else f"channels_server_{server_id}.json"
+            )
+            outputs[json_path] = json.dumps(
+                result, ensure_ascii=False, indent=2,
+            ) + "\\n"
+            outputs.update(playlists)
+            generated_count += len(result["channels"])
+
         write_outputs_atomically(outputs)
 
-        print(f"Wrote {len(result['channels'])} channel URLs to {JSON_OUTPUT}.")
-        for path in playlists:
-            print(f"Wrote category playlist to {path}.")
+        print(f"Wrote {generated_count} channel entries across both sources.")
+        for path in outputs:
+            print(f"Wrote {path}.")
         return 0
     except Exception as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
-
 
 if __name__ == "__main__":
     raise SystemExit(main())
