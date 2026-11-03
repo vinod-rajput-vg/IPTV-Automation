@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build channels.json and manually categorized TXT playlists from the public catalog.
+"""Build separate server JSON catalogs and one merged TXT playlist from the public catalog.
 
 This does not imitate browser sessions, bypass access controls, or resolve
 protected playback tokens. If api.php is unavailable to a plain HTTP client,
@@ -258,29 +258,27 @@ def build_txt(targets: list[tuple[str, dict, dict]]) -> str:
     return "\n\n".join(entries) + ("\n" if entries else "")
 
 
-def build_category_playlists(
-    targets: list[tuple[str, dict, dict]], server_id: int,
-) -> dict[Path, str]:
-    targets_by_name = {catalog_name: (channel, metadata) for catalog_name, channel, metadata in targets}
-    playlists = {}
+def build_merged_txt(
+    server_targets: list[list[tuple[str, dict, dict]]],
+) -> str:
+    """Merge both server catalogs into one TXT, keeping the first unique channel name."""
+    entries = []
+    seen_names: set[str] = set()
 
-    for category, channel_names in CATEGORY_TARGETS.items():
-        entries = []
-        for catalog_name in channel_names:
-            if catalog_name not in targets_by_name:
+    for targets in server_targets:
+        for catalog_name, channel, metadata in targets:
+            normalized_name = normalize_name(metadata["name"])
+            if normalized_name in seen_names:
                 continue
-            channel, metadata = targets_by_name[catalog_name]
+            seen_names.add(normalized_name)
+
             channel_id = str(channel["id"]).strip()
             stream_url = f"{BASE_URL}/play.php?id={channel_id}"
             entries.append(
-                f"{metadata['name']}\n{metadata['logo']}\n{stream_url}"
+                f"{metadata['name']}\\n{metadata['logo']}\\n{stream_url}"
             )
 
-        if entries:
-            output_name = f"{category}.txt" if server_id == 1 else f"server_{server_id}_{category}.txt"
-            playlists[OUTPUT_DIR / output_name] = "\n\n".join(entries) + "\n"
-
-    return playlists
+    return "\\n\\n".join(entries) + ("\\n" if entries else "")
 
 
 def write_outputs_atomically(outputs: dict[Path, str]) -> None:
@@ -312,22 +310,24 @@ def write_outputs_atomically(outputs: dict[Path, str]) -> None:
 def main() -> int:
     try:
         outputs = {}
+        server_targets = []
         generated_count = 0
 
         for server_id in (1, 2):
             catalog = fetch_catalog(server_id)
             targets = find_targets(catalog, require_all=False)
             result = build_json(targets, server_id)
-            playlists = build_category_playlists(targets, server_id)
 
             json_path = OUTPUT_DIR / (
                 "channels.json" if server_id == 1 else f"channels_server_{server_id}.json"
             )
             outputs[json_path] = json.dumps(
                 result, ensure_ascii=False, indent=2,
-            ) + "\n"
-            outputs.update(playlists)
+            ) + "\\n"
+            server_targets.append(targets)
             generated_count += len(result["channels"])
+
+        outputs[OUTPUT_DIR / "channels.txt"] = build_merged_txt(server_targets)
 
         write_outputs_atomically(outputs)
 
