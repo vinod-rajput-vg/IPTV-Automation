@@ -30,6 +30,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Run regression tests
+        run: python -m unittest discover -s tests -v
+
       - name: Generate JSON and category TXT playlist
         run: python generate.py
 
