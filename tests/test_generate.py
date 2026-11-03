@@ -54,6 +54,21 @@ class GeneratorTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "no catalog ID"):
             generate.find_targets(catalog)
 
+    def test_find_targets_can_select_available_targets_per_source(self):
+        first_target = next(iter(generate.TARGETS))
+        targets = generate.find_targets(
+            [{"name": first_target, "id": "server-specific-id"}],
+            require_all=False,
+        )
+
+        self.assertEqual(len(targets), 1)
+        self.assertEqual(targets[0][0], first_target)
+        self.assertEqual(targets[0][1]["id"], "server-specific-id")
+
+    def test_find_targets_rejects_source_without_any_configured_target(self):
+        with self.assertRaisesRegex(RuntimeError, "No configured target"):
+            generate.find_targets([{"name": "unmapped channel", "id": "1"}], require_all=False)
+
 
 if __name__ == "__main__":
     unittest.main()
