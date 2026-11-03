@@ -65,26 +65,39 @@ class GeneratorTests(unittest.TestCase):
         self.assertEqual(targets[0][0], first_target)
         self.assertEqual(targets[0][1]["id"], "server-specific-id")
 
-    def test_build_merged_txt_deduplicates_channel_names_across_servers(self):
-        first = [
-            ("CHANNEL A", {"id": "server-1-id"}, {"name": "Channel A", "logo": "logo-a"}),
-            ("CHANNEL B", {"id": "server-1-b"}, {"name": "Channel B", "logo": "logo-b"}),
+    def test_build_category_playlists_merges_servers_without_duplicate_names(self):
+        category_names = generate.CATEGORY_TARGETS["entertainment"][:3]
+        first, second, third = category_names
+
+        first_server = [
+            (first, {"id": "server-1-a"}, generate.TARGETS[first]),
+            (second, {"id": "server-1-b"}, generate.TARGETS[second]),
         ]
-        second = [
-            ("CHANNEL A", {"id": "server-2-id"}, {"name": " channel   a ", "logo": "logo-a-2"}),
-            ("CHANNEL C", {"id": "server-2-c"}, {"name": "Channel C", "logo": "logo-c"}),
+        second_server = [
+            (first, {"id": "server-2-a"}, generate.TARGETS[first]),
+            (third, {"id": "server-2-c"}, generate.TARGETS[third]),
         ]
 
-        playlist = generate.build_merged_txt([first, second])
+        playlists = generate.build_category_playlists([first_server, second_server])
+        playlist = playlists[generate.OUTPUT_DIR / "entertainment.txt"]
 
-        self.assertEqual(playlist.count("Channel A\n"), 1)
-        self.assertIn("https://rkdy-linkgen.wasmer.app/play.php?id=server-1-id", playlist)
-        self.assertIn("https://rkdy-linkgen.wasmer.app/play.php?id=server-2-c", playlist)
-        self.assertNotIn("server-2-id", playlist)
+        self.assertEqual(playlist.count(generate.TARGETS[first]["name"]), 1)
+        self.assertIn(
+            "https://rkdy-linkgen.wasmer.app/play.php?id=server-1-a",
+            playlist,
+        )
+        self.assertIn(
+            "https://rkdy-linkgen.wasmer.app/play.php?id=server-2-c",
+            playlist,
+        )
+        self.assertNotIn("server-2-a", playlist)
 
     def test_find_targets_rejects_source_without_any_configured_target(self):
         with self.assertRaisesRegex(RuntimeError, "No configured target"):
-            generate.find_targets([{"name": "unmapped channel", "id": "1"}], require_all=False)
+            generate.find_targets(
+                [{"name": "unmapped channel", "id": "1"}],
+                require_all=False,
+            )
 
 
 if __name__ == "__main__":
