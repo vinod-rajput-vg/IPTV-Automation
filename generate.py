@@ -22,17 +22,13 @@ BASE_URL = "https://rkdy-linkgen.wasmer.app"
 OUTPUT_DIR = Path("Output")
 
 TARGETS = {
-    "STAR GOLD": {"name": "Star Gold HD", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/star-gold-hd-in.png"},
+    "STAR GOLD HD INDIA": {"name": "Star Gold HD", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/star-gold-hd-in.png"},
     "STAR GOLD 2": {"name": "Star Gold 2 HD", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/8bd0df3e5ad35c9b42efa4a720c3680c.png"},
     "STAR GOLD THRILLS": {"name": "Star Gold Thrills", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/6fd63a1a3719b03299aa45daedad36ed.png"},
     "STAR GOLD ROMANCE": {"name": "Star Gold Romance", "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/904285d71367035368f9ac8bf8b8f03c.png"},
-    "AND PICTURES": {"name": "&Pictures HD", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/and-pictures-hd-in.png"},
     "SONY MAX": {"name": "Sony Max HD", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-hd-in.png"},
     "SONY MAX 2": {"name": "Sony Max 2", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-2-in.png"},
     "ZEE CINEMA": {"name": "Zee Cinema", "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/zee-cinema-in.png"},
-    "ZEE ACTION": {"name": "Zee Action", "logo": "https://images.weserv.nl/?url=https://tv-site.b-cdn.net/images/channel-logo/zee-action.png"},
-    "ZEE CLASSIC": {"name": "Zee Classic", "logo": "https://images.weserv.nl/?url=https://tv-site.b-cdn.net/images/channel-logo/zee-classic.png"},
-    "ZEE BOLLYWOOD": {"name": "Zee Bollywood", "logo": "https://images.weserv.nl/?url=https://tv-site.b-cdn.net/images/channel-logo/zee-bollywood.png"},
     "SONY WAH": {"name": "Sony Wah", "logo": "https://d2ljy97uzhlwv2.cloudfront.net/sonypicturesnetworksindia/logo/10_258.png"},
     "STAR UTSAV MOVIES": {"name": "Star Utsav Movies", "logo": "https://intvschedule.com/logo/star-utsav-movies.webp"},
     "ZEE ANMOL CINEMA": {"name": "Zee Anmol Cinema", "logo": "https://images.weserv.nl/?url=https://tv-site.b-cdn.net/images/channel-logo/zee-anmol-cinema.png"},
@@ -87,9 +83,6 @@ CATEGORY_TARGETS = {
         "SONY MAX",
         "SONY MAX 2",
         "ZEE CINEMA",
-        "ZEE ACTION",
-        "ZEE CLASSIC",
-        "ZEE BOLLYWOOD",
         "SONY WAH",
         "STAR UTSAV MOVIES",
         "ZEE ANMOL CINEMA",
