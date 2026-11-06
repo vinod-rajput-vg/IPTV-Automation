@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Build separate server JSON catalogs and one merged TXT playlist from the public catalog.
+"""Generate IPTV JSON catalogs and category TXT playlists.
+
+Generation is separated from network fetching and filesystem publishing so
+Firebase Functions and GitHub Actions can publish the exact same output set.
 
 This does not imitate browser sessions, bypass access controls, or resolve
 protected playback tokens. If api.php is unavailable to a plain HTTP client,
@@ -9,12 +12,13 @@ the workflow fails rather than publishing stale IDs.
 from __future__ import annotations
 
 import json
-import re
 import os
+import re
 import sys
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Callable
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
@@ -29,8 +33,8 @@ SHOW_SERVER_IN_TXT = False
 CATEGORY_DIR = Path("Sorted Channels")
 
 
-def fetch_catalog(server_id: int) -> list[dict]:
-    catalog_url = f"{BASE_URL}/api.php?server={server_id}"
+def fetch_catalog(server_id: int, base_url: str = BASE_URL) -> list[dict]:
+    catalog_url = f"{base_url}/api.php?server={server_id}"
     request = Request(
         catalog_url,
         headers={
@@ -67,10 +71,62 @@ def normalize_name(value: object) -> str:
     return " ".join(str(value or "").split()).upper()
 
 
-def find_targets(catalog: list[dict]) -> list[tuple[str, dict, dict]]:
+def load_category_files(category_dir: Path = CATEGORY_DIR) -> dict[str, list[dict]]:
+    """Load every category and channel entry from Sorted Channels/*.txt."""
+    categories = {}
+
+    if not category_dir.is_dir():
+        raise RuntimeError(f"Category directory not found: {category_dir}")
+
+    for category_file in sorted(category_dir.glob("*.txt")):
+        lines = [
+            line.strip()
+            for line in category_file.read_text(encoding="utf-8").splitlines()
+            if line.strip()
+        ]
+        if len(lines) % 3:
+            raise ValueError(
+                f"{category_file} must contain three non-empty lines per channel."
+            )
+
+        entries = []
+        for index in range(0, len(lines), 3):
+            header, display_name, logo = lines[index:index + 3]
+            match = re.fullmatch(r'"(.+?)"\s+([12])', header)
+            if not match:
+                raise ValueError(
+                    f'Invalid channel header in {category_file}: {header}'
+                )
+
+            catalog_name, server = match.groups()
+            catalog_name = " ".join(catalog_name.split())
+            if not display_name:
+                raise ValueError(f"Missing display name in {category_file}: {header}")
+            if not re.fullmatch(r"https?://\S+", logo):
+                raise ValueError(f"Invalid logo URL in {category_file}: {logo}")
+
+            entries.append({
+                "key": catalog_name,
+                "server": int(server),
+                "name": display_name,
+                "logo": logo,
+            })
+
+        categories[category_file.stem] = entries
+
+    if not categories:
+        raise RuntimeError(f"No category TXT files found in {category_dir}")
+
+    return categories
+
+
+def find_targets(
+    catalog: list[dict],
+    categories: dict[str, list[dict]],
+) -> list[tuple[str, dict, dict]]:
     """Select catalog channels configured in Sorted Channels category files."""
     configured = {}
-    for category_entries in load_category_files().values():
+    for category_entries in categories.values():
         for entry in category_entries:
             configured.setdefault(entry["key"], {
                 "name": entry["name"],
@@ -112,7 +168,12 @@ def find_targets(catalog: list[dict]) -> list[tuple[str, dict, dict]]:
     return result
 
 
-def build_json(targets: list[tuple[str, dict, dict]], server_id: int) -> dict:
+def build_json(
+    targets: list[tuple[str, dict, dict]],
+    server_id: int,
+    base_url: str = BASE_URL,
+    generated_at: datetime | None = None,
+) -> dict:
     channels = []
     for _, channel, metadata in targets:
         channel_id = str(channel["id"]).strip()
@@ -122,65 +183,29 @@ def build_json(targets: list[tuple[str, dict, dict]], server_id: int) -> dict:
                 "id": channel_id,
                 "group": str(channel.get("group", "")),
                 "logo": metadata["logo"],
-                "url": f"{BASE_URL}/play.php?id={channel_id}",
+                "url": f"{base_url}/play.php?id={channel_id}",
             }
         )
 
-    now_utc = datetime.now(timezone.utc)
+    now_utc = generated_at or datetime.now(timezone.utc)
+    if now_utc.tzinfo is None:
+        raise ValueError("generated_at must be timezone-aware.")
     now_ist = now_utc.astimezone(ZoneInfo("Asia/Kolkata"))
 
     return {
         "updated_at": now_ist.isoformat(timespec="seconds"),
-        "source": f"{BASE_URL}/api.php?server={server_id}",
+        "source": f"{base_url}/api.php?server={server_id}",
         "channels": channels,
     }
 
 
-def load_category_files() -> dict[str, list[dict]]:
-    """Load every category and channel entry from Sorted Channels/*.txt."""
-    categories = {}
-
-    if not CATEGORY_DIR.is_dir():
-        raise RuntimeError(f"Category directory not found: {CATEGORY_DIR}")
-
-    for category_file in sorted(CATEGORY_DIR.glob("*.txt")):
-        lines = [line.strip() for line in category_file.read_text(encoding="utf-8").splitlines() if line.strip()]
-        if len(lines) % 3:
-            raise ValueError(
-                f"{category_file} must contain three non-empty lines per channel."
-            )
-
-        entries = []
-        for index in range(0, len(lines), 3):
-            header, display_name, logo = lines[index:index + 3]
-            match = re.fullmatch(r'"(.+?)"\s+([12])', header)
-            if not match:
-                raise ValueError(
-                    f'Invalid channel header in {category_file}: {header}'
-                )
-
-            catalog_name, server = match.groups()
-            catalog_name = " ".join(catalog_name.split())
-            if not display_name:
-                raise ValueError(f"Missing display name in {category_file}: {header}")
-            if not re.fullmatch(r"https?://\S+", logo):
-                raise ValueError(f"Invalid logo URL in {category_file}: {logo}")
-
-            entries.append({
-                "key": catalog_name,
-                "server": int(server),
-                "name": display_name,
-                "logo": logo,
-            })
-
-        categories[category_file.stem] = entries
-
-    return categories
-
-
 def build_category_playlists(
     server_targets: list[list[tuple[str, dict, dict]]],
-) -> dict[Path, str]:
+    categories: dict[str, list[dict]],
+    base_url: str = BASE_URL,
+    show_server_in_txt: bool = SHOW_SERVER_IN_TXT,
+    output_dir: Path = OUTPUT_DIR,
+) -> dict[str, str]:
     """Generate playlists, preferring the server specified in each category file."""
     targets_by_server = []
     for targets in server_targets:
@@ -190,7 +215,7 @@ def build_category_playlists(
         })
 
     playlists = {}
-    for category, category_entries in load_category_files().items():
+    for category, category_entries in categories.items():
         entries = []
         seen_names: set[str] = set()
 
@@ -215,29 +240,76 @@ def build_category_playlists(
             seen_names.add(normalized_name)
 
             channel_id = str(channel["id"]).strip()
-            stream_url = f"{BASE_URL}/play.php?id={channel_id}"
+            stream_url = f"{base_url}/play.php?id={channel_id}"
             channel_name = category_entry["name"]
             channel_logo = category_entry["logo"]
             display_name = (
                 f"{channel_name} (Server {server_id})"
-                if SHOW_SERVER_IN_TXT else channel_name
+                if show_server_in_txt else channel_name
             )
             entries.append(f"{display_name}\n{channel_logo}\n{stream_url}")
 
-        playlists[OUTPUT_DIR / f"{category}.txt"] = (
+        playlists[(output_dir / f"{category}.txt").as_posix()] = (
             "\n\n".join(entries) + ("\n" if entries else "")
         )
 
     return playlists
 
 
-def write_outputs_atomically(outputs: dict[Path, str]) -> None:
+def generate_outputs(
+    catalogs: dict[int, list[dict]],
+    categories: dict[str, list[dict]],
+    base_url: str = BASE_URL,
+    show_server_in_txt: bool = SHOW_SERVER_IN_TXT,
+    generated_at: datetime | None = None,
+    output_dir: Path = OUTPUT_DIR,
+) -> dict[str, str]:
+    """Build the complete output mapping without writing files or making requests."""
+    missing_servers = {1, 2} - set(catalogs)
+    if missing_servers:
+        raise ValueError(
+            "Catalog data is missing server(s): "
+            + ", ".join(str(server) for server in sorted(missing_servers))
+        )
+
+    server_targets = []
+    outputs: dict[str, str] = {}
+
+    for server_id in (1, 2):
+        targets = find_targets(catalogs[server_id], categories)
+        result = build_json(
+            targets,
+            server_id,
+            base_url=base_url,
+            generated_at=generated_at,
+        )
+        json_path = output_dir / (
+            "channels.json" if server_id == 1 else f"channels_server_{server_id}.json"
+        )
+        outputs[json_path.as_posix()] = json.dumps(
+            result, ensure_ascii=False, indent=2,
+        ) + "\n"
+        server_targets.append(targets)
+
+    outputs.update(build_category_playlists(
+        server_targets,
+        categories,
+        base_url=base_url,
+        show_server_in_txt=show_server_in_txt,
+        output_dir=output_dir,
+    ))
+
+    return outputs
+
+
+def write_outputs_atomically(outputs: dict[str, str]) -> None:
     """Stage every output beside its destination, then replace destination files."""
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     staged: dict[Path, Path] = {}
 
     try:
-        for destination, data in outputs.items():
+        for destination_name, data in outputs.items():
+            destination = Path(destination_name)
+            destination.parent.mkdir(parents=True, exist_ok=True)
             with tempfile.NamedTemporaryFile(
                 mode="w",
                 encoding="utf-8",
@@ -259,28 +331,19 @@ def write_outputs_atomically(outputs: dict[Path, str]) -> None:
 
 def main() -> int:
     try:
-        outputs = {}
-        server_targets = []
-        generated_count = 0
-
-        for server_id in (1, 2):
-            catalog = fetch_catalog(server_id)
-            targets = find_targets(catalog)
-            result = build_json(targets, server_id)
-
-            json_path = OUTPUT_DIR / (
-                "channels.json" if server_id == 1 else f"channels_server_{server_id}.json"
-            )
-            outputs[json_path] = json.dumps(
-                result, ensure_ascii=False, indent=2,
-            ) + "\n"
-            server_targets.append(targets)
-            generated_count += len(result["channels"])
-
-        outputs.update(build_category_playlists(server_targets))
-
+        categories = load_category_files()
+        catalogs = {
+            server_id: fetch_catalog(server_id)
+            for server_id in (1, 2)
+        }
+        outputs = generate_outputs(catalogs, categories)
         write_outputs_atomically(outputs)
 
+        generated_count = sum(
+            len(json.loads(content)["channels"])
+            for path, content in outputs.items()
+            if path.endswith(".json")
+        )
         print(f"Wrote {generated_count} channel entries across both sources.")
         for path in outputs:
             print(f"Wrote {path}.")
@@ -288,6 +351,7 @@ def main() -> int:
     except Exception as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
+
 
 if __name__ == "__main__":
     raise SystemExit(main())
