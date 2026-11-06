@@ -1,11 +1,11 @@
 # Firebase + Vercel implementation plan
 
-Status: preparation only. No Firebase project has been provisioned, no secrets have been created, and no production deployment has been performed.
+Status: preparation on `main`. No Firebase project has been provisioned, no secrets have been created, and no production deployment has been performed.
 
 ## 1. Confirmed decisions
 
 - Repository: `vinod-rajput-vg/IPTV-Automation`
-- Work branch: `feat/firebase-automation-foundation`
+- All repository changes are made directly on `main`; no feature branches or pull requests.
 - Firebase project: a new, dedicated project for IPTV-Automation (project ID is not assigned yet).
 - Automation: Firebase Cloud Functions for Python.
 - Schedule: `10 0,12,18 * * *`, timezone `Asia/Kolkata` (00:10, 12:10, 18:10 IST).
@@ -132,4 +132,4 @@ Do not disable the existing schedule during initial preparation.
 
 The project owner must create the dedicated Firebase project and provide/confirm its non-secret project ID. The following setup must then be completed in that project: Blaze billing, Cloud Functions and Cloud Scheduler APIs, Cloud Storage bucket, Firestore database, Authentication, and least-privilege service identities.
 
-Vercel project/team selection and the Android app repository are also not yet connected to this implementation branch. The Android repository must be inspected before changing its catalog loader; do not assume its current URL parsing or cache behavior.
+Vercel project/team selection and the Android app repository are also not yet connected to this implementation. The Android repository must be inspected before changing its catalog loader; do not assume its current URL parsing or cache behavior.
