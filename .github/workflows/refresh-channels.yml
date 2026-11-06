@@ -31,6 +31,9 @@ jobs:
       - name: Validate Python syntax
         run: python -m py_compile generate.py
 
+      - name: Run generator tests
+        run: python -m unittest discover -s tests -v
+
       - name: Generate JSON and category TXT playlist
         if: github.event_name != 'pull_request'
         run: python generate.py
