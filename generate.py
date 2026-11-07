@@ -27,9 +27,10 @@ SHOW_SERVER_IN_TXT = False
 # Channel metadata and category order are loaded from Sorted Channels/*.txt.
 CATEGORY_DIR = Path("Sorted Channels")
 RESOLVED_STREAM_URLS: dict[str, str] = {}
+UNRESOLVED_STREAM_IDS: set[str] = set()
 
 
-def resolve_stream_url(channel_id: str) -> str:
+def resolve_stream_url(channel_id: str) -> str | None:
     """Follow the public play.php redirect and return the final stream URL."""
     cached_url = RESOLVED_STREAM_URLS.get(channel_id)
     if cached_url:
@@ -49,6 +50,13 @@ def resolve_stream_url(channel_id: str) -> str:
         with urlopen(request, timeout=25) as response:
             final_url = response.geturl()
     except HTTPError as exc:
+        if exc.code == 403:
+            UNRESOLVED_STREAM_IDS.add(channel_id)
+            print(
+                f"WARNING: Skipping channel ID {channel_id}; redirect endpoint returned HTTP 403.",
+                file=sys.stderr,
+            )
+            return None
         raise RuntimeError(
             f"Could not resolve stream for channel ID {channel_id} (HTTP {exc.code})."
         ) from exc
@@ -192,13 +200,16 @@ def build_json(targets: list[tuple[str, dict, dict]], server_id: int) -> dict:
     channels = []
     for _, channel, metadata in targets:
         channel_id = str(channel["id"]).strip()
+        stream_url = resolve_stream_url(channel_id)
+        if stream_url is None:
+            continue
         channels.append(
             {
                 "name": metadata["name"],
                 "id": channel_id,
                 "group": str(channel.get("group", "")),
                 "logo": metadata["logo"],
-                "url": resolve_stream_url(channel_id),
+                "url": stream_url,
             }
         )
 
@@ -297,6 +308,8 @@ def build_category_playlists(
 
             channel_id = str(channel["id"]).strip()
             stream_url = resolve_stream_url(channel_id)
+            if stream_url is None:
+                continue
             channel_name = category_entry["name"]
             channel_logo = category_entry["logo"]
             display_name = (
@@ -391,6 +404,11 @@ def main() -> int:
         write_outputs_atomically(outputs)
 
         print(f"Discovered {len(servers)} servers. Wrote {generated_count} configured channel entries.")
+        if UNRESOLVED_STREAM_IDS:
+            print(
+                f"Skipped {len(UNRESOLVED_STREAM_IDS)} channels with HTTP 403: "
+                + ", ".join(sorted(UNRESOLVED_STREAM_IDS),
+            )
         for path in outputs:
             print(f"Wrote {path}.")
         return 0
