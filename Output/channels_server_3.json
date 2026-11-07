@@ -1,5 +1,13 @@
 {
-  "updated_at": "2026-11-07T21:25:45+05:30",
+  "updated_at": "2026-11-07T21:33:58+05:30",
   "source": "https://rkdy-linkgen.wasmer.app/api.php?server=3",
-  "channels": []
+  "channels": [
+    {
+      "name": "&Picturs HD",
+      "id": "6bcc996b28c8c90a0b85",
+      "group": "INDIA | HINDI MOVIES",
+      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/and-pictures-hd-in.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=6bcc996b28c8c90a0b85"
+    }
+  ]
 }
