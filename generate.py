@@ -52,10 +52,10 @@ def resolve_stream_url(channel_id: str) -> str | None:
         with urlopen(request, timeout=25) as response:
             final_url = response.geturl()
     except HTTPError as exc:
-        if exc.code == 403:
+        if exc.code in (403, 404):
             UNRESOLVED_STREAM_IDS.add(channel_id)
             print(
-                f"WARNING: Skipping channel ID {channel_id}; redirect endpoint returned HTTP 403.",
+                f"WARNING: Skipping channel ID {channel_id}; redirect endpoint returned HTTP {exc.code}.",
                 file=sys.stderr,
             )
             return None
