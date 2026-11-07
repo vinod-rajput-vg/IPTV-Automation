@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-"""Build separate server JSON catalogs and one merged TXT playlist from the public catalog.
+"""Build server JSON catalogs and category TXT playlists from the public catalog.
 
-This does not imitate browser sessions, bypass access controls, or resolve
-protected playback tokens. If api.php is unavailable to a plain HTTP client,
-the workflow fails rather than publishing stale IDs.
+Playback URLs are resolved by following the public play.php HTTP redirect.
+This does not imitate browser sessions or bypass access controls.
 """
 
 from __future__ import annotations
@@ -27,6 +26,46 @@ SHOW_SERVER_IN_TXT = False
 
 # Channel metadata and category order are loaded from Sorted Channels/*.txt.
 CATEGORY_DIR = Path("Sorted Channels")
+RESOLVED_STREAM_URLS: dict[str, str] = {}
+
+
+def resolve_stream_url(channel_id: str) -> str:
+    """Follow the public play.php redirect and return the final stream URL."""
+    cached_url = RESOLVED_STREAM_URLS.get(channel_id)
+    if cached_url:
+        return cached_url
+
+    redirect_url = f"{BASE_URL}/play.php?id={channel_id}"
+    request = Request(
+        redirect_url,
+        headers={
+            "Accept": "*/*",
+            "User-Agent": "IPTV-Automation/1.0",
+        },
+        method="GET",
+    )
+
+    try:
+        with urlopen(request, timeout=25) as response:
+            final_url = response.geturl()
+    except HTTPError as exc:
+        raise RuntimeError(
+            f"Could not resolve stream for channel ID {channel_id} (HTTP {exc.code})."
+        ) from exc
+    except URLError as exc:
+        raise RuntimeError(
+            f"Could not resolve stream for channel ID {channel_id}: {exc.reason}"
+        ) from exc
+
+    if not re.match(r"^https?://", final_url, re.IGNORECASE):
+        raise RuntimeError(f"Channel ID {channel_id} returned an invalid stream URL.")
+    if final_url == redirect_url:
+        raise RuntimeError(
+            f"Channel ID {channel_id} did not redirect to a final stream URL."
+        )
+
+    RESOLVED_STREAM_URLS[channel_id] = final_url
+    return final_url
 
 
 def fetch_server_list() -> list[tuple[int, str]]:
@@ -159,7 +198,7 @@ def build_json(targets: list[tuple[str, dict, dict]], server_id: int) -> dict:
                 "id": channel_id,
                 "group": str(channel.get("group", "")),
                 "logo": metadata["logo"],
-                "url": f"{BASE_URL}/play.php?id={channel_id}",
+                "url": resolve_stream_url(channel_id),
             }
         )
 
@@ -257,7 +296,7 @@ def build_category_playlists(
             seen_names.add(normalized_name)
 
             channel_id = str(channel["id"]).strip()
-            stream_url = f"{BASE_URL}/play.php?id={channel_id}"
+            stream_url = resolve_stream_url(channel_id)
             channel_name = category_entry["name"]
             channel_logo = category_entry["logo"]
             display_name = (
