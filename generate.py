@@ -29,6 +29,43 @@ SHOW_SERVER_IN_TXT = False
 CATEGORY_DIR = Path("Sorted Channels")
 
 
+def fetch_server_list() -> list[tuple[int, str]]:
+    """Read server keys exposed by the website's public api.php endpoint."""
+    request = Request(
+        f"{BASE_URL}/api.php",
+        headers={"Accept": "application/json", "User-Agent": "IPTV-Automation/1.0"},
+        method="GET",
+    )
+    try:
+        with urlopen(request, timeout=20) as response:
+            if response.status != 200:
+                raise RuntimeError(f"Server list returned HTTP {response.status}")
+            payload = json.loads(response.read().decode("utf-8"))
+    except HTTPError as exc:
+        raise RuntimeError(f"Server list unavailable (HTTP {exc.code}).") from exc
+    except URLError as exc:
+        raise RuntimeError(f"Could not reach server list: {exc.reason}") from exc
+    except json.JSONDecodeError as exc:
+        raise RuntimeError("Server list response was not valid JSON.") from exc
+
+    if not isinstance(payload, list) or not payload:
+        raise RuntimeError("Server list must be a non-empty JSON array.")
+    servers = []
+    seen = set()
+    for item in payload:
+        if not isinstance(item, dict):
+            raise RuntimeError("Each server entry must be a JSON object.")
+        key = str(item.get("key", "")).strip()
+        if not re.fullmatch(r"[0-9]+", key):
+            raise RuntimeError(f"Invalid server key: {key!r}")
+        server_id = int(key)
+        if server_id in seen:
+            raise RuntimeError(f"Duplicate server key: {key}")
+        seen.add(server_id)
+        servers.append((server_id, str(item.get("label", "")).strip() or f"Server {server_id}"))
+    return servers
+
+
 def fetch_catalog(server_id: int) -> list[dict]:
     catalog_url = f"{BASE_URL}/api.php?server={server_id}"
     request = Request(
@@ -153,7 +190,7 @@ def load_category_files() -> dict[str, list[dict]]:
         entries = []
         for index in range(0, len(lines), 3):
             header, display_name, logo = lines[index:index + 3]
-            match = re.fullmatch(r'"(.+?)"\s+([12])', header)
+            match = re.fullmatch(r'"(.+?)"\s+([0-9]+)', header)
             if not match:
                 raise ValueError(
                     f'Invalid channel header in {category_file}: {header}'
@@ -179,15 +216,16 @@ def load_category_files() -> dict[str, list[dict]]:
 
 
 def build_category_playlists(
-    server_targets: list[list[tuple[str, dict, dict]]],
+    server_targets: dict[int, list[tuple[str, dict, dict]]],
 ) -> dict[Path, str]:
-    """Generate playlists, preferring the server specified in each category file."""
-    targets_by_server = []
-    for targets in server_targets:
-        targets_by_server.append({
+    """Generate playlists, preferring the configured server then available fallbacks."""
+    targets_by_server = {
+        server_id: {
             catalog_name: (channel, metadata)
             for catalog_name, channel, metadata in targets
-        })
+        }
+        for server_id, targets in server_targets.items()
+    }
 
     playlists = {}
     for category, category_entries in load_category_files().items():
@@ -197,14 +235,18 @@ def build_category_playlists(
         for category_entry in category_entries:
             catalog_name = category_entry["key"]
             preferred_server = category_entry["server"]
-            preferred_index = preferred_server - 1
-            fallback_index = 1 - preferred_index
-
-            selected = targets_by_server[preferred_index].get(catalog_name)
+            server_order = [preferred_server] + [
+                candidate_id for candidate_id in sorted(targets_by_server)
+                if candidate_id != preferred_server
+            ]
+            selected = None
             server_id = preferred_server
-            if selected is None:
-                selected = targets_by_server[fallback_index].get(catalog_name)
-                server_id = fallback_index + 1
+            for candidate_id in server_order:
+                candidate = targets_by_server[candidate_id].get(catalog_name)
+                if candidate is not None:
+                    selected = candidate
+                    server_id = candidate_id
+                    break
             if selected is None:
                 continue
 
@@ -229,6 +271,30 @@ def build_category_playlists(
         )
 
     return playlists
+
+
+def build_server_files(server_catalogs: dict[int, list[dict]]) -> dict[Path, str]:
+    """Generate server_N.txt files for newly discovered servers; preserve files 1 and 2."""
+    outputs = {}
+    for server_id, catalog in server_catalogs.items():
+        if server_id in (1, 2):
+            continue
+        entries = []
+        seen_names = set()
+        for channel in catalog:
+            if not isinstance(channel, dict):
+                continue
+            name = " ".join(str(channel.get("name", "")).split())
+            if not name or any(char in name for char in '\r\n"'):
+                continue
+            normalized = normalize_name(name)
+            if normalized in seen_names:
+                continue
+            seen_names.add(normalized)
+            entries.append(f'"{normalized}" {server_id}\n{name}')
+        if entries:
+            outputs[Path("Servers") / f"server_{server_id}.txt"] = "\n\n".join(entries) + "\n\n"
+    return outputs
 
 
 def write_outputs_atomically(outputs: dict[Path, str]) -> None:
@@ -260,11 +326,14 @@ def write_outputs_atomically(outputs: dict[Path, str]) -> None:
 def main() -> int:
     try:
         outputs = {}
-        server_targets = []
+        server_targets = {}
+        server_catalogs = {}
         generated_count = 0
 
-        for server_id in (1, 2):
+        servers = fetch_server_list()
+        for server_id, server_label in servers:
             catalog = fetch_catalog(server_id)
+            server_catalogs[server_id] = catalog
             targets = find_targets(catalog)
             result = build_json(targets, server_id)
 
@@ -274,14 +343,15 @@ def main() -> int:
             outputs[json_path] = json.dumps(
                 result, ensure_ascii=False, indent=2,
             ) + "\n"
-            server_targets.append(targets)
+            server_targets[server_id] = targets
             generated_count += len(result["channels"])
 
+        outputs.update(build_server_files(server_catalogs))
         outputs.update(build_category_playlists(server_targets))
 
         write_outputs_atomically(outputs)
 
-        print(f"Wrote {generated_count} channel entries across both sources.")
+        print(f"Discovered {len(servers)} servers. Wrote {generated_count} configured channel entries.")
         for path in outputs:
             print(f"Wrote {path}.")
         return 0
