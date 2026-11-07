@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-07T21:33:59+05:30",
+  "updated_at": "2026-11-07T21:37:31+05:30",
   "source": "https://rkdy-linkgen.wasmer.app/api.php?server=4",
   "channels": [
     {
@@ -22,6 +22,13 @@
       "group": "HINDI | INDIA",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/904285d71367035368f9ac8bf8b8f03c.png",
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=157de12bfe4e95a0eeaf"
+    },
+    {
+      "name": "&Picturs HD",
+      "id": "8316ef0c34df924259bc",
+      "group": "HINDI | INDIA",
+      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/and-pictures-hd-in.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=8316ef0c34df924259bc"
     },
     {
       "name": "Sony Max 2",
