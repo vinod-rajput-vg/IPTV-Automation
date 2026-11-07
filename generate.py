@@ -35,6 +35,8 @@ def resolve_stream_url(channel_id: str) -> str | None:
     cached_url = RESOLVED_STREAM_URLS.get(channel_id)
     if cached_url:
         return cached_url
+    if channel_id in UNRESOLVED_STREAM_IDS:
+        return None
 
     redirect_url = f"{BASE_URL}/play.php?id={channel_id}"
     request = Request(
@@ -407,7 +409,7 @@ def main() -> int:
         if UNRESOLVED_STREAM_IDS:
             print(
                 f"Skipped {len(UNRESOLVED_STREAM_IDS)} channels with HTTP 403: "
-                + ", ".join(sorted(UNRESOLVED_STREAM_IDS),
+                + ", ".join(sorted(UNRESOLVED_STREAM_IDS))
             )
         for path in outputs:
             print(f"Wrote {path}.")
