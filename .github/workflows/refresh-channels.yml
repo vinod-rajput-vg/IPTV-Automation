@@ -22,6 +22,9 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -50,8 +53,23 @@ jobs:
 
           git commit -m "Refresh channel URLs"
 
-          # The remote may have received another commit during this workflow.
-          # Rebase this generated commit onto the latest main before pushing.
-          git fetch origin main
-          git rebase origin/main
-          git push origin HEAD:main
+          # Retry against the latest main if another writer pushed concurrently.
+          for attempt in 1 2 3; do
+            git fetch origin main
+
+            if git rebase -X theirs origin/main; then
+              if git push origin HEAD:main; then
+                exit 0
+              fi
+
+              git rebase --abort || true
+            else
+              git rebase --abort || true
+            fi
+
+            echo "Push attempt $attempt failed; retrying from latest main."
+            sleep $((attempt * 2))
+          done
+
+          echo "Could not push generated files after 3 attempts."
+          exit 1
