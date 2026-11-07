@@ -26,58 +26,6 @@ SHOW_SERVER_IN_TXT = False
 
 # Channel metadata and category order are loaded from Sorted Channels/*.txt.
 CATEGORY_DIR = Path("Sorted Channels")
-RESOLVED_STREAM_URLS: dict[str, str] = {}
-UNRESOLVED_STREAM_IDS: set[str] = set()
-
-
-def resolve_stream_url(channel_id: str) -> str | None:
-    """Follow the public play.php redirect and return the final stream URL."""
-    cached_url = RESOLVED_STREAM_URLS.get(channel_id)
-    if cached_url:
-        return cached_url
-    if channel_id in UNRESOLVED_STREAM_IDS:
-        return None
-
-    redirect_url = f"{BASE_URL}/play.php?id={channel_id}"
-    request = Request(
-        redirect_url,
-        headers={
-            "Accept": "*/*",
-            "User-Agent": "IPTV-Automation/1.0",
-        },
-        method="GET",
-    )
-
-    try:
-        with urlopen(request, timeout=25) as response:
-            final_url = response.geturl()
-    except HTTPError as exc:
-        if exc.code in (403, 404):
-            UNRESOLVED_STREAM_IDS.add(channel_id)
-            print(
-                f"WARNING: Skipping channel ID {channel_id}; redirect endpoint returned HTTP {exc.code}.",
-                file=sys.stderr,
-            )
-            return None
-        raise RuntimeError(
-            f"Could not resolve stream for channel ID {channel_id} (HTTP {exc.code})."
-        ) from exc
-    except URLError as exc:
-        raise RuntimeError(
-            f"Could not resolve stream for channel ID {channel_id}: {exc.reason}"
-        ) from exc
-
-    if not re.match(r"^https?://", final_url, re.IGNORECASE):
-        raise RuntimeError(f"Channel ID {channel_id} returned an invalid stream URL.")
-    if final_url == redirect_url:
-        raise RuntimeError(
-            f"Channel ID {channel_id} did not redirect to a final stream URL."
-        )
-
-    RESOLVED_STREAM_URLS[channel_id] = final_url
-    return final_url
-
-
 def fetch_server_list() -> list[tuple[int, str]]:
     """Read server keys exposed by the website's public api.php endpoint."""
     request = Request(
@@ -202,16 +150,13 @@ def build_json(targets: list[tuple[str, dict, dict]], server_id: int) -> dict:
     channels = []
     for _, channel, metadata in targets:
         channel_id = str(channel["id"]).strip()
-        stream_url = resolve_stream_url(channel_id)
-        if stream_url is None:
-            continue
         channels.append(
             {
                 "name": metadata["name"],
                 "id": channel_id,
                 "group": str(channel.get("group", "")),
                 "logo": metadata["logo"],
-                "url": stream_url,
+                "url": f"{BASE_URL}/play.php?id={channel_id}",
             }
         )
 
@@ -309,9 +254,7 @@ def build_category_playlists(
             seen_names.add(normalized_name)
 
             channel_id = str(channel["id"]).strip()
-            stream_url = resolve_stream_url(channel_id)
-            if stream_url is None:
-                continue
+            stream_url = f"{BASE_URL}/play.php?id={channel_id}"
             channel_name = category_entry["name"]
             channel_logo = category_entry["logo"]
             display_name = (
@@ -406,11 +349,6 @@ def main() -> int:
         write_outputs_atomically(outputs)
 
         print(f"Discovered {len(servers)} servers. Wrote {generated_count} configured channel entries.")
-        if UNRESOLVED_STREAM_IDS:
-            print(
-                f"Skipped {len(UNRESOLVED_STREAM_IDS)} channels with HTTP 403: "
-                + ", ".join(sorted(UNRESOLVED_STREAM_IDS))
-            )
         for path in outputs:
             print(f"Wrote {path}.")
         return 0
