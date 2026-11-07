@@ -14,6 +14,10 @@ https://jiotvimages.cdn.jio.com/dare_images/images/channel/6fd63a1a3719b03299aa4
 Star Gold Romance
 https://jiotvimages.cdn.jio.com/dare_images/images/channel/904285d71367035368f9ac8bf8b8f03c.png
 
+"IN: & PICTURES HD" 3
+&Picturs HD
+https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/and-pictures-hd-in.png
+
 "SONY MAX" 1
 Sony Max HD
 https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-hd-in.png
