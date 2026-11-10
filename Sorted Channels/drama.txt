@@ -7,8 +7,8 @@ Star Plus HD
 https://jiotvimages.cdn.jio.com/dare_images/images/channel/35b759b6ec89c654df9e4374e9548cbd.png
 
 "SONY SAB TV 4K" 4
-Sony Sab HD
-https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-sab-hd-in.png
+Sony Sab
+https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-sab-in.png
 
 "BIGG BOSS" 1
 Bigg Boss
