@@ -1,10 +1,10 @@
-Nick HD+
+Nick
 https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/nick-in.png
-https://rkdy-linkgen.wasmer.app/play.php?id=e1d97a8426b20f37ba38
+https://rkdy-linkgen.wasmer.app/play.php?id=d6bc3464e81ffdde9759
 
 Sonic
 https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/nickelodeon-sonic-in.png
-https://rkdy-linkgen.wasmer.app/play.php?id=b2c0bb9a0b54e3a8b915
+https://rkdy-linkgen.wasmer.app/play.php?id=dc7c8b5e5382013ac595
 
 Pogo
 https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/pogo-in.png
@@ -16,7 +16,7 @@ https://rkdy-linkgen.wasmer.app/play.php?id=bbefa4024fdbce3f6c53
 
 Super Hungama
 https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/super-hungama-in.png
-https://rkdy-linkgen.wasmer.app/play.php?id=19cd2cd9e1833342cce2
+https://rkdy-linkgen.wasmer.app/play.php?id=7b02fff158294b666fb7
 
 Hungama TV
 https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/hungama-in.png

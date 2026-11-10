@@ -1,34 +1,5 @@
 {
-  "updated_at": "2026-11-10T17:09:21+05:30",
+  "updated_at": "2026-11-10T17:15:59+05:30",
   "source": "https://rkdy-linkgen.wasmer.app/api.php?server=3",
-  "channels": [
-    {
-      "name": "Zee TV HD",
-      "id": "07956f3c1a0955ba8335",
-      "group": "INDIA | ENTERTAINMENT",
-      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/zee-tv-hd-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=07956f3c1a0955ba8335"
-    },
-    {
-      "name": "Nick HD+",
-      "id": "e1d97a8426b20f37ba38",
-      "group": "INDIA | KIDS",
-      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/nick-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=e1d97a8426b20f37ba38"
-    },
-    {
-      "name": "Sonic",
-      "id": "b2c0bb9a0b54e3a8b915",
-      "group": "INDIA | KIDS",
-      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/nickelodeon-sonic-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=b2c0bb9a0b54e3a8b915"
-    },
-    {
-      "name": "Super Hungama",
-      "id": "19cd2cd9e1833342cce2",
-      "group": "INDIA | KIDS",
-      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/super-hungama-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=19cd2cd9e1833342cce2"
-    }
-  ]
+  "channels": []
 }

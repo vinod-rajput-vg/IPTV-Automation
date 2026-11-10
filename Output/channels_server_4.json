@@ -1,12 +1,12 @@
 {
-  "updated_at": "2026-11-10T17:09:26+05:30",
+  "updated_at": "2026-11-10T17:15:59+05:30",
   "source": "https://rkdy-linkgen.wasmer.app/api.php?server=4",
   "channels": [
     {
-      "name": "Sony Sab HD",
+      "name": "Sony Sab",
       "id": "0c6a8c4e93a9b54c934b",
       "group": "HINDI | INDIA",
-      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-sab-hd-in.png",
+      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-sab-in.png",
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=0c6a8c4e93a9b54c934b"
     },
     {
@@ -64,6 +64,27 @@
       "group": "HINDI | INDIA",
       "logo": "https://d2ljy97uzhlwv2.cloudfront.net/sonypicturesnetworksindia/logo/32_254.png",
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=b668942dc9bdf5d033da"
+    },
+    {
+      "name": "Nick",
+      "id": "d6bc3464e81ffdde9759",
+      "group": "HINDI | INDIA",
+      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/nick-in.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=d6bc3464e81ffdde9759"
+    },
+    {
+      "name": "Sonic",
+      "id": "dc7c8b5e5382013ac595",
+      "group": "HINDI | INDIA",
+      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/nickelodeon-sonic-in.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=dc7c8b5e5382013ac595"
+    },
+    {
+      "name": "Super Hungama",
+      "id": "7b02fff158294b666fb7",
+      "group": "HINDI | INDIA",
+      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/super-hungama-in.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=7b02fff158294b666fb7"
     },
     {
       "name": "NDTV India",

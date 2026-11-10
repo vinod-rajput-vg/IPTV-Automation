@@ -1,7 +1,14 @@
 {
-  "updated_at": "2026-11-10T17:09:18+05:30",
+  "updated_at": "2026-11-10T17:15:58+05:30",
   "source": "https://rkdy-linkgen.wasmer.app/api.php?server=2",
   "channels": [
+    {
+      "name": "Zee TV HD",
+      "id": "cd55e307b5e558fe37ee",
+      "group": "HINDI",
+      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/zee-tv-hd-in.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=cd55e307b5e558fe37ee"
+    },
     {
       "name": "Star Gold HD",
       "id": "34c888812e26caf9f54c",

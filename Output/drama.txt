@@ -1,13 +1,13 @@
 Zee TV HD
 https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/zee-tv-hd-in.png
-https://rkdy-linkgen.wasmer.app/play.php?id=07956f3c1a0955ba8335
+https://rkdy-linkgen.wasmer.app/play.php?id=cd55e307b5e558fe37ee
 
 Star Plus HD
 https://jiotvimages.cdn.jio.com/dare_images/images/channel/35b759b6ec89c654df9e4374e9548cbd.png
 https://rkdy-linkgen.wasmer.app/play.php?id=af246fa7b29a0c8611ff
 
-Sony Sab HD
-https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-sab-hd-in.png
+Sony Sab
+https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-sab-in.png
 https://rkdy-linkgen.wasmer.app/play.php?id=0c6a8c4e93a9b54c934b
 
 Bigg Boss

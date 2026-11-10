@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-10T17:09:15+05:30",
+  "updated_at": "2026-11-10T17:15:57+05:30",
   "source": "https://rkdy-linkgen.wasmer.app/api.php?server=1",
   "channels": [
     {
@@ -141,6 +141,13 @@
       "group": "HINDI | KIDS",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/cartoon-network-in.png",
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=bbefa4024fdbce3f6c53"
+    },
+    {
+      "name": "Super Hungama",
+      "id": "d382fd3adc7313122469",
+      "group": "HINDI | KIDS",
+      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/super-hungama-in.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=d382fd3adc7313122469"
     },
     {
       "name": "Hungama TV",
