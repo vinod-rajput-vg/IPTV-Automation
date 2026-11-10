@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-10T17:05:33+05:30",
+  "updated_at": "2026-11-10T17:06:17+05:30",
   "source": "https://rkdy-linkgen.wasmer.app/api.php?server=1",
   "channels": [
     {
@@ -8,6 +8,13 @@
       "group": "HINDI | TV",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/35b759b6ec89c654df9e4374e9548cbd.png",
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=af246fa7b29a0c8611ff"
+    },
+    {
+      "name": "Bigg Boss",
+      "id": "45d87394225627198826",
+      "group": "HINDI | TV",
+      "logo": "https://upload.wikimedia.org/wikipedia/en/d/da/Bigg_Boss_Hindi_TV_Series_Logo.jpg",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=45d87394225627198826"
     },
     {
       "name": "Star Gold 2 HD",

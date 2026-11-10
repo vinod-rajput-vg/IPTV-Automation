@@ -9,3 +9,7 @@ https://rkdy-linkgen.wasmer.app/play.php?id=af246fa7b29a0c8611ff
 Sony Sab HD
 https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-sab-hd-in.png
 https://rkdy-linkgen.wasmer.app/play.php?id=2e4237daf876b70e320e
+
+Bigg Boss
+https://upload.wikimedia.org/wikipedia/en/d/da/Bigg_Boss_Hindi_TV_Series_Logo.jpg
+https://rkdy-linkgen.wasmer.app/play.php?id=45d87394225627198826
