@@ -1,4 +1,4 @@
-"IN: ZEE TV HD" 3
+"ZEE TV HD INDIA" 2
 Zee TV HD
 https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/zee-tv-hd-in.png
 
