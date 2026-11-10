@@ -1,27 +1,13 @@
 {
-  "updated_at": "2026-11-10T15:32:17+05:30",
+  "updated_at": "2026-11-10T17:05:33+05:30",
   "source": "https://rkdy-linkgen.wasmer.app/api.php?server=1",
   "channels": [
-    {
-      "name": "Zee TV HD",
-      "id": "b6b9aa61051471288821",
-      "group": "HINDI | TV",
-      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/zee-tv-hd-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=b6b9aa61051471288821"
-    },
     {
       "name": "Star Plus HD",
       "id": "af246fa7b29a0c8611ff",
       "group": "HINDI | TV",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/35b759b6ec89c654df9e4374e9548cbd.png",
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=af246fa7b29a0c8611ff"
-    },
-    {
-      "name": "Bigg Boss",
-      "id": "45d87394225627198826",
-      "group": "HINDI | TV",
-      "logo": "https://upload.wikimedia.org/wikipedia/en/d/da/Bigg_Boss_Hindi_TV_Series_Logo.jpg",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=45d87394225627198826"
     },
     {
       "name": "Star Gold 2 HD",
@@ -136,20 +122,6 @@
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=08ea864128d3e4ee8c1b"
     },
     {
-      "name": "Nick HD+",
-      "id": "078276c41f36614f7083",
-      "group": "HINDI | KIDS",
-      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/nick-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=078276c41f36614f7083"
-    },
-    {
-      "name": "Sonic",
-      "id": "57699643086b711c2a2b",
-      "group": "HINDI | KIDS",
-      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/nickelodeon-sonic-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=57699643086b711c2a2b"
-    },
-    {
       "name": "Pogo",
       "id": "1389d0c0a55ed962581a",
       "group": "HINDI | KIDS",
@@ -162,13 +134,6 @@
       "group": "HINDI | KIDS",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/cartoon-network-in.png",
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=bbefa4024fdbce3f6c53"
-    },
-    {
-      "name": "Super Hungama",
-      "id": "d382fd3adc7313122469",
-      "group": "HINDI | KIDS",
-      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/super-hungama-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=d382fd3adc7313122469"
     },
     {
       "name": "Hungama TV",
