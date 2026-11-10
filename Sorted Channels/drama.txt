@@ -9,3 +9,7 @@ https://jiotvimages.cdn.jio.com/dare_images/images/channel/35b759b6ec89c654df9e4
 "SONY SAB TV 4K" 4
 Sony Sab HD
 https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-sab-hd-in.png
+
+"BIGG BOSS" 1
+Bigg Boss
+https://upload.wikimedia.org/wikipedia/en/d/da/Bigg_Boss_Hindi_TV_Series_Logo.jpg
