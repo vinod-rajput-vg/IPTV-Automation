@@ -1,4 +1,4 @@
-"ZEE TV HD" 1
+"IN: ZEE TV HD" 3
 Zee TV HD
 https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/zee-tv-hd-in.png
 
@@ -6,6 +6,6 @@ https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/ind
 Star Plus HD
 https://jiotvimages.cdn.jio.com/dare_images/images/channel/35b759b6ec89c654df9e4374e9548cbd.png
 
-"BIGG BOSS" 1
-Bigg Boss
-https://upload.wikimedia.org/wikipedia/en/d/da/Bigg_Boss_Hindi_TV_Series_Logo.jpg
+"SONY SAB TV 4K" 4
+Sony Sab HD
+https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-sab-hd-in.png
