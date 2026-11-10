@@ -1,8 +1,8 @@
-"IN: NICK_HINDI" 3
-Nick HD+
+"NICK HINDI" 4
+Nick
 https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/nick-in.png
 
-"IN: SONIC_HINDI" 3
+"SONIC HINDI" 4
 Sonic
 https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/nickelodeon-sonic-in.png
 
@@ -14,7 +14,7 @@ https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/ind
 Cartoon Network
 https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/cartoon-network-in.png
 
-"KIDS: SUPER HUNGAMA" 3
+"SUPER HUNGAMA" 4
 Super Hungama
 https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/super-hungama-in.png
 
