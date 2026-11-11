@@ -31,12 +31,12 @@ SHOW_SERVER_IN_TXT = False
 CATEGORY_DIR = Path("Sorted Channels")
 
 # Stream validation uses response headers only; it does not download or play media.
-STREAM_TIMEOUT = 10
-VALIDATION_ATTEMPTS = 5
-VALIDATION_RETRY_BASE_SECONDS = 10
-VALIDATION_RETRY_MAX_SECONDS = 60
+STREAM_TIMEOUT = 7
+VALIDATION_ATTEMPTS = 4
+VALIDATION_RETRY_BASE_SECONDS = 5
+VALIDATION_RETRY_MAX_SECONDS = 20
 # Keep requests gentle on the public endpoint; high concurrency can trigger HTTP 5xx.
-VALIDATION_WORKERS = 4
+VALIDATION_WORKERS = 8
 def fetch_server_list() -> list[tuple[int, str]]:
     """Read server keys exposed by the website's public api.php endpoint."""
     request = Request(
@@ -266,8 +266,8 @@ def write_validation_report(
     print(f"Wrote validation diagnostics to {report_path}.")
 
 
-def validate_streams(server_targets: dict[int, list[tuple[str, dict, dict]]]) -> None:
-    """Retry failed configured streams; report failures before refusing publication."""
+def validate_streams(server_targets: dict[int, list[tuple[str, dict, dict]]]) -> set[str]:
+    """Retry failed streams and return the endpoints that passed validation."""
     streams = {}
     for targets in server_targets.values():
         for catalog_name, channel, metadata in targets:
@@ -324,8 +324,9 @@ def validate_streams(server_targets: dict[int, list[tuple[str, dict, dict]]]) ->
         )
         if not failed and not permanent:
             write_validation_report(streams, validated, {}, attempts_used)
+            write_validation_report(streams, validated, {}, attempts_used)
             print(f"Validated all {len(streams)} unique configured stream endpoints.")
-            return
+            return set(validated)
 
         for name, details in newly_permanent.values():
             print(f"Stream rejected: {name} ({details['error']})")
@@ -346,11 +347,11 @@ def validate_streams(server_targets: dict[int, list[tuple[str, dict, dict]]]) ->
     remaining = {**permanent, **failed}
     write_validation_report(streams, validated, remaining, attempts_used)
     failed_names = ", ".join(sorted({name for name, _details in remaining.values()}))
-    raise RuntimeError(
-        f"{len(remaining)} stream(s) failed validation after "
-        f"{attempts_used} attempts: {failed_names}. "
-        "Existing generated playlists were not changed."
+    print(
+        f"Validation finished: {len(validated)}/{len(streams)} streams passed; "
+        f"{len(remaining)} failed after {attempts_used} attempts: {failed_names}."
     )
+    return set(validated)
 
 
 def ensure_all_configured_channels_found(
@@ -553,33 +554,44 @@ def main() -> int:
         outputs = {}
         server_targets = {}
         server_catalogs = {}
-        generated_count = 0
 
         servers = fetch_server_list()
         for server_id, server_label in servers:
             catalog = fetch_catalog(server_id)
             server_catalogs[server_id] = catalog
-            targets = find_targets(catalog)
-            result = build_json(targets, server_id)
+            server_targets[server_id] = find_targets(catalog)
 
+        ensure_all_configured_channels_found(server_targets)
+        validated_urls = validate_streams(server_targets)
+
+        # Publish only channels whose stream endpoints passed validation.
+        working_targets = {}
+        total_count = sum(len(targets) for targets in server_targets.values())
+        generated_count = 0
+        for server_id, targets in server_targets.items():
+            working = [
+                target for target in targets
+                if build_stream_url(str(target[1]["id"]).strip()) in validated_urls
+            ]
+            working_targets[server_id] = working
+            result = build_json(working, server_id)
             json_path = OUTPUT_DIR / (
                 "channels.json" if server_id == 1 else f"channels_server_{server_id}.json"
             )
             outputs[json_path] = json.dumps(
                 result, ensure_ascii=False, indent=2,
             ) + "\n"
-            server_targets[server_id] = targets
             generated_count += len(result["channels"])
 
-        ensure_all_configured_channels_found(server_targets)
-        validate_streams(server_targets)
-
         outputs.update(build_server_files(server_catalogs))
-        outputs.update(build_category_playlists(server_targets))
-
+        outputs.update(build_category_playlists(working_targets))
         write_outputs_atomically(outputs)
 
-        print(f"Discovered {len(servers)} servers. Wrote {generated_count} configured channel entries.")
+        skipped_count = total_count - generated_count
+        print(
+            f"Discovered {len(servers)} servers. Wrote {generated_count} "
+            f"validated configured channel entries; skipped {skipped_count} failed entries."
+        )
         for path in outputs:
             print(f"Wrote {path}.")
         return 0
