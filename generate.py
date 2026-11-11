@@ -632,7 +632,7 @@ def main() -> int:
             if normalize_name(entry["key"]) in missing_names
         ]
         outputs[OUTPUT_DIR / "missing-channels.json"] = (
-            json.dumps(missing_metadata, ensure_ascii=False, indent=2) + "\\n"
+            json.dumps(missing_metadata, ensure_ascii=False, indent=2) + "\n"
         )
 
         outputs.update(build_server_files(server_catalogs))
