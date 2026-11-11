@@ -575,7 +575,7 @@ def main() -> int:
             server_catalogs[server_id] = catalog
             server_targets[server_id] = find_targets(catalog)
 
-        ensure_all_configured_channels_found(server_targets)
+        missing_channels = ensure_all_configured_channels_found(server_targets)
         validated_urls = validate_streams(server_targets)
 
         # Refresh every server catalog when current IDs still produce failures.
@@ -603,7 +603,7 @@ def main() -> int:
 
             server_catalogs = refreshed_catalogs
             server_targets = refreshed_targets
-            ensure_all_configured_channels_found(server_targets)
+            missing_channels = ensure_all_configured_channels_found(server_targets)
             validated_urls = validate_streams(server_targets)
 
         # Keep every discovered configured channel, including failed endpoints.
@@ -618,6 +618,22 @@ def main() -> int:
                 result, ensure_ascii=False, indent=2,
             ) + "\n"
             generated_count += len(result["channels"])
+
+        missing_names = {normalize_name(name) for name in missing_channels}
+        missing_metadata = [
+            {
+                "name": entry["name"],
+                "catalog_name": entry["key"],
+                "logo": entry["logo"],
+                "status": "missing_from_all_servers",
+            }
+            for entries in load_category_files().values()
+            for entry in entries
+            if normalize_name(entry["key"]) in missing_names
+        ]
+        outputs[OUTPUT_DIR / "missing-channels.json"] = (
+            json.dumps(missing_metadata, ensure_ascii=False, indent=2) + "\\n"
+        )
 
         outputs.update(build_server_files(server_catalogs))
         outputs.update(build_category_playlists(server_targets))
