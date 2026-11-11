@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-11T19:37:13+05:30",
+  "updated_at": "2026-11-11T19:55:00+05:30",
   "source": "https://rkdy-linkgen.wasmer.app/api.php?server=1",
   "channels": [
     {
@@ -7,231 +7,312 @@
       "id": "271a5b884bb321b43632",
       "group": "HINDI | TV",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/35b759b6ec89c654df9e4374e9548cbd.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=271a5b884bb321b43632"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=271a5b884bb321b43632",
+      "validation_status": "valid"
     },
     {
       "name": "Bigg Boss",
       "id": "e528981ffa7f7e503cd2",
       "group": "HINDI | TV",
       "logo": "https://upload.wikimedia.org/wikipedia/en/d/da/Bigg_Boss_Hindi_TV_Series_Logo.jpg",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=e528981ffa7f7e503cd2"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=e528981ffa7f7e503cd2",
+      "validation_status": "valid"
     },
     {
       "name": "Star Gold 2 HD",
       "id": "d1b877a82d2f62a9362d",
       "group": "HINDI | CINEMA",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/8bd0df3e5ad35c9b42efa4a720c3680c.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=d1b877a82d2f62a9362d"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=d1b877a82d2f62a9362d",
+      "validation_status": "unavailable"
     },
     {
       "name": "Star Gold Thrills",
       "id": "5b15def079ddfe6752f9",
       "group": "HINDI | CINEMA",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/6fd63a1a3719b03299aa45daedad36ed.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=5b15def079ddfe6752f9"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=5b15def079ddfe6752f9",
+      "validation_status": "valid"
     },
     {
       "name": "Star Gold Romance",
       "id": "4735636c72c83c091763",
       "group": "HINDI | CINEMA",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/904285d71367035368f9ac8bf8b8f03c.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=4735636c72c83c091763"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=4735636c72c83c091763",
+      "validation_status": "valid"
     },
     {
       "name": "Sony Max HD",
       "id": "bbf3b77511a293ea0bb7",
       "group": "HINDI | CINEMA",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-hd-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=bbf3b77511a293ea0bb7"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=bbf3b77511a293ea0bb7",
+      "validation_status": "unavailable"
+    },
+    {
+      "name": "Sony Max 2",
+      "id": "bb090f19be448c27e306",
+      "group": "HINDI | CINEMA",
+      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-2-in.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=bb090f19be448c27e306",
+      "validation_status": "unavailable"
+    },
+    {
+      "name": "Zee Cinema",
+      "id": "0be9a98563c223d62e74",
+      "group": "HINDI | CINEMA",
+      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/zee-cinema-in.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=0be9a98563c223d62e74",
+      "validation_status": "unavailable"
+    },
+    {
+      "name": "Sony Wah",
+      "id": "0c2e2e244a800b200560",
+      "group": "HINDI | TV",
+      "logo": "https://d2ljy97uzhlwv2.cloudfront.net/sonypicturesnetworksindia/logo/10_258.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=0c2e2e244a800b200560",
+      "validation_status": "unavailable"
     },
     {
       "name": "Star Utsav Movies",
       "id": "b49ef4a5abca807f100f",
       "group": "HINDI | CINEMA",
       "logo": "https://intvschedule.com/logo/star-utsav-movies.webp",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=b49ef4a5abca807f100f"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=b49ef4a5abca807f100f",
+      "validation_status": "valid"
     },
     {
       "name": "Zee Anmol Cinema",
       "id": "94b2d1f8c45165aaec3e",
       "group": "HINDI | TV",
       "logo": "https://images.weserv.nl/?url=https://tv-site.b-cdn.net/images/channel-logo/zee-anmol-cinema.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=94b2d1f8c45165aaec3e"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=94b2d1f8c45165aaec3e",
+      "validation_status": "valid"
     },
     {
       "name": "Colors Cineplex HD",
       "id": "49dc97ac68d2a7ca1633",
       "group": "HINDI | CINEMA",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/fa1e0b003da3eaef8602cbfb2833231f.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=49dc97ac68d2a7ca1633"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=49dc97ac68d2a7ca1633",
+      "validation_status": "valid"
+    },
+    {
+      "name": "Discovery HD",
+      "id": "7aab58593c43878c0781",
+      "group": "HINDI | TV",
+      "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/082c33fedac20343e59eb52d7d13a139.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=7aab58593c43878c0781",
+      "validation_status": "valid"
     },
     {
       "name": "Sony BBC Earth HD",
       "id": "493fdfeafbbeb6387de8",
       "group": "HINDI | TV",
       "logo": "https://d2ljy97uzhlwv2.cloudfront.net/sonypicturesnetworksindia/logo/32_254.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=493fdfeafbbeb6387de8"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=493fdfeafbbeb6387de8",
+      "validation_status": "unavailable"
+    },
+    {
+      "name": "Animal Planet HD",
+      "id": "c4a4cc36a6a42ea96461",
+      "group": "HINDI | TV",
+      "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/36d31ab0f2693fcdc87bcb4ffec3bcb8.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=c4a4cc36a6a42ea96461",
+      "validation_status": "valid"
     },
     {
       "name": "Nat Geo Wild HD",
       "id": "a16881f96f49afeffabb",
       "group": "HINDI | TV",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/c6b17fad2bf31a052f3dd2c688ae3257.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=a16881f96f49afeffabb"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=a16881f96f49afeffabb",
+      "validation_status": "valid"
     },
     {
       "name": "National Geographic HD",
       "id": "3f67efcede86d3d53bc1",
       "group": "HINDI | TV",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/a59081e5d6c95ca73f6f89855fb37a18.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=3f67efcede86d3d53bc1"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=3f67efcede86d3d53bc1",
+      "validation_status": "valid"
     },
     {
       "name": "History TV18 HD",
       "id": "7900b6c22c98065fc3ce",
       "group": "HINDI | TV",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/history-tv18-hd-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=7900b6c22c98065fc3ce"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=7900b6c22c98065fc3ce",
+      "validation_status": "valid"
     },
     {
       "name": "Pogo",
       "id": "dcaaf042573b394c23db",
       "group": "HINDI | KIDS",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/pogo-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=dcaaf042573b394c23db"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=dcaaf042573b394c23db",
+      "validation_status": "valid"
+    },
+    {
+      "name": "Cartoon Network",
+      "id": "35d064c95fc722dea4e9",
+      "group": "HINDI | KIDS",
+      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/cartoon-network-in.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=35d064c95fc722dea4e9",
+      "validation_status": "valid"
     },
     {
       "name": "Super Hungama",
       "id": "78624b391840fc867cf5",
       "group": "HINDI | KIDS",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/super-hungama-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=78624b391840fc867cf5"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=78624b391840fc867cf5",
+      "validation_status": "valid"
     },
     {
       "name": "Hungama TV",
       "id": "bbeb895551eded8af3b4",
       "group": "HINDI | KIDS",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/hungama-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=bbeb895551eded8af3b4"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=bbeb895551eded8af3b4",
+      "validation_status": "valid"
     },
     {
       "name": "Oggy And The Cockroaches 24/7",
       "id": "0ae6161fe8d1dd7bfc01",
       "group": "HINDI | KIDS",
       "logo": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Oggy_and_the_Cockroaches_Logo.webp",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=0ae6161fe8d1dd7bfc01"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=0ae6161fe8d1dd7bfc01",
+      "validation_status": "valid"
     },
     {
       "name": "Doraemon 24/7",
       "id": "3d7e2bfe4a802409d88f",
       "group": "HINDI | KIDS",
       "logo": "https://upload.wikimedia.org/wikipedia/en/c/c8/Doraemon_volume_1_cover.jpg",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=3d7e2bfe4a802409d88f"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=3d7e2bfe4a802409d88f",
+      "validation_status": "valid"
     },
     {
       "name": "Motu Patlu 24/7",
       "id": "c3db1cb57dbb71e54c18",
       "group": "HINDI | KIDS",
       "logo": "https://upload.wikimedia.org/wikipedia/en/3/3b/Motu_Patlu.Jpg",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=c3db1cb57dbb71e54c18"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=c3db1cb57dbb71e54c18",
+      "validation_status": "valid"
     },
     {
       "name": "Chota Bheem 24/7",
       "id": "d4d7f5e8d3d9b56fd3ba",
       "group": "HINDI | KIDS",
       "logo": "https://upload.wikimedia.org/wikipedia/en/f/f9/Chhota_Bheem.jpg",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=d4d7f5e8d3d9b56fd3ba"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=d4d7f5e8d3d9b56fd3ba",
+      "validation_status": "valid"
     },
     {
       "name": "Tv9 Bharatvarsh",
       "id": "9576bb983eddc3e0bc86",
       "group": "HINDI | NEWS",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/tv9-bharatvarsh-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=9576bb983eddc3e0bc86"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=9576bb983eddc3e0bc86",
+      "validation_status": "valid"
     },
     {
       "name": "Times Now Navbharat",
       "id": "1de598a494885ba0adda",
       "group": "HINDI | NEWS",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/bc00f1e02773b93ec36890b5a4ef7ece.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=1de598a494885ba0adda"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=1de598a494885ba0adda",
+      "validation_status": "valid"
     },
     {
       "name": "NDTV India",
       "id": "4177ad42f03cfeef8bc1",
       "group": "HINDI | NEWS",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/b69d5a23fcfa02d4c2f47e958c704b46.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=4177ad42f03cfeef8bc1"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=4177ad42f03cfeef8bc1",
+      "validation_status": "valid"
     },
     {
       "name": "DD News",
       "id": "92baebb85543f891bc2b",
       "group": "HINDI | NEWS",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/16dfa4cb5cb300bfad994dc6acb44c76.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=92baebb85543f891bc2b"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=92baebb85543f891bc2b",
+      "validation_status": "valid"
     },
     {
       "name": "Tv9 Gujarati",
       "id": "09dd4245f68921529834",
       "group": "GUJARATI | TV",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/f344ea2f99c67074b52150e40cc30c24.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=09dd4245f68921529834"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=09dd4245f68921529834",
+      "validation_status": "valid"
     },
     {
       "name": "Tv9 Marathi",
       "id": "95e2f237468d4fcacbb0",
       "group": "MARATHI | TV",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/cbfc396076a82705258fb3b019b1153b.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=95e2f237468d4fcacbb0"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=95e2f237468d4fcacbb0",
+      "validation_status": "valid"
     },
     {
       "name": "Zee 24 Kalak",
       "id": "cdcff7a7ad49ef3a8ab1",
       "group": "GUJARATI | TV",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/zee-24-kalak-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=cdcff7a7ad49ef3a8ab1"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=cdcff7a7ad49ef3a8ab1",
+      "validation_status": "valid"
     },
     {
       "name": "Zee 24 Taas",
       "id": "3f8a18cec5a2af8e83b3",
       "group": "MARATHI | TV",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/zee-24-taas-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=3f8a18cec5a2af8e83b3"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=3f8a18cec5a2af8e83b3",
+      "validation_status": "valid"
     },
     {
       "name": "Republic Bharat",
       "id": "2690c82fb0b2cb3d4f66",
       "group": "HINDI | NEWS",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/republic-bharat-tv-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=2690c82fb0b2cb3d4f66"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=2690c82fb0b2cb3d4f66",
+      "validation_status": "valid"
     },
     {
       "name": "News Nation",
       "id": "e8ef74d0a902f714e09e",
       "group": "HINDI | NEWS",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/cd40fe9e8db4c7662414c19f09e38857.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=e8ef74d0a902f714e09e"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=e8ef74d0a902f714e09e",
+      "validation_status": "valid"
     },
     {
       "name": "Aaj Tak",
       "id": "ea81e61e188bc482ce29",
       "group": "HINDI | NEWS",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/aaj-tak-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=ea81e61e188bc482ce29"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=ea81e61e188bc482ce29",
+      "validation_status": "valid"
     },
     {
       "name": "ABP News",
       "id": "925b8e844b7098a175e1",
       "group": "HINDI | NEWS",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/abp-news-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=925b8e844b7098a175e1"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=925b8e844b7098a175e1",
+      "validation_status": "valid"
     },
     {
       "name": "India TV",
       "id": "e0b123a1ffded0ebfdc6",
       "group": "HINDI | NEWS",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/india-tv-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=e0b123a1ffded0ebfdc6"
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=e0b123a1ffded0ebfdc6",
+      "validation_status": "valid"
     }
   ]
 }
