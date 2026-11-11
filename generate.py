@@ -247,7 +247,9 @@ def validate_streams(server_targets: dict[int, list[tuple[str, dict, dict]]]) ->
             print(f"Stream temporarily unavailable: {name} ({error})")
 
         pending = {url: name for url, (name, _error) in failed.items()}
-        if pending and attempt < VALIDATION_ATTEMPTS:
+        if not pending:
+            break
+        if attempt < VALIDATION_ATTEMPTS:
             delay = min(
                 VALIDATION_RETRY_BASE_SECONDS * (2 ** (attempt - 1)),
                 VALIDATION_RETRY_MAX_SECONDS,
