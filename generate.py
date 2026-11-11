@@ -32,10 +32,11 @@ CATEGORY_DIR = Path("Sorted Channels")
 
 # Stream validation uses response headers only; it does not download or play media.
 STREAM_TIMEOUT = 10
-VALIDATION_ATTEMPTS = 4
-VALIDATION_RETRY_BASE_SECONDS = 5
-VALIDATION_RETRY_MAX_SECONDS = 30
-VALIDATION_WORKERS = 24
+VALIDATION_ATTEMPTS = 5
+VALIDATION_RETRY_BASE_SECONDS = 10
+VALIDATION_RETRY_MAX_SECONDS = 60
+# Keep requests gentle on the public endpoint; high concurrency can trigger HTTP 5xx.
+VALIDATION_WORKERS = 4
 def fetch_server_list() -> list[tuple[int, str]]:
     """Read server keys exposed by the website's public api.php endpoint."""
     request = Request(
@@ -160,6 +161,10 @@ def build_stream_url(channel_id: str) -> str:
     return f"{BASE_URL}/play.php?{urlencode({'id': channel_id})}"
 
 
+class PermanentStreamError(RuntimeError):
+    """An HTTP response indicating that retrying the same endpoint is not useful."""
+
+
 def validate_stream_url(url: str) -> None:
     """Check that the public stream endpoint resolves to a successful media response."""
     request = Request(
@@ -186,7 +191,10 @@ def validate_stream_url(url: str) -> None:
             if content_type in ("text/html", "application/json", "application/problem+json"):
                 raise RuntimeError(f"Unexpected response type: {content_type}")
     except HTTPError as exc:
-        raise RuntimeError(f"HTTP {exc.code}") from exc
+        message = f"HTTP {exc.code}"
+        if exc.code in (400, 401, 403, 404, 410):
+            raise PermanentStreamError(f"{message} (non-retryable)") from exc
+        raise RuntimeError(message) from exc
     except URLError as exc:
         raise RuntimeError(f"Connection failed: {exc.reason}") from exc
 
@@ -204,8 +212,10 @@ def validate_streams(server_targets: dict[int, list[tuple[str, dict, dict]]]) ->
         raise RuntimeError("No configured streams were found to validate.")
 
     pending = dict(streams)
+    permanent = {}
     for attempt in range(1, VALIDATION_ATTEMPTS + 1):
         failed = {}
+        newly_permanent = {}
         with ThreadPoolExecutor(max_workers=VALIDATION_WORKERS) as executor:
             futures = {
                 executor.submit(validate_stream_url, url): (url, name)
@@ -215,33 +225,43 @@ def validate_streams(server_targets: dict[int, list[tuple[str, dict, dict]]]) ->
                 url, name = futures[future]
                 try:
                     future.result()
+                except PermanentStreamError as exc:
+                    newly_permanent[url] = (name, str(exc))
                 except Exception as exc:
                     failed[url] = (name, str(exc))
 
-        passed = len(pending) - len(failed)
+        permanent.update(newly_permanent)
+        passed = len(pending) - len(failed) - len(newly_permanent)
         print(
             f"Stream validation attempt {attempt}/{VALIDATION_ATTEMPTS}: "
-            f"{passed}/{len(pending)} passed."
+            f"{passed}/{len(pending)} passed; "
+            f"{len(newly_permanent)} non-retryable."
         )
-        if not failed:
+        if not failed and not permanent:
             print(f"Validated all {len(streams)} unique configured stream endpoints.")
             return
 
+        for name, error in newly_permanent.values():
+            print(f"Stream rejected: {name} ({error})")
         for name, error in failed.values():
-            print(f"Stream unavailable: {name} ({error})")
+            print(f"Stream temporarily unavailable: {name} ({error})")
 
         pending = {url: name for url, (name, _error) in failed.items()}
-        if attempt < VALIDATION_ATTEMPTS:
+        if pending and attempt < VALIDATION_ATTEMPTS:
             delay = min(
                 VALIDATION_RETRY_BASE_SECONDS * (2 ** (attempt - 1)),
                 VALIDATION_RETRY_MAX_SECONDS,
             )
-            print(f"Retrying {len(pending)} failed streams in {delay} seconds.")
+            print(f"Retrying {len(pending)} temporary failures in {delay} seconds.")
             time.sleep(delay)
 
-    failed_names = ", ".join(sorted({name for name, _error in failed.values()}))
+    remaining = {
+        **permanent,
+        **{url: (name, error) for url, (name, error) in failed.items()},
+    }
+    failed_names = ", ".join(sorted({name for name, _error in remaining.values()}))
     raise RuntimeError(
-        f"{len(pending)} stream(s) failed validation after "
+        f"{len(remaining)} stream(s) failed validation after "
         f"{VALIDATION_ATTEMPTS} attempts: {failed_names}. "
         "Existing generated playlists were not changed."
     )
