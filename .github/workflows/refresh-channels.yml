@@ -2,10 +2,8 @@ name: Refresh channel URLs
 
 on:
   schedule:
-    - cron: '0 0 * * *'
-      timezone: 'Asia/Kolkata'
-    - cron: '0 12 * * *'
-      timezone: 'Asia/Kolkata'
+    - cron: '30 18 * * *'
+    - cron: '30 6 * * *'
       
   workflow_dispatch:
   pull_request:
