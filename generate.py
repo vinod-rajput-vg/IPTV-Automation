@@ -161,12 +161,29 @@ def build_stream_url(channel_id: str) -> str:
     return f"{BASE_URL}/play.php?{urlencode({'id': channel_id})}"
 
 
-class PermanentStreamError(RuntimeError):
+class StreamValidationError(RuntimeError):
+    """A stream validation failure with reportable HTTP and redirect details."""
+
+    def __init__(
+        self,
+        message: str,
+        *,
+        status: int | None = None,
+        final_url: str | None = None,
+        retryable: bool = True,
+    ) -> None:
+        super().__init__(message)
+        self.status = status
+        self.final_url = final_url
+        self.retryable = retryable
+
+
+class PermanentStreamError(StreamValidationError):
     """An HTTP response indicating that retrying the same endpoint is not useful."""
 
 
-def validate_stream_url(url: str) -> None:
-    """Check that the public stream endpoint resolves to a successful media response."""
+def validate_stream_url(url: str) -> dict:
+    """Check response headers and return the final redirect and response details."""
     request = Request(
         url,
         headers={
@@ -180,27 +197,77 @@ def validate_stream_url(url: str) -> None:
     try:
         with urlopen(request, timeout=STREAM_TIMEOUT) as response:
             status = getattr(response, "status", response.getcode())
-            if not 200 <= status < 300:
-                raise RuntimeError(f"HTTP {status}")
-
             final_url = response.geturl()
+            if not 200 <= status < 300:
+                raise StreamValidationError(
+                    f"HTTP {status}", status=status, final_url=final_url,
+                )
             if urlsplit(final_url).scheme not in ("http", "https"):
-                raise RuntimeError("Redirect did not resolve to HTTP(S)")
+                raise StreamValidationError(
+                    "Redirect did not resolve to HTTP(S)",
+                    status=status,
+                    final_url=final_url,
+                )
 
             content_type = response.headers.get_content_type().lower()
             if content_type in ("text/html", "application/json", "application/problem+json"):
-                raise RuntimeError(f"Unexpected response type: {content_type}")
+                raise StreamValidationError(
+                    f"Unexpected response type: {content_type}",
+                    status=status,
+                    final_url=final_url,
+                )
+            return {
+                "status": status,
+                "final_url": final_url,
+                "content_type": content_type,
+            }
     except HTTPError as exc:
         message = f"HTTP {exc.code}"
+        details = {
+            "status": exc.code,
+            "final_url": exc.geturl() or url,
+        }
         if exc.code in (400, 401, 403, 404, 410):
-            raise PermanentStreamError(f"{message} (non-retryable)") from exc
-        raise RuntimeError(message) from exc
+            raise PermanentStreamError(
+                f"{message} (non-retryable)", **details, retryable=False,
+            ) from exc
+        raise StreamValidationError(message, **details) from exc
     except URLError as exc:
-        raise RuntimeError(f"Connection failed: {exc.reason}") from exc
+        raise StreamValidationError(f"Connection failed: {exc.reason}") from exc
+
+
+def write_validation_report(
+    streams: dict[str, str],
+    validated: dict[str, dict],
+    failures: dict[str, tuple[str, dict]],
+    attempts: int,
+) -> None:
+    """Persist validation diagnostics separately from generated playlists."""
+    report = {
+        "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "result": "passed" if not failures else "failed",
+        "total_streams": len(streams),
+        "validated_streams": len(validated),
+        "failed_streams": len(failures),
+        "attempts": attempts,
+        "failures": [
+            {
+                "channel": name,
+                "requested_url": url,
+                **details,
+            }
+            for url, (name, details) in sorted(failures.items(), key=lambda item: item[1][0])
+        ],
+    }
+    report_path = OUTPUT_DIR / "stream-validation-report.json"
+    write_outputs_atomically({
+        report_path: json.dumps(report, ensure_ascii=False, indent=2) + "\n",
+    })
+    print(f"Wrote validation diagnostics to {report_path}.")
 
 
 def validate_streams(server_targets: dict[int, list[tuple[str, dict, dict]]]) -> None:
-    """Retry failed configured streams; raise before publishing unless all pass."""
+    """Retry failed configured streams; report failures before refusing publication."""
     streams = {}
     for targets in server_targets.values():
         for catalog_name, channel, metadata in targets:
@@ -213,7 +280,11 @@ def validate_streams(server_targets: dict[int, list[tuple[str, dict, dict]]]) ->
 
     pending = dict(streams)
     permanent = {}
+    validated = {}
+    attempts_used = 0
+    failed = {}
     for attempt in range(1, VALIDATION_ATTEMPTS + 1):
+        attempts_used = attempt
         failed = {}
         newly_permanent = {}
         with ThreadPoolExecutor(max_workers=VALIDATION_WORKERS) as executor:
@@ -224,11 +295,25 @@ def validate_streams(server_targets: dict[int, list[tuple[str, dict, dict]]]) ->
             for future in as_completed(futures):
                 url, name = futures[future]
                 try:
-                    future.result()
-                except PermanentStreamError as exc:
-                    newly_permanent[url] = (name, str(exc))
+                    validated[url] = future.result()
+                except StreamValidationError as exc:
+                    details = {
+                        "status": exc.status,
+                        "final_url": exc.final_url,
+                        "error": str(exc),
+                        "retryable": exc.retryable,
+                    }
+                    if exc.retryable:
+                        failed[url] = (name, details)
+                    else:
+                        newly_permanent[url] = (name, details)
                 except Exception as exc:
-                    failed[url] = (name, str(exc))
+                    failed[url] = (name, {
+                        "status": None,
+                        "final_url": None,
+                        "error": str(exc),
+                        "retryable": True,
+                    })
 
         permanent.update(newly_permanent)
         passed = len(pending) - len(failed) - len(newly_permanent)
@@ -238,15 +323,16 @@ def validate_streams(server_targets: dict[int, list[tuple[str, dict, dict]]]) ->
             f"{len(newly_permanent)} non-retryable."
         )
         if not failed and not permanent:
+            write_validation_report(streams, validated, {}, attempts_used)
             print(f"Validated all {len(streams)} unique configured stream endpoints.")
             return
 
-        for name, error in newly_permanent.values():
-            print(f"Stream rejected: {name} ({error})")
-        for name, error in failed.values():
-            print(f"Stream temporarily unavailable: {name} ({error})")
+        for name, details in newly_permanent.values():
+            print(f"Stream rejected: {name} ({details['error']})")
+        for name, details in failed.values():
+            print(f"Stream temporarily unavailable: {name} ({details['error']})")
 
-        pending = {url: name for url, (name, _error) in failed.items()}
+        pending = {url: name for url, (name, _details) in failed.items()}
         if not pending:
             break
         if attempt < VALIDATION_ATTEMPTS:
@@ -257,14 +343,12 @@ def validate_streams(server_targets: dict[int, list[tuple[str, dict, dict]]]) ->
             print(f"Retrying {len(pending)} temporary failures in {delay} seconds.")
             time.sleep(delay)
 
-    remaining = {
-        **permanent,
-        **{url: (name, error) for url, (name, error) in failed.items()},
-    }
-    failed_names = ", ".join(sorted({name for name, _error in remaining.values()}))
+    remaining = {**permanent, **failed}
+    write_validation_report(streams, validated, remaining, attempts_used)
+    failed_names = ", ".join(sorted({name for name, _details in remaining.values()}))
     raise RuntimeError(
         f"{len(remaining)} stream(s) failed validation after "
-        f"{VALIDATION_ATTEMPTS} attempts: {failed_names}. "
+        f"{attempts_used} attempts: {failed_names}. "
         "Existing generated playlists were not changed."
     )
 
