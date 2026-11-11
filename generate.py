@@ -156,7 +156,7 @@ def find_targets(catalog: list[dict]) -> list[tuple[str, dict, dict]]:
     return result
 
 
-def stream_url(channel_id: str) -> str:
+def build_stream_url(channel_id: str) -> str:
     return f"{BASE_URL}/play.php?{urlencode({'id': channel_id})}"
 
 
@@ -197,7 +197,7 @@ def validate_streams(server_targets: dict[int, list[tuple[str, dict, dict]]]) ->
     for targets in server_targets.values():
         for catalog_name, channel, metadata in targets:
             channel_id = str(channel["id"]).strip()
-            url = stream_url(channel_id)
+            url = build_stream_url(channel_id)
             streams.setdefault(url, metadata["name"])
 
     if not streams:
@@ -278,7 +278,7 @@ def build_json(targets: list[tuple[str, dict, dict]], server_id: int) -> dict:
                 "id": channel_id,
                 "group": str(channel.get("group", "")),
                 "logo": metadata["logo"],
-                "url": stream_url(channel_id),
+                "url": build_stream_url(channel_id),
             }
         )
 
@@ -376,7 +376,7 @@ def build_category_playlists(
             seen_names.add(normalized_name)
 
             channel_id = str(channel["id"]).strip()
-            stream_url = globals()["stream_url"](channel_id)
+            stream_url = build_stream_url(channel_id)
             channel_name = category_entry["name"]
             channel_logo = category_entry["logo"]
             display_name = (
