@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-11-11T19:29:42+05:30",
+  "updated_at": "2026-11-11T19:37:13+05:30",
   "source": "https://rkdy-linkgen.wasmer.app/api.php?server=1",
   "channels": [
     {
@@ -8,6 +8,13 @@
       "group": "HINDI | TV",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/35b759b6ec89c654df9e4374e9548cbd.png",
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=271a5b884bb321b43632"
+    },
+    {
+      "name": "Bigg Boss",
+      "id": "e528981ffa7f7e503cd2",
+      "group": "HINDI | TV",
+      "logo": "https://upload.wikimedia.org/wikipedia/en/d/da/Bigg_Boss_Hindi_TV_Series_Logo.jpg",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=e528981ffa7f7e503cd2"
     },
     {
       "name": "Star Gold 2 HD",
@@ -38,20 +45,6 @@
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=bbf3b77511a293ea0bb7"
     },
     {
-      "name": "Sony Max 2",
-      "id": "bb090f19be448c27e306",
-      "group": "HINDI | CINEMA",
-      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-max-2-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=bb090f19be448c27e306"
-    },
-    {
-      "name": "Sony Wah",
-      "id": "0c2e2e244a800b200560",
-      "group": "HINDI | TV",
-      "logo": "https://d2ljy97uzhlwv2.cloudfront.net/sonypicturesnetworksindia/logo/10_258.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=0c2e2e244a800b200560"
-    },
-    {
       "name": "Star Utsav Movies",
       "id": "b49ef4a5abca807f100f",
       "group": "HINDI | CINEMA",
@@ -64,6 +57,13 @@
       "group": "HINDI | TV",
       "logo": "https://images.weserv.nl/?url=https://tv-site.b-cdn.net/images/channel-logo/zee-anmol-cinema.png",
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=94b2d1f8c45165aaec3e"
+    },
+    {
+      "name": "Colors Cineplex HD",
+      "id": "49dc97ac68d2a7ca1633",
+      "group": "HINDI | CINEMA",
+      "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/fa1e0b003da3eaef8602cbfb2833231f.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=49dc97ac68d2a7ca1633"
     },
     {
       "name": "Sony BBC Earth HD",
@@ -99,13 +99,6 @@
       "group": "HINDI | KIDS",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/pogo-in.png",
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=dcaaf042573b394c23db"
-    },
-    {
-      "name": "Cartoon Network",
-      "id": "35d064c95fc722dea4e9",
-      "group": "HINDI | KIDS",
-      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/cartoon-network-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=35d064c95fc722dea4e9"
     },
     {
       "name": "Super Hungama",
@@ -225,6 +218,13 @@
       "group": "HINDI | NEWS",
       "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/aaj-tak-in.png",
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=ea81e61e188bc482ce29"
+    },
+    {
+      "name": "ABP News",
+      "id": "925b8e844b7098a175e1",
+      "group": "HINDI | NEWS",
+      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/abp-news-in.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=925b8e844b7098a175e1"
     },
     {
       "name": "India TV",

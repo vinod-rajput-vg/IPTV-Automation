@@ -44,7 +44,7 @@ https://rkdy-linkgen.wasmer.app/play.php?id=ea81e61e188bc482ce29
 
 ABP News
 https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/abp-news-in.png
-https://rkdy-linkgen.wasmer.app/play.php?id=e4bc6eaf0b65fdcae571
+https://rkdy-linkgen.wasmer.app/play.php?id=925b8e844b7098a175e1
 
 India TV
 https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/india-tv-in.png

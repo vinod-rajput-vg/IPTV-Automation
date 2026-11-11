@@ -1,27 +1,20 @@
 {
-  "updated_at": "2026-11-11T19:29:42+05:30",
+  "updated_at": "2026-11-11T19:37:13+05:30",
   "source": "https://rkdy-linkgen.wasmer.app/api.php?server=4",
   "channels": [
-    {
-      "name": "Sony Sab",
-      "id": "1d94e3ae4e45d59b6cf7",
-      "group": "HINDI | INDIA",
-      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/sony-sab-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=1d94e3ae4e45d59b6cf7"
-    },
-    {
-      "name": "Star Gold Thrills",
-      "id": "7c0af4708a610f0a780d",
-      "group": "HINDI | INDIA",
-      "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/6fd63a1a3719b03299aa45daedad36ed.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=7c0af4708a610f0a780d"
-    },
     {
       "name": "Star Utsav Movies",
       "id": "f9155976b3e727032320",
       "group": "HINDI | INDIA",
       "logo": "https://intvschedule.com/logo/star-utsav-movies.webp",
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=f9155976b3e727032320"
+    },
+    {
+      "name": "Zee Anmol Cinema",
+      "id": "7e6b7e6d42c26f0e2215",
+      "group": "HINDI | INDIA",
+      "logo": "https://images.weserv.nl/?url=https://tv-site.b-cdn.net/images/channel-logo/zee-anmol-cinema.png",
+      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=7e6b7e6d42c26f0e2215"
     },
     {
       "name": "Sony BBC Earth HD",
@@ -31,32 +24,11 @@
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=1228c9b6c084e6ce9fa6"
     },
     {
-      "name": "Nick",
-      "id": "8c91a45e29032bb970e4",
-      "group": "HINDI | INDIA",
-      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/nick-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=8c91a45e29032bb970e4"
-    },
-    {
-      "name": "Super Hungama",
-      "id": "fb17a442c21a90f7d6dc",
-      "group": "HINDI | INDIA",
-      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/super-hungama-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=fb17a442c21a90f7d6dc"
-    },
-    {
       "name": "Tv9 Gujarati",
       "id": "29f61d25489de8887120",
       "group": "GUJARATI | INDIA",
       "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/f344ea2f99c67074b52150e40cc30c24.png",
       "url": "https://rkdy-linkgen.wasmer.app/play.php?id=29f61d25489de8887120"
-    },
-    {
-      "name": "Republic Bharat",
-      "id": "d329662c177cf4dbe44f",
-      "group": "HINDI | NEWS",
-      "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/republic-bharat-tv-in.png",
-      "url": "https://rkdy-linkgen.wasmer.app/play.php?id=d329662c177cf4dbe44f"
     },
     {
       "name": "News Nation",
