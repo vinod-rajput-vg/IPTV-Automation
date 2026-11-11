@@ -324,7 +324,6 @@ def validate_streams(server_targets: dict[int, list[tuple[str, dict, dict]]]) ->
         )
         if not failed and not permanent:
             write_validation_report(streams, validated, {}, attempts_used)
-            write_validation_report(streams, validated, {}, attempts_used)
             print(f"Validated all {len(streams)} unique configured stream endpoints.")
             return set(validated)
 
