@@ -482,7 +482,7 @@ def build_category_playlists(
             selected = None
             server_id = preferred_server
             for candidate_id in server_order:
-                candidate = targets_by_server[candidate_id].get(catalog_name)
+                candidate = targets_by_server.get(candidate_id, {}).get(catalog_name)
                 if candidate is not None:
                     selected = candidate
                     server_id = candidate_id
@@ -586,7 +586,7 @@ def main() -> int:
                 for targets in server_targets.values()
                 for _name, channel, _metadata in targets
             }
-            if current_urls and current_urls.issubset(validated_urls):
+            if not current_urls or current_urls.issubset(validated_urls):
                 break
 
             print(
@@ -623,11 +623,16 @@ def main() -> int:
         outputs.update(build_category_playlists(server_targets))
         write_outputs_atomically(outputs)
 
-        skipped_count = total_count - generated_count
+        unavailable_count = sum(
+            1
+            for targets in server_targets.values()
+            for _name, channel, _metadata in targets
+            if build_stream_url(str(channel["id"]).strip()) not in validated_urls
+        )
         print(
             f"Discovered {len(servers)} servers. Wrote {generated_count} "
             f"configured channel entries (including unavailable links); "
-            f"{skipped_count} links currently unavailable."
+            f"{unavailable_count} links currently unavailable."
         )
         for path in outputs:
             print(f"Wrote {path}.")
