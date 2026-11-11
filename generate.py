@@ -12,9 +12,12 @@ import re
 import os
 import sys
 import tempfile
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.error import HTTPError, URLError
+from urllib.parse import urlencode, urlsplit
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
@@ -26,6 +29,13 @@ SHOW_SERVER_IN_TXT = False
 
 # Channel metadata and category order are loaded from Sorted Channels/*.txt.
 CATEGORY_DIR = Path("Sorted Channels")
+
+# Stream validation uses response headers only; it does not download or play media.
+STREAM_TIMEOUT = 10
+VALIDATION_ATTEMPTS = 4
+VALIDATION_RETRY_BASE_SECONDS = 5
+VALIDATION_RETRY_MAX_SECONDS = 30
+VALIDATION_WORKERS = 24
 def fetch_server_list() -> list[tuple[int, str]]:
     """Read server keys exposed by the website's public api.php endpoint."""
     request = Request(
@@ -146,6 +156,118 @@ def find_targets(catalog: list[dict]) -> list[tuple[str, dict, dict]]:
     return result
 
 
+def stream_url(channel_id: str) -> str:
+    return f"{BASE_URL}/play.php?{urlencode({'id': channel_id})}"
+
+
+def validate_stream_url(url: str) -> None:
+    """Check that the public stream endpoint resolves to a successful media response."""
+    request = Request(
+        url,
+        headers={
+            "Accept": "application/vnd.apple.mpegurl, application/x-mpegURL, "
+            "audio/*, video/*, application/octet-stream, */*",
+            "User-Agent": "IPTV-Automation/1.0",
+        },
+        method="GET",
+    )
+
+    try:
+        with urlopen(request, timeout=STREAM_TIMEOUT) as response:
+            status = getattr(response, "status", response.getcode())
+            if not 200 <= status < 300:
+                raise RuntimeError(f"HTTP {status}")
+
+            final_url = response.geturl()
+            if urlsplit(final_url).scheme not in ("http", "https"):
+                raise RuntimeError("Redirect did not resolve to HTTP(S)")
+
+            content_type = response.headers.get_content_type().lower()
+            if content_type in ("text/html", "application/json", "application/problem+json"):
+                raise RuntimeError(f"Unexpected response type: {content_type}")
+    except HTTPError as exc:
+        raise RuntimeError(f"HTTP {exc.code}") from exc
+    except URLError as exc:
+        raise RuntimeError(f"Connection failed: {exc.reason}") from exc
+
+
+def validate_streams(server_targets: dict[int, list[tuple[str, dict, dict]]]) -> None:
+    """Retry failed configured streams; raise before publishing unless all pass."""
+    streams = {}
+    for targets in server_targets.values():
+        for catalog_name, channel, metadata in targets:
+            channel_id = str(channel["id"]).strip()
+            url = stream_url(channel_id)
+            streams.setdefault(url, metadata["name"])
+
+    if not streams:
+        raise RuntimeError("No configured streams were found to validate.")
+
+    pending = dict(streams)
+    for attempt in range(1, VALIDATION_ATTEMPTS + 1):
+        failed = {}
+        with ThreadPoolExecutor(max_workers=VALIDATION_WORKERS) as executor:
+            futures = {
+                executor.submit(validate_stream_url, url): (url, name)
+                for url, name in pending.items()
+            }
+            for future in as_completed(futures):
+                url, name = futures[future]
+                try:
+                    future.result()
+                except Exception as exc:
+                    failed[url] = (name, str(exc))
+
+        passed = len(pending) - len(failed)
+        print(
+            f"Stream validation attempt {attempt}/{VALIDATION_ATTEMPTS}: "
+            f"{passed}/{len(pending)} passed."
+        )
+        if not failed:
+            print(f"Validated all {len(streams)} unique configured stream endpoints.")
+            return
+
+        for name, error in failed.values():
+            print(f"Stream unavailable: {name} ({error})")
+
+        pending = {url: name for url, (name, _error) in failed.items()}
+        if attempt < VALIDATION_ATTEMPTS:
+            delay = min(
+                VALIDATION_RETRY_BASE_SECONDS * (2 ** (attempt - 1)),
+                VALIDATION_RETRY_MAX_SECONDS,
+            )
+            print(f"Retrying {len(pending)} failed streams in {delay} seconds.")
+            time.sleep(delay)
+
+    failed_names = ", ".join(sorted({name for name, _error in failed.values()}))
+    raise RuntimeError(
+        f"{len(pending)} stream(s) failed validation after "
+        f"{VALIDATION_ATTEMPTS} attempts: {failed_names}. "
+        "Existing generated playlists were not changed."
+    )
+
+
+def ensure_all_configured_channels_found(
+    server_targets: dict[int, list[tuple[str, dict, dict]]],
+) -> None:
+    configured = {
+        normalize_name(entry["key"]): entry["name"]
+        for entries in load_category_files().values()
+        for entry in entries
+    }
+    found = {
+        normalize_name(catalog_name)
+        for targets in server_targets.values()
+        for catalog_name, _channel, _metadata in targets
+    }
+    missing = sorted(name for key, name in configured.items() if key not in found)
+    if missing:
+        raise RuntimeError(
+            "Configured channels missing from every discovered server: "
+            + ", ".join(missing)
+        )
+
+
 def build_json(targets: list[tuple[str, dict, dict]], server_id: int) -> dict:
     channels = []
     for _, channel, metadata in targets:
@@ -156,7 +278,7 @@ def build_json(targets: list[tuple[str, dict, dict]], server_id: int) -> dict:
                 "id": channel_id,
                 "group": str(channel.get("group", "")),
                 "logo": metadata["logo"],
-                "url": f"{BASE_URL}/play.php?id={channel_id}",
+                "url": stream_url(channel_id),
             }
         )
 
@@ -254,7 +376,7 @@ def build_category_playlists(
             seen_names.add(normalized_name)
 
             channel_id = str(channel["id"]).strip()
-            stream_url = f"{BASE_URL}/play.php?id={channel_id}"
+            stream_url = globals()["stream_url"](channel_id)
             channel_name = category_entry["name"]
             channel_logo = category_entry["logo"]
             display_name = (
@@ -342,6 +464,9 @@ def main() -> int:
             ) + "\n"
             server_targets[server_id] = targets
             generated_count += len(result["channels"])
+
+        ensure_all_configured_channels_found(server_targets)
+        validate_streams(server_targets)
 
         outputs.update(build_server_files(server_catalogs))
         outputs.update(build_category_playlists(server_targets))
