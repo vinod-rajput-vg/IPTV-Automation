@@ -37,6 +37,11 @@ VALIDATION_RETRY_BASE_SECONDS = 5
 VALIDATION_RETRY_MAX_SECONDS = 20
 # Keep requests gentle on the public endpoint; high concurrency can trigger HTTP 5xx.
 VALIDATION_WORKERS = 8
+
+# Re-fetch every server catalog when current IDs produce failed links.
+# Bounded retries prevent scheduled runs from looping indefinitely.
+CATALOG_REFRESH_ROUNDS = 3
+CATALOG_REFRESH_RETRY_SECONDS = 10
 def fetch_server_list() -> list[tuple[int, str]]:
     """Read server keys exposed by the website's public api.php endpoint."""
     request = Request(
@@ -276,7 +281,9 @@ def validate_streams(server_targets: dict[int, list[tuple[str, dict, dict]]]) ->
             streams.setdefault(url, metadata["name"])
 
     if not streams:
-        raise RuntimeError("No configured streams were found to validate.")
+        write_validation_report({}, {}, {}, 0)
+        print("No configured stream endpoints were found; channel metadata will still be saved.")
+        return set()
 
     pending = dict(streams)
     permanent = {}
@@ -355,7 +362,8 @@ def validate_streams(server_targets: dict[int, list[tuple[str, dict, dict]]]) ->
 
 def ensure_all_configured_channels_found(
     server_targets: dict[int, list[tuple[str, dict, dict]]],
-) -> None:
+) -> list[str]:
+    """Report channels absent from all catalogs without aborting other output."""
     configured = {
         normalize_name(entry["key"]): entry["name"]
         for entries in load_category_files().values()
@@ -368,13 +376,18 @@ def ensure_all_configured_channels_found(
     }
     missing = sorted(name for key, name in configured.items() if key not in found)
     if missing:
-        raise RuntimeError(
-            "Configured channels missing from every discovered server: "
+        print(
+            "Configured channels not present in any discovered server catalog: "
             + ", ".join(missing)
         )
+    return missing
 
 
-def build_json(targets: list[tuple[str, dict, dict]], server_id: int) -> dict:
+def build_json(
+    targets: list[tuple[str, dict, dict]],
+    server_id: int,
+    validated_urls: set[str],
+) -> dict:
     channels = []
     for _, channel, metadata in targets:
         channel_id = str(channel["id"]).strip()
@@ -385,6 +398,10 @@ def build_json(targets: list[tuple[str, dict, dict]], server_id: int) -> dict:
                 "group": str(channel.get("group", "")),
                 "logo": metadata["logo"],
                 "url": build_stream_url(channel_id),
+                "validation_status": (
+                    "valid" if build_stream_url(channel_id) in validated_urls
+                    else "unavailable"
+                ),
             }
         )
 
@@ -467,7 +484,7 @@ def build_category_playlists(
             selected = None
             server_id = preferred_server
             for candidate_id in server_order:
-                candidate = targets_by_server[candidate_id].get(catalog_name)
+                candidate = targets_by_server.get(candidate_id, {}).get(catalog_name)
                 if candidate is not None:
                     selected = candidate
                     server_id = candidate_id
@@ -560,20 +577,42 @@ def main() -> int:
             server_catalogs[server_id] = catalog
             server_targets[server_id] = find_targets(catalog)
 
-        ensure_all_configured_channels_found(server_targets)
+        missing_channels = ensure_all_configured_channels_found(server_targets)
         validated_urls = validate_streams(server_targets)
 
-        # Publish only channels whose stream endpoints passed validation.
-        working_targets = {}
+        # Refresh every server catalog when current IDs still produce failures.
+        # The newest catalog is retained even if some links remain unavailable.
+        for refresh_round in range(1, CATALOG_REFRESH_ROUNDS + 1):
+            current_urls = {
+                build_stream_url(str(channel["id"]).strip())
+                for targets in server_targets.values()
+                for _name, channel, _metadata in targets
+            }
+            if not current_urls or current_urls.issubset(validated_urls):
+                break
+
+            print(
+                f"Refreshing all server catalogs "
+                f"(round {refresh_round}/{CATALOG_REFRESH_ROUNDS})."
+            )
+            time.sleep(CATALOG_REFRESH_RETRY_SECONDS)
+            refreshed_catalogs = {}
+            refreshed_targets = {}
+            for server_id, _server_label in servers:
+                catalog = fetch_catalog(server_id)
+                refreshed_catalogs[server_id] = catalog
+                refreshed_targets[server_id] = find_targets(catalog)
+
+            server_catalogs = refreshed_catalogs
+            server_targets = refreshed_targets
+            missing_channels = ensure_all_configured_channels_found(server_targets)
+            validated_urls = validate_streams(server_targets)
+
+        # Keep every discovered configured channel, including failed endpoints.
         total_count = sum(len(targets) for targets in server_targets.values())
         generated_count = 0
         for server_id, targets in server_targets.items():
-            working = [
-                target for target in targets
-                if build_stream_url(str(target[1]["id"]).strip()) in validated_urls
-            ]
-            working_targets[server_id] = working
-            result = build_json(working, server_id)
+            result = build_json(targets, server_id, validated_urls)
             json_path = OUTPUT_DIR / (
                 "channels.json" if server_id == 1 else f"channels_server_{server_id}.json"
             )
@@ -582,14 +621,36 @@ def main() -> int:
             ) + "\n"
             generated_count += len(result["channels"])
 
+        missing_names = {normalize_name(name) for name in missing_channels}
+        missing_metadata = [
+            {
+                "name": entry["name"],
+                "catalog_name": entry["key"],
+                "logo": entry["logo"],
+                "status": "missing_from_all_servers",
+            }
+            for entries in load_category_files().values()
+            for entry in entries
+            if normalize_name(entry["key"]) in missing_names
+        ]
+        outputs[OUTPUT_DIR / "missing-channels.json"] = (
+            json.dumps(missing_metadata, ensure_ascii=False, indent=2) + "\n"
+        )
+
         outputs.update(build_server_files(server_catalogs))
-        outputs.update(build_category_playlists(working_targets))
+        outputs.update(build_category_playlists(server_targets))
         write_outputs_atomically(outputs)
 
-        skipped_count = total_count - generated_count
+        unavailable_count = sum(
+            1
+            for targets in server_targets.values()
+            for _name, channel, _metadata in targets
+            if build_stream_url(str(channel["id"]).strip()) not in validated_urls
+        )
         print(
             f"Discovered {len(servers)} servers. Wrote {generated_count} "
-            f"validated configured channel entries; skipped {skipped_count} failed entries."
+            f"configured channel entries (including unavailable links); "
+            f"{unavailable_count} links currently unavailable."
         )
         for path in outputs:
             print(f"Wrote {path}.")
