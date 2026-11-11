@@ -281,7 +281,9 @@ def validate_streams(server_targets: dict[int, list[tuple[str, dict, dict]]]) ->
             streams.setdefault(url, metadata["name"])
 
     if not streams:
-        raise RuntimeError("No configured streams were found to validate.")
+        write_validation_report({}, {}, {}, 0)
+        print("No configured stream endpoints were found; channel metadata will still be saved.")
+        return set()
 
     pending = dict(streams)
     permanent = {}
