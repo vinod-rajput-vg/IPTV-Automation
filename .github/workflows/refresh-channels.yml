@@ -2,8 +2,8 @@ name: Refresh channel URLs
 
 on:
   schedule:
-    - cron: '30 18 * * *'
-    - cron: '30 6 * * *'
+    - cron: '0 18 * * *'  # 12 AM IST
+    - cron: '0 6 * * *'   # 12 PM IST
       
   workflow_dispatch:
   pull_request:
@@ -34,19 +34,6 @@ jobs:
 
       - name: Validate Python syntax
         run: python -m py_compile generate.py
-
-      - name: Generate JSON and category TXT playlist
-        if: github.event_name != 'pull_request'
-        run: python generate.py
-
-      - name: Upload stream validation report
-        if: always() && hashFiles('Output/stream-validation-report.json') != ''
-        uses: actions/upload-artifact@v4
-        with:
-          name: stream-validation-report
-          path: Output/stream-validation-report.json
-          if-no-files-found: ignore
-          retention-days: 14
 
       - name: Commit and push generated files
         if: github.event_name != 'pull_request'
