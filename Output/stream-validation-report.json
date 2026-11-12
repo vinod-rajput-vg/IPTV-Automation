@@ -1,216 +1,232 @@
 {
-  "generated_at": "2026-11-12T00:58:12+00:00",
+  "generated_at": "2026-11-12T06:48:41+00:00",
   "result": "failed",
   "total_streams": 73,
-  "validated_streams": 47,
-  "failed_streams": 26,
+  "validated_streams": 45,
+  "failed_streams": 28,
   "attempts": 4,
   "failures": [
     {
-      "channel": "Animal Planet HD",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=593e6c10edfc3c14b931",
+      "channel": "&Pictures HD",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=65e329cbbad37e4eaa4e",
       "status": 500,
-      "final_url": "https://admin-rkdy.vercel.app/api/rkdyiptv/pluylust.m3u?action=stream&id=3159&token=rkdyiptv&key=rkdy5a8c9d",
+      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/11625.m3u8?token=RKDYIPTV&key=rkdyiptv%7B34gag6hxvcv59bio%7D",
       "error": "HTTP 500",
       "retryable": true
     },
     {
-      "channel": "Cartoon Network",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=55e768581970a7649645",
+      "channel": "ABP News",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=208d8de572f338445dd1",
       "status": 500,
-      "final_url": "https://admin-rkdy.vercel.app/api/rkdyiptv/pluylust.m3u?action=stream&id=475130&token=rkdyiptv&key=rkdy5a8c9d",
+      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/664.m3u8?token=RKDYIPTV&key=rkdyiptv%7B34gag6hxvcv59bio%7D",
       "error": "HTTP 500",
       "retryable": true
     },
     {
-      "channel": "DD News",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=89e30538dfa4b3acdbc6",
-      "status": 403,
-      "final_url": "http://79.127.242.17/5defb44571cfe49a34f31e2659af70f9280b35cfa764c24fc4bf7198f95f/mono.m3u8?token=67783da7967edb1dc3603492041ac540",
-      "error": "HTTP 403 (non-retryable)",
-      "retryable": false
-    },
-    {
-      "channel": "Discovery HD",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=38f4d98c3532441b18ed",
+      "channel": "Chota Bheem 24/7",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=9d75f900bb2ab1a17b31",
       "status": 500,
-      "final_url": "https://admin-rkdy.vercel.app/api/rkdyiptv/pluylust.m3u?action=stream&id=3142&token=rkdyiptv&key=rkdy5a8c9d",
+      "final_url": "https://admin-rkdy.vercel.app/api/rkdyiptv/pluylust.m3u?action=stream&id=481514&token=rkdyiptv&key=rkdy5a8c9d",
       "error": "HTTP 500",
       "retryable": true
     },
     {
       "channel": "India TV",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=cb1bfbb0b9fa25f722a2",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=a62ee1c9b9ee27ba52d9",
       "status": 500,
-      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/805.m3u8?token=RKDYIPTV&key=rkdyiptv%7B6sodtadoycnxaw0p%7D",
+      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/805.m3u8?token=RKDYIPTV&key=rkdyiptv%7B34gag6hxvcv59bio%7D",
       "error": "HTTP 500",
       "retryable": true
     },
     {
       "channel": "NDTV India",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=de66124495cb94db568b",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=53cd9ea959b74a684330",
       "status": 403,
-      "final_url": "http://79.127.242.17/5defb44571cfe49a34f31e2653af6aca1616619ffe63cd42c7ba769df85e982ecc/mono.m3u8?token=d2f2ab04e53a257061849b61aa3b4492",
+      "final_url": "http://79.127.242.17/5defb44571cfe49a34f31e2653af6aca1616619ffe63cd42c7ba769df85e982ecc/mono.m3u8?token=52c9486cdc498ae11c1c60d952a5e693",
       "error": "HTTP 403 (non-retryable)",
       "retryable": false
     },
     {
-      "channel": "Nat Geo Wild HD",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=d783721c6927ac822fa0",
+      "channel": "NDTV India",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=36dfaed5f4a7d12178ac",
       "status": 500,
-      "final_url": "https://admin-rkdy.vercel.app/api/rkdyiptv/pluylust.m3u?action=stream&id=3158&token=rkdyiptv&key=rkdy5a8c9d",
+      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/883.m3u8?token=RKDYIPTV&key=rkdyiptv%7B34gag6hxvcv59bio%7D",
       "error": "HTTP 500",
       "retryable": true
     },
     {
       "channel": "News Nation",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=88e5774c689d3f89aadf",
-      "status": 403,
-      "final_url": "http://79.127.242.17/5defb44571cfe49a34f31e26538e49ef1119719ff03dc443c8bb759cff5f9b2dcd82/mono.m3u8?token=f99d5f659e8b5b7da8298d74c62d26a5",
-      "error": "HTTP 403 (non-retryable)",
-      "retryable": false
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=da9204b9b03a9a61fd91",
+      "status": 500,
+      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/872.m3u8?token=RKDYIPTV&key=rkdyiptv%7B34gag6hxvcv59bio%7D",
+      "error": "HTTP 500",
+      "retryable": true
+    },
+    {
+      "channel": "Nick",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=4146d0b934aa01b175f2",
+      "status": 500,
+      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/11662.m3u8?token=RKDYIPTV&key=rkdyiptv%7B34gag6hxvcv59bio%7D",
+      "error": "HTTP 500",
+      "retryable": true
+    },
+    {
+      "channel": "Republic Bharat",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=5cb6705d64618080ba24",
+      "status": 500,
+      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/1119.m3u8?token=RKDYIPTV&key=rkdyiptv%7B34gag6hxvcv59bio%7D",
+      "error": "HTTP 500",
+      "retryable": true
+    },
+    {
+      "channel": "Sonic",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=a0fbe037378596a19013",
+      "status": 500,
+      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/11667.m3u8?token=RKDYIPTV&key=rkdyiptv%7B34gag6hxvcv59bio%7D",
+      "error": "HTTP 500",
+      "retryable": true
     },
     {
       "channel": "Sony BBC Earth HD",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=ca6fe987e388a011386c",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=5135b301895f9de750ca",
       "status": 500,
-      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/77056.m3u8?token=RKDYIPTV&key=rkdyiptv%7B6sodtadoycnxaw0p%7D",
+      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/77056.m3u8?token=RKDYIPTV&key=rkdyiptv%7B34gag6hxvcv59bio%7D",
       "error": "HTTP 500",
       "retryable": true
     },
     {
       "channel": "Sony Max 2",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=2ff0e7c62b5800fa2af7",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=aaa10ff399caf8c087c5",
       "status": 500,
-      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/1156.m3u8?token=RKDYIPTV&key=rkdyiptv%7B6sodtadoycnxaw0p%7D",
+      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/1156.m3u8?token=RKDYIPTV&key=rkdyiptv%7B34gag6hxvcv59bio%7D",
       "error": "HTTP 500",
       "retryable": true
     },
     {
       "channel": "Sony Sab",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=20f8340d69e6140497ae",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=25541d30fdd0686d00d2",
       "status": 500,
-      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/11672.m3u8?token=RKDYIPTV&key=rkdyiptv%7B6sodtadoycnxaw0p%7D",
+      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/11672.m3u8?token=RKDYIPTV&key=rkdyiptv%7B34gag6hxvcv59bio%7D",
+      "error": "HTTP 500",
+      "retryable": true
+    },
+    {
+      "channel": "Sony Wah",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=9ef6076960401711d106",
+      "status": 500,
+      "final_url": "https://admin-rkdy.vercel.app/api/rkdyiptv/pluylust.m3u?action=stream&id=3108&token=rkdyiptv&key=rkdy5a8c9d",
       "error": "HTTP 500",
       "retryable": true
     },
     {
       "channel": "Star Gold 2 HD",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=54989bacbcb8f76ee1d4",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=33dfb0ca9b0c3d4546e0",
       "status": 500,
-      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/976.m3u8?token=RKDYIPTV&key=rkdyiptv%7B6sodtadoycnxaw0p%7D",
+      "final_url": "https://admin-rkdy.vercel.app/api/rkdyiptv/pluylust.m3u?action=stream&id=3174&token=rkdyiptv&key=rkdy5a8c9d",
+      "error": "HTTP 500",
+      "retryable": true
+    },
+    {
+      "channel": "Star Gold 2 HD",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=6a196edf6df1f9af6375",
+      "status": 500,
+      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/976.m3u8?token=RKDYIPTV&key=rkdyiptv%7B34gag6hxvcv59bio%7D",
       "error": "HTTP 500",
       "retryable": true
     },
     {
       "channel": "Star Gold Romance",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=8ac944980fc3f9aa48f0",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=9e41dd28be707a997b28",
       "status": 500,
-      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/66802.m3u8?token=RKDYIPTV&key=rkdyiptv%7B6sodtadoycnxaw0p%7D",
+      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/66802.m3u8?token=RKDYIPTV&key=rkdyiptv%7B34gag6hxvcv59bio%7D",
       "error": "HTTP 500",
       "retryable": true
     },
     {
       "channel": "Star Gold Thrills",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=9bcf756a0e9c7838b019",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=56f0d37f5cb031a66d5d",
       "status": 500,
-      "final_url": "https://admin-rkdy.vercel.app/api/rkdyiptv/pluylust.m3u?action=stream&id=481591&token=rkdyiptv&key=rkdy5a8c9d",
-      "error": "HTTP 500",
-      "retryable": true
-    },
-    {
-      "channel": "Star Plus HD",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=f53270940a730db94369",
-      "status": 500,
-      "final_url": "https://admin-rkdy.vercel.app/api/rkdyiptv/pluylust.m3u?action=stream&id=3070&token=rkdyiptv&key=rkdy5a8c9d",
+      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/77035.m3u8?token=RKDYIPTV&key=rkdyiptv%7B34gag6hxvcv59bio%7D",
       "error": "HTTP 500",
       "retryable": true
     },
     {
       "channel": "Star Utsav Movies",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=ab19e75d233ba0f5b4a1",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=bd1ab865faa7b7be6800",
       "status": 500,
-      "final_url": "https://admin-rkdy.vercel.app/api/rkdyiptv/pluylust.m3u?action=stream&id=3208&token=rkdyiptv&key=rkdy5a8c9d",
-      "error": "HTTP 500",
-      "retryable": true
-    },
-    {
-      "channel": "Star Utsav Movies",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=c96e3a4d74e1c453d275",
-      "status": 500,
-      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/869.m3u8?token=RKDYIPTV&key=rkdyiptv%7B6sodtadoycnxaw0p%7D",
+      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/869.m3u8?token=RKDYIPTV&key=rkdyiptv%7B34gag6hxvcv59bio%7D",
       "error": "HTTP 500",
       "retryable": true
     },
     {
       "channel": "Super Hungama",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=d529ae5dde21e1aa07af",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=b39629e38f92a9917846",
       "status": 500,
-      "final_url": "https://admin-rkdy.vercel.app/api/rkdyiptv/pluylust.m3u?action=stream&id=482616&token=rkdyiptv&key=rkdy5a8c9d",
+      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/77032.m3u8?token=RKDYIPTV&key=rkdyiptv%7B34gag6hxvcv59bio%7D",
       "error": "HTTP 500",
       "retryable": true
     },
     {
-      "channel": "Super Hungama",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=418ceef26897a5b021c9",
+      "channel": "Tv9 Bharatvarsh",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=24fcc2c13047d4ad028d",
       "status": 500,
-      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/77032.m3u8?token=RKDYIPTV&key=rkdyiptv%7B6sodtadoycnxaw0p%7D",
+      "final_url": "https://admin-rkdy.vercel.app/api/rkdyiptv/pluylust.m3u?action=stream&id=3260&token=rkdyiptv&key=rkdy5a8c9d",
       "error": "HTTP 500",
       "retryable": true
     },
     {
       "channel": "Tv9 Gujarati",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=8d5605393bc86624c9ad",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=318083ebaef3fb582caa",
       "status": 403,
-      "final_url": "http://79.127.242.17/5defb44571cfe49a34f31e2649bd07db2a126484fe279d4ac9b4749ffe589a2ece83b2/mono.m3u8?token=04380c21b389057ec7e34444bf1b57a9",
+      "final_url": "http://79.127.242.17/5defb44571cfe49a34f31e2649bd07db2a126484fe279d4ac9b4749ffe589a2ece83b2/mono.m3u8?token=793d7c8601f5ae33ab45e9d880a8e393",
       "error": "HTTP 403 (non-retryable)",
       "retryable": false
     },
     {
+      "channel": "Tv9 Gujarati",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=4b6ba2f0b63e3f753fa9",
+      "status": 500,
+      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/11913.m3u8?token=RKDYIPTV&key=rkdyiptv%7B34gag6hxvcv59bio%7D",
+      "error": "HTTP 500",
+      "retryable": true
+    },
+    {
       "channel": "Tv9 Marathi",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=ef8bff6f41ad102448a9",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=1c2bf2240c9b5e1009a0",
       "status": 403,
-      "final_url": "http://79.127.242.17/5defb44571cfe49a34f31e2649bd07d13e0a6482f73ac443c8bb759cff5f9b2dcd82/mono.m3u8?token=0bdc5b54a665a4f26701929836fbe8a0",
+      "final_url": "http://79.127.242.17/5defb44571cfe49a34f31e2649bd07d13e0a6482f73ac443c8bb759cff5f9b2dcd82/mono.m3u8?token=cbb05640a37cbea820d3c50c207bfcf5",
       "error": "HTTP 403 (non-retryable)",
       "retryable": false
     },
     {
       "channel": "Zee 24 Kalak",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=4b82163f2d43948ff914",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=aba685ba44fbd1e481bb",
       "status": 403,
-      "final_url": "http://79.127.242.17/5defb44571cfe49a34f31e26478e5bae6b33649afe38c443c8bb759cff5f9b2dcd82/mono.m3u8?token=50522d36b90ae9a490caae7824196d02",
+      "final_url": "http://79.127.242.17/5defb44571cfe49a34f31e26478e5bae6b33649afe38c443c8bb759cff5f9b2dcd82/mono.m3u8?token=9d37ac6d728ef16713589b95783779bd",
       "error": "HTTP 403 (non-retryable)",
       "retryable": false
     },
     {
-      "channel": "Zee 24 Taas",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=6b76da36217137d8c58b",
+      "channel": "Zee 24 Kalak",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=2f4b55459d141e3c83fe",
       "status": 500,
-      "final_url": "https://admin-rkdy.vercel.app/api/rkdyiptv/pluylust.m3u?action=stream&id=6005&token=rkdyiptv&key=rkdy5a8c9d",
+      "final_url": "https://admin-rkdy.vercel.app/api/rkdyiptv/pluylust.m3u?action=stream&id=6734&token=rkdyiptv&key=rkdy5a8c9d",
       "error": "HTTP 500",
       "retryable": true
     },
     {
       "channel": "Zee Anmol Cinema",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=ff10e4434317beea931b",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=ba32d12e852e4ec0fb1a",
       "status": 403,
-      "final_url": "http://79.127.242.17/5defb44571cfe49a34f31e26478e5bdd31156a9adc3a9a1f9ded7390f35b9f29cb82b3a55bae/mono.m3u8?token=24b3e8802c67d6c2b24932d45a3bb285",
+      "final_url": "http://79.127.242.17/5defb44571cfe49a34f31e26478e5bdd31156a9adc3a9a1f9ded7390f35b9f29cb82b3a55bae/mono.m3u8?token=d2653a51621e7cadfd78f65804d3bce2",
       "error": "HTTP 403 (non-retryable)",
       "retryable": false
     },
     {
       "channel": "Zee Anmol Cinema",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=c39960660a7a074b5ae1",
+      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=d05d19b53f9314b3ec27",
       "status": 500,
-      "final_url": "https://admin-rkdy.vercel.app/api/rkdyiptv/pluylust.m3u?action=stream&id=474203&token=rkdyiptv&key=rkdy5a8c9d",
-      "error": "HTTP 500",
-      "retryable": true
-    },
-    {
-      "channel": "Zee Anmol Cinema",
-      "requested_url": "https://rkdy-linkgen.wasmer.app/play.php?id=fbfb177015cc22709748",
-      "status": 500,
-      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/953.m3u8?token=RKDYIPTV&key=rkdyiptv%7B6sodtadoycnxaw0p%7D",
+      "final_url": "https://playlist.opplexx-rkdyiptv.workers.dev/live/953.m3u8?token=RKDYIPTV&key=rkdyiptv%7B34gag6hxvcv59bio%7D",
       "error": "HTTP 500",
       "retryable": true
     }
