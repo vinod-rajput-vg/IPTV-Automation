@@ -459,8 +459,9 @@ def load_category_files() -> dict[str, list[dict]]:
 
 def build_category_playlists(
     server_targets: dict[int, list[tuple[str, dict, dict]]],
+    validated_urls: set[str],
 ) -> dict[Path, str]:
-    """Generate playlists, preferring the configured server then available fallbacks."""
+    """Prefer validated streams, then retain the configured-server fallback."""
     targets_by_server = {
         server_id: {
             catalog_name: (channel, metadata)
@@ -483,12 +484,27 @@ def build_category_playlists(
             ]
             selected = None
             server_id = preferred_server
+
+            # Prefer a working stream, including a fallback server when needed.
             for candidate_id in server_order:
                 candidate = targets_by_server.get(candidate_id, {}).get(catalog_name)
-                if candidate is not None:
+                if candidate is None:
+                    continue
+                candidate_channel, _candidate_metadata = candidate
+                candidate_url = build_stream_url(str(candidate_channel["id"]).strip())
+                if candidate_url in validated_urls:
                     selected = candidate
                     server_id = candidate_id
                     break
+
+            # Preserve the configured server's channel when no endpoint validates.
+            if selected is None:
+                for candidate_id in server_order:
+                    candidate = targets_by_server.get(candidate_id, {}).get(catalog_name)
+                    if candidate is not None:
+                        selected = candidate
+                        server_id = candidate_id
+                        break
             if selected is None:
                 continue
 
@@ -638,7 +654,7 @@ def main() -> int:
         )
 
         outputs.update(build_server_files(server_catalogs))
-        outputs.update(build_category_playlists(server_targets))
+        outputs.update(build_category_playlists(server_targets, validated_urls))
         write_outputs_atomically(outputs)
 
         unavailable_count = sum(
