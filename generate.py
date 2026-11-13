@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build server channel catalogs and category TXT playlists from the public catalog.
+"""Build category TXT playlists from the public channel catalog.
 
 Playback URLs point to the public play.php redirect endpoint. The generator
 does not resolve redirects, imitate browser sessions, or bypass access controls.
@@ -311,46 +311,8 @@ def build_category_playlists(
     return playlists
 
 
-def build_server_files(server_catalogs: dict[int, list[dict]]) -> dict[Path, str]:
-    """Generate a current server_N.txt catalog for every discovered server."""
-    outputs = {}
-
-    for server_id, catalog in server_catalogs.items():
-
-        entries = []
-        seen_names = set()
-        for channel in catalog:
-            if not isinstance(channel, dict):
-                continue
-
-            name = " ".join(str(channel.get("name", "")).split())
-            if not name or any(char in name for char in '\r\n"'):
-                continue
-
-            normalized = normalize_name(name)
-            if normalized in seen_names:
-                continue
-
-            seen_names.add(normalized)
-            entries.append(f'"{normalized}" {server_id}\n{name}')
-
-        if not entries:
-            raise RuntimeError(
-                f"Server {server_id} catalog contained no usable channel names."
-            )
-
-        outputs[Path("Servers") / f"server_{server_id}.txt"] = (
-            "\n\n".join(entries) + "\n\n"
-        )
-
-    return outputs
-
-
-def write_outputs_atomically(
-    outputs: dict[Path, str],
-    delete_paths: list[Path] | None = None,
-) -> None:
-    """Stage every output, replace destinations, then remove stale generated files.
+def write_outputs_atomically(outputs: dict[Path, str]) -> None:
+    """Stage every output, then atomically replace each destination file.
 
     The replacement of an individual file is atomic; the complete set of files
     is not a single filesystem transaction.
@@ -376,8 +338,6 @@ def write_outputs_atomically(
         for destination, temporary in staged.items():
             os.replace(temporary, destination)
 
-        for stale_path in delete_paths or []:
-            stale_path.unlink(missing_ok=True)
     finally:
         for temporary in staged.values():
             temporary.unlink(missing_ok=True)
@@ -399,26 +359,12 @@ def main() -> int:
 
         ensure_all_configured_channels_found(server_targets)
 
-        outputs = build_server_files(server_catalogs)
-        outputs.update(build_category_playlists(server_targets))
-
-        active_server_files = {
-            Path("Servers") / f"server_{server_id}.txt"
-            for server_id in server_catalogs
-        }
-        stale_server_files = [
-            path
-            for path in Path("Servers").glob("server_*.txt")
-            if path not in active_server_files
-        ]
-
-        write_outputs_atomically(outputs, stale_server_files)
+        outputs = build_category_playlists(server_targets)
+        write_outputs_atomically(outputs)
 
         print(f"Discovered {len(servers)} servers.")
         for path in outputs:
             print(f"Wrote {path}.")
-        for path in stale_server_files:
-            print(f"Removed stale {path}.")
 
         return 0
     except Exception as exc:
