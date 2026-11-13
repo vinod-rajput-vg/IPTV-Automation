@@ -32,6 +32,9 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Generate channel playlists
+        run: python generate.py
+
       - name: Commit and push generated files
         if: github.event_name != 'pull_request'
         run: |
