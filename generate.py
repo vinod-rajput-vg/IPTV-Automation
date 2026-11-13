@@ -546,6 +546,7 @@ def write_outputs_atomically(outputs: dict[Path, str]) -> None:
 
     try:
         for destination, data in outputs.items():
+            destination.parent.mkdir(parents=True, exist_ok=True)
             with tempfile.NamedTemporaryFile(
                 mode="w",
                 encoding="utf-8",
