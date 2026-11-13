@@ -346,14 +346,12 @@ def write_outputs_atomically(outputs: dict[Path, str]) -> None:
 def main() -> int:
     try:
         server_targets = {}
-        server_catalogs = {}
 
         servers = fetch_server_list()
         for server_id, server_label in servers:
             # Every advertised server must be readable. A partial run must never
             # replace a complete set of playlists with incomplete data.
             catalog = fetch_catalog(server_id)
-            server_catalogs[server_id] = catalog
             server_targets[server_id] = find_targets(catalog)
             print(f"{server_label}: loaded {len(catalog)} channels.")
 
