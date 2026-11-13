@@ -1,0 +1,56 @@
+[
+  {
+    "name": "Star Plus HD",
+    "catalog_name": "STAR PLUS HD",
+    "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/35b759b6ec89c654df9e4374e9548cbd.png",
+    "status": "missing_from_all_servers"
+  },
+  {
+    "name": "Bigg Boss",
+    "catalog_name": "BIGG BOSS",
+    "logo": "https://upload.wikimedia.org/wikipedia/en/d/da/Bigg_Boss_Hindi_TV_Series_Logo.jpg",
+    "status": "missing_from_all_servers"
+  },
+  {
+    "name": "Zee Cinema",
+    "catalog_name": "ZEE CINEMA",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/india/zee-cinema-in.png",
+    "status": "missing_from_all_servers"
+  },
+  {
+    "name": "Sony Wah",
+    "catalog_name": "SONY WAH",
+    "logo": "https://d2ljy97uzhlwv2.cloudfront.net/sonypicturesnetworksindia/logo/10_258.png",
+    "status": "missing_from_all_servers"
+  },
+  {
+    "name": "DD News",
+    "catalog_name": "DD NEWS",
+    "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/16dfa4cb5cb300bfad994dc6acb44c76.png",
+    "status": "missing_from_all_servers"
+  },
+  {
+    "name": "Tv9 Marathi",
+    "catalog_name": "TV9 MARATHI",
+    "logo": "https://jiotvimages.cdn.jio.com/dare_images/images/channel/cbfc396076a82705258fb3b019b1153b.png",
+    "status": "missing_from_all_servers"
+  },
+  {
+    "name": "Zee 24 Kalak",
+    "catalog_name": "ZEE 24 KALAK",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/zee-24-kalak-in.png",
+    "status": "missing_from_all_servers"
+  },
+  {
+    "name": "Zee 24 Taas",
+    "catalog_name": "ZEE 24 TAAS",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/zee-24-taas-in.png",
+    "status": "missing_from_all_servers"
+  },
+  {
+    "name": "Aaj Tak",
+    "catalog_name": "AAJ TAK",
+    "logo": "https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/aaj-tak-in.png",
+    "status": "missing_from_all_servers"
+  }
+]
