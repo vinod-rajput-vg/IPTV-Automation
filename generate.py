@@ -424,25 +424,37 @@ def main() -> int:
 
         missing_channels = ensure_all_configured_channels_found(server_targets)
 
-        # Export all Server 4 catalog entries except explicitly adult categories.
-        if 4 in server_catalogs:
-            full_server_4 = build_full_server_json(server_catalogs[4], 4)
-            outputs[OUTPUT_DIR / "channels_server_4.json"] = (
-                json.dumps(full_server_4, ensure_ascii=False, indent=2) + "\n"
+        # Export the full non-explicit catalog for every server that returned data.
+        # Keep the established Server 4 filename; use a separate *_full.json file
+        # for other servers so existing configured-channel outputs are preserved.
+        full_catalogs = {}
+        for server_id, catalog in server_catalogs.items():
+            full_catalog = build_full_server_json(catalog, server_id)
+            full_catalogs[server_id] = full_catalog
+            full_name = (
+                "channels_server_4.json"
+                if server_id == 4
+                else f"channels_server_{server_id}_full.json"
             )
-            print(f"Server 4 catalog: {full_server_4['total_channels']} non-adult channels.")
+            outputs[OUTPUT_DIR / full_name] = (
+                json.dumps(full_catalog, ensure_ascii=False, indent=2) + "\n"
+            )
+            print(
+                f"Server {server_id} full catalog: "
+                f"{full_catalog['total_channels']} non-explicit channels."
+            )
 
-        generated_count = 0
+        generated_count = sum(
+            catalog["total_channels"] for catalog in full_catalogs.values()
+        )
         for server_id, targets in server_targets.items():
-            if server_id == 4:
-                generated_count += full_server_4["total_channels"]
-                continue
             result = build_json(targets, server_id)
             json_path = OUTPUT_DIR / (
                 "channels.json" if server_id == 1 else f"channels_server_{server_id}.json"
             )
+            if server_id == 4:
+                continue
             outputs[json_path] = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
-            generated_count += len(result["channels"])
 
         missing_names = {normalize_name(name) for name in missing_channels}
         missing_metadata = [
