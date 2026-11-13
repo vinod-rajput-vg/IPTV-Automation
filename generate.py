@@ -13,6 +13,8 @@ import os
 import sys
 import tempfile
 import time
+import unittest
+from unittest.mock import patch
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.error import HTTPError, URLError
@@ -397,6 +399,55 @@ def write_outputs_atomically(outputs: dict[Path, str]) -> None:
             temporary.unlink(missing_ok=True)
 
 
+
+def run_self_tests() -> int:
+    """Run the generator's deterministic regression checks without network access."""
+    class GeneratorTests(unittest.TestCase):
+        def setUp(self):
+            self.metadata = {"name": "Example Channel", "logo": "https://example.com/logo.png"}
+            self.entry = {
+                "key": "EXAMPLE CHANNEL",
+                "server": 1,
+                "name": "Example Channel",
+                "logo": "https://example.com/logo.png",
+            }
+            self.targets = {
+                1: [("EXAMPLE CHANNEL", {"id": "preferred"}, self.metadata)],
+                2: [("EXAMPLE CHANNEL", {"id": "fallback"}, self.metadata)],
+            }
+
+        def test_uses_configured_server_without_stream_validation(self):
+            with tempfile.TemporaryDirectory() as temp_dir:
+                with (
+                    patch.object(generate_module, "load_category_files", return_value={"news": [self.entry]}),
+                    patch.object(generate_module, "OUTPUT_DIR", Path(temp_dir)),
+                ):
+                    playlists = generate_module.build_category_playlists(self.targets)
+                content = playlists[Path(temp_dir) / "news.txt"]
+                self.assertIn(generate_module.build_stream_url("preferred"), content)
+                self.assertNotIn(generate_module.build_stream_url("fallback"), content)
+
+        def test_full_server_json_exports_non_adult_channels(self):
+            catalog = [
+                {"name": "News One", "id": "n1", "group": "NEWS", "logo": "https://x.test/n.png"},
+                {"name": "Adult Channel", "id": "a1", "group": "ADULT 18+", "logo": ""},
+                {"name": "Sports One", "id": "s1", "group": "SPORTS", "logo": ""},
+            ]
+            result = generate_module.build_full_server_json(catalog, 4)
+            self.assertEqual(result["total_channels"], 2)
+            self.assertEqual([item["id"] for item in result["channels"]], ["n1", "s1"])
+            self.assertNotIn("validation_status", result["channels"][0])
+
+    # The local test class uses this module alias so the checks exercise production code.
+    generate_module = sys.modules[__name__]
+    suite = unittest.TestSuite([
+        GeneratorTests("test_uses_configured_server_without_stream_validation"),
+        GeneratorTests("test_full_server_json_exports_non_adult_channels"),
+    ])
+    result = unittest.TextTestRunner(verbosity=2).run(suite)
+    return 0 if result.wasSuccessful() else 1
+
+
 def main() -> int:
     try:
         outputs = {}
@@ -463,4 +514,6 @@ def main() -> int:
         return 1
 
 if __name__ == "__main__":
+    if sys.argv[1:] == ["--self-test"]:
+        raise SystemExit(run_self_tests())
     raise SystemExit(main())
