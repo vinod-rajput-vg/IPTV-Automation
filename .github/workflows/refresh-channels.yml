@@ -2,19 +2,14 @@ name: Refresh channel URLs
 
 on:
   schedule:
-    - cron: '*/30 * * * *' # Retry window starts every 30 minutes
+    - cron: '0 18 * * *'  # 12 AM IST
+    - cron: '0 6 * * *'   # 12 PM IST
+      
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - "generate.py"
-      - "Sorted Channels/**"
-      - ".github/workflows/refresh-channels.yml"
+  pull_request:
 
-# The workflow defaults to read-only; only the refresh job can write to main.
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: refresh-channels
@@ -22,74 +17,51 @@ concurrency:
 
 jobs:
   refresh:
-    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
-    timeout-minutes: 360
-    permissions:
-      contents: write
+    timeout-minutes: 30
     steps:
-      - name: Check out main
-        uses: actions/checkout@v6
+      - name: Check out repository
+        uses: actions/checkout@v4
         with:
-          ref: main
+          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Validate, generate, and publish
+      - name: Validate Python syntax
+        run: python -m py_compile generate.py
+
+      - name: Commit and push generated files
+        if: github.event_name != 'pull_request'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # Keep successful server catalogs for this retry window only.
-          export IPTV_RETRY_CACHE="$RUNNER_TEMP/iptv-catalog-cache"
-          rm -rf "$IPTV_RETRY_CACHE"
-          mkdir -p "$IPTV_RETRY_CACHE"
+          git add Output/ Servers/
 
-          # Regenerate from the newest main on every retry. Never resolve output
-          # conflicts by overwriting a newer commit with an older playlist.
+          if git diff --cached --quiet; then
+            echo "No generated playlist changes detected."
+            exit 0
+          fi
+
+          git commit -m "Refresh channel URLs"
+
+          # Retry against the latest main if another writer pushed concurrently.
           for attempt in 1 2 3; do
             git fetch origin main
-            git reset --hard origin/main
 
-            # Publish any successful server updates immediately, then retry
-            # failed servers. Existing entries for failed servers are preserved.
-            while true; do
-              if python generate.py; then
-                break
+            if git rebase -X theirs origin/main; then
+              if git push origin HEAD:main; then
+                exit 0
               fi
 
-              git add Output/
-              if [ -d Servers ]; then git add Servers/; fi
-              if ! git diff --cached --quiet; then
-                git commit -m "Partially refresh available channel URLs"
-                until git push origin HEAD:main; do
-                  echo "Push failed; rebasing the saved playlist updates onto latest main."
-                  git fetch origin main
-                  git rebase origin/main
-                  sleep 10
-                done
-              fi
-
-              echo "Some servers are unavailable; retrying in 5 minutes."
-              sleep 300
-              git fetch origin main
-              git rebase origin/main
-            done
-
-            git add Output/
-              if [ -d Servers ]; then git add Servers/; fi
-            if git diff --cached --quiet; then
-              echo "No generated playlist changes detected."
-              exit 0
-            fi
-
-            git commit -m "Refresh channel URLs"
-            if git push origin HEAD:main; then
-              exit 0
+              git rebase --abort || true
+            else
+              git rebase --abort || true
             fi
 
             echo "Push attempt $attempt failed; retrying from latest main."
