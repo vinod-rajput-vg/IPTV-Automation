@@ -212,15 +212,6 @@ def load_category_files() -> dict[str, list[dict]]:
     if not CATEGORY_DIR.is_dir():
         raise RuntimeError(f"Category directory not found: {CATEGORY_DIR}")
 
-    for category_file in sorted(CATEGORY_DIR.glob("*.txt")):
-        if is_adult_channel(category_file.stem):
-            continue
-        lines = [line.strip() for line in category_file.read_text(encoding="utf-8").splitlines() if line.strip()]
-        if len(lines) % 3:
-            raise ValueError(
-                f"{category_file} must contain three non-empty lines per channel."
-            )
-
         entries = []
         for index in range(0, len(lines), 3):
             header, display_name, logo = lines[index:index + 3]
@@ -319,9 +310,6 @@ def build_server_files(server_catalogs: dict[int, list[dict]]) -> dict[Path, str
         seen_names = set()
         for channel in catalog:
             if not isinstance(channel, dict):
-                continue
-            name = " ".join(str(channel.get("name", "")).split())
-            if is_adult_channel(name) or is_adult_channel(channel.get("group", "")):
                 continue
             if not name or any(char in name for char in '\r\n"'):
                 continue
