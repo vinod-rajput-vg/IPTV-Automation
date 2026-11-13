@@ -215,23 +215,27 @@ def build_stream_url(channel_id: str, server_id: int) -> str:
 def ensure_all_configured_channels_found(
     server_targets: dict[int, list[tuple[str, dict, dict]]],
 ) -> list[str]:
-    """Report configured channels absent from all server catalogs."""
-    configured = {
-        normalize_name(entry["key"]): entry["name"]
-        for entries in load_category_files().values()
-        for entry in entries
+    """Report configured channels missing from their assigned server catalog."""
+    found_by_server = {
+        server_id: {
+            normalize_name(catalog_name)
+            for catalog_name, _channel, _metadata in targets
+        }
+        for server_id, targets in server_targets.items()
     }
-    found = {
-        normalize_name(catalog_name)
-        for targets in server_targets.values()
-        for catalog_name, _channel, _metadata in targets
-    }
-    missing = sorted(name for key, name in configured.items() if key not in found)
+    missing = []
+    for entries in load_category_files().values():
+        for entry in entries:
+            key = normalize_name(entry["key"])
+            if key not in found_by_server.get(entry["server"], set()):
+                missing.append(
+                    f"{entry['name']} (Server {entry['server']})"
+                )
 
     if missing:
         print(
-            "Configured channels not present in any discovered server catalog: "
-            + ", ".join(missing)
+            "Configured channels missing from their assigned server catalogs: "
+            + ", ".join(sorted(set(missing)))
         )
 
     return missing
@@ -240,7 +244,7 @@ def ensure_all_configured_channels_found(
 def build_category_playlists(
     server_targets: dict[int, list[tuple[str, dict, dict]]],
 ) -> dict[Path, str]:
-    """Use configured server preference and fall back to other available catalogs."""
+    """Generate playlists using only each channel's explicitly assigned server."""
     targets_by_server = {
         server_id: {
             catalog_name: (channel, metadata)
@@ -257,24 +261,12 @@ def build_category_playlists(
         for category_entry in category_entries:
             catalog_name = category_entry["key"]
             preferred_server = category_entry["server"]
-            server_order = [preferred_server] + [
-                candidate_id for candidate_id in sorted(targets_by_server)
-                if candidate_id != preferred_server
-            ]
-            selected = None
-            server_id = preferred_server
-
-            for candidate_id in server_order:
-                candidate = targets_by_server.get(candidate_id, {}).get(catalog_name)
-                if candidate is not None:
-                    selected = candidate
-                    server_id = candidate_id
-                    break
-
+            selected = targets_by_server.get(preferred_server, {}).get(catalog_name)
             if selected is None:
                 continue
 
             channel, _metadata = selected
+            server_id = preferred_server
             normalized_name = normalize_name(category_entry["name"])
             if normalized_name in seen_names:
                 continue
