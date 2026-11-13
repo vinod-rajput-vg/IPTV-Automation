@@ -249,44 +249,6 @@ def load_category_files() -> dict[str, list[dict]]:
     return categories
 
 
-def is_adult_channel(value: object) -> bool:
-    """Exclude explicitly adult/18+ catalog entries and categories."""
-    normalized = normalize_name(value)
-    return bool(re.search(r"(^|[^A-Z0-9])(ADULT|18\s*\+|XXX|PORN)([^A-Z0-9]|$)", normalized))
-
-
-def build_full_server_json(catalog: list[dict], server_id: int) -> dict:
-    """Export the full non-adult catalog without probing stream URLs."""
-    channels = []
-    seen_ids = set()
-    for channel in catalog:
-        if not isinstance(channel, dict):
-            continue
-        name = " ".join(str(channel.get("name", "")).split())
-        group = " ".join(str(channel.get("group", "")).split())
-        category = " ".join(str(channel.get("category", "")).split())
-        if not name or is_adult_channel(name) or is_adult_channel(group) or is_adult_channel(category):
-            continue
-        channel_id = str(channel.get("id", "")).strip()
-        if not channel_id or any(character.isspace() for character in channel_id) or channel_id in seen_ids:
-            continue
-        seen_ids.add(channel_id)
-        channels.append({
-            "name": name,
-            "id": channel_id,
-            "group": group,
-            "logo": str(channel.get("logo", "")).strip(),
-            "url": build_stream_url(channel_id, server_id),
-        })
-    now_ist = datetime.now(timezone.utc).astimezone(ZoneInfo("Asia/Kolkata"))
-    return {
-        "updated_at": now_ist.isoformat(timespec="seconds"),
-        "source": f"{BASE_URL}/api.php?server={server_id}",
-        "total_channels": len(channels),
-        "channels": channels,
-    }
-
-
 def build_category_playlists(
     server_targets: dict[int, list[tuple[str, dict, dict]]],
 ) -> dict[Path, str]:
