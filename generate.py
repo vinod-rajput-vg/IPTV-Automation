@@ -342,7 +342,7 @@ def build_category_playlists(
         destination = OUTPUT_DIR / f"{category}.txt"
         previous_entries = {}
         if destination.is_file():
-            previous_blocks = destination.read_text(encoding="utf-8").strip().split("\\n\\n")
+            previous_blocks = destination.read_text(encoding="utf-8").strip().split("\n\n")
             for block in previous_blocks:
                 lines = block.splitlines()
                 if len(lines) == 3:
@@ -382,11 +382,11 @@ def build_category_playlists(
                 if SHOW_SERVER_IN_TXT else channel_name
             )
             entries.append(
-                f"{display_name}\\n{category_entry['logo']}\\n{stream_url}"
+                f"{display_name}\n{category_entry['logo']}\n{stream_url}"
             )
 
         playlists[destination] = (
-            "\\n\\n".join(entries) + ("\\n" if entries else "")
+            "\n\n".join(entries) + ("\n" if entries else "")
         )
 
     return playlists
