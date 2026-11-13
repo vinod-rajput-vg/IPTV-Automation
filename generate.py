@@ -404,7 +404,7 @@ def build_server_files(server_catalogs: dict[int, list[dict]]) -> dict[Path, str
                 continue
 
             name = " ".join(str(channel.get("name", "")).split())
-            if not name or any(char in name for char in '\\r\\n"'):
+            if not name or any(char in name for char in '\r\n"'):
                 continue
 
             normalized = normalize_name(name)
@@ -412,11 +412,11 @@ def build_server_files(server_catalogs: dict[int, list[dict]]) -> dict[Path, str
                 continue
 
             seen_names.add(normalized)
-            entries.append(f'"{normalized}" {server_id}\\n{name}')
+            entries.append(f'"{normalized}" {server_id}\n{name}')
 
         if entries:
             outputs[Path("Servers") / f"server_{server_id}.txt"] = (
-                "\\n\\n".join(entries) + "\\n\\n"
+                "\n\n".join(entries) + "\n\n"
             )
 
     return outputs
