@@ -391,6 +391,37 @@ def build_category_playlists(
     return playlists
 
 
+def build_server_files(server_catalogs: dict[int, list[dict]]) -> dict[Path, str]:
+    """Generate a current server_N.txt catalog for every successfully loaded server."""
+    outputs = {}
+
+    for server_id, catalog in server_catalogs.items():
+        entries = []
+        seen_names = set()
+
+        for channel in catalog:
+            if not isinstance(channel, dict):
+                continue
+
+            name = " ".join(str(channel.get("name", "")).split())
+            if not name or any(char in name for char in '\\r\\n"'):
+                continue
+
+            normalized = normalize_name(name)
+            if normalized in seen_names:
+                continue
+
+            seen_names.add(normalized)
+            entries.append(f'"{normalized}" {server_id}\\n{name}')
+
+        if entries:
+            outputs[Path("Servers") / f"server_{server_id}.txt"] = (
+                "\\n\\n".join(entries) + "\\n\\n"
+            )
+
+    return outputs
+
+
 def write_outputs_atomically(outputs: dict[Path, str]) -> None:
     """Stage every output, then atomically replace each destination file.
 
@@ -426,6 +457,7 @@ def write_outputs_atomically(outputs: dict[Path, str]) -> None:
 def main() -> int:
     try:
         server_targets = {}
+        server_catalogs = {}
         categories = load_category_files()
         required_server_ids = {
             entry["server"]
@@ -475,6 +507,7 @@ def main() -> int:
                 server_id = futures[future]
                 try:
                     loaded_id, server_label, catalog, targets = future.result()
+                    server_catalogs[loaded_id] = catalog
                     server_targets[loaded_id] = targets
                     print(f"{server_label}: loaded {len(catalog)} channels.")
                 except Exception as exc:
@@ -482,7 +515,8 @@ def main() -> int:
 
         # Publish successful servers immediately. For failed servers, retain
         # their previous playlist entries and retry them in the workflow loop.
-        outputs = build_category_playlists(server_targets)
+        outputs = build_server_files(server_catalogs)
+        outputs.update(build_category_playlists(server_targets))
         write_outputs_atomically(outputs)
 
         print(f"Discovered {len(servers)} servers.")
