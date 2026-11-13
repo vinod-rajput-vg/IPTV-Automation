@@ -385,9 +385,8 @@ def build_category_playlists(
                 f"{display_name}\n{category_entry['logo']}\n{stream_url}"
             )
 
-        playlists[destination] = (
-            "\n\n".join(entries) + ("\n" if entries else "")
-        )
+        if entries:
+            playlists[destination] = "\n\n".join(entries) + "\n"
 
     return playlists
 
