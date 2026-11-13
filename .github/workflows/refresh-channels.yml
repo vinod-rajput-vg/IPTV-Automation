@@ -35,13 +35,21 @@ jobs:
       - name: Validate Python syntax
         run: python -m py_compile generate.py
 
+      - name: Generate channel files
+        run: python generate.py
+
       - name: Commit and push generated files
         if: github.event_name != 'pull_request'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add -A -- Output/
+          if [ -d "Output" ]; then
+            git add -A -- Output/
+          else
+            echo "ERROR: generate.py did not create Output/."
+            exit 1
+          fi
 
           if [ -d "Servers" ]; then
             git add -A -- Servers/
