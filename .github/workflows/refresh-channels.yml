@@ -62,7 +62,7 @@ jobs:
                 break
               fi
 
-              git add Output/
+              git add Output/`n              if [ -d Servers ]; then git add Servers/; fi
               if ! git diff --cached --quiet; then
                 git commit -m "Partially refresh available channel URLs"
                 until git push origin HEAD:main; do
@@ -79,7 +79,7 @@ jobs:
               git rebase origin/main
             done
 
-            git add Output/
+            git add Output/`n              if [ -d Servers ]; then git add Servers/; fi
             if git diff --cached --quiet; then
               echo "No generated playlist changes detected."
               exit 0
