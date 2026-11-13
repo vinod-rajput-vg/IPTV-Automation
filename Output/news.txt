@@ -1,51 +1,23 @@
-Tv9 Bharatvarsh
-https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/tv9-bharatvarsh-in.png
-https://rkdy-linkgen.wasmer.app/play.php?id=24fcc2c13047d4ad028d
-
-Times Now Navbharat
-https://jiotvimages.cdn.jio.com/dare_images/images/channel/bc00f1e02773b93ec36890b5a4ef7ece.png
-https://rkdy-linkgen.wasmer.app/play.php?id=d7a8687fae0839f3c1cc
-
 NDTV India
 https://jiotvimages.cdn.jio.com/dare_images/images/channel/b69d5a23fcfa02d4c2f47e958c704b46.png
-https://rkdy-linkgen.wasmer.app/play.php?id=c1f1bc9fa783bdec77fb
-
-DD News
-https://jiotvimages.cdn.jio.com/dare_images/images/channel/16dfa4cb5cb300bfad994dc6acb44c76.png
-https://rkdy-linkgen.wasmer.app/play.php?id=e7d6c6360dc375b68a59
+https://rkdy-linkgen.wasmer.app/play.php?s=4&id=9fd455caed2cb609390c
 
 Tv9 Gujarati
 https://jiotvimages.cdn.jio.com/dare_images/images/channel/f344ea2f99c67074b52150e40cc30c24.png
-https://rkdy-linkgen.wasmer.app/play.php?id=09d9f7a66ce577474ac4
-
-Tv9 Marathi
-https://jiotvimages.cdn.jio.com/dare_images/images/channel/cbfc396076a82705258fb3b019b1153b.png
-https://rkdy-linkgen.wasmer.app/play.php?id=e081bdb588ffdf070e1c
-
-Zee 24 Kalak
-https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/zee-24-kalak-in.png
-https://rkdy-linkgen.wasmer.app/play.php?id=2f4b55459d141e3c83fe
-
-Zee 24 Taas
-https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/zee-24-taas-in.png
-https://rkdy-linkgen.wasmer.app/play.php?id=162696a30f24a45766cf
+https://rkdy-linkgen.wasmer.app/play.php?s=4&id=0621d794780e9e5dffd4
 
 Republic Bharat
 https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/republic-bharat-tv-in.png
-https://rkdy-linkgen.wasmer.app/play.php?id=57179a55a2e884c1e335
+https://rkdy-linkgen.wasmer.app/play.php?s=4&id=af6854cf2d5dfc62e75f
 
 News Nation
 https://jiotvimages.cdn.jio.com/dare_images/images/channel/cd40fe9e8db4c7662414c19f09e38857.png
-https://rkdy-linkgen.wasmer.app/play.php?id=5ce0c8317e9fdc5b827d
-
-Aaj Tak
-https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/aaj-tak-in.png
-https://rkdy-linkgen.wasmer.app/play.php?id=5f8c7ea883b18aec1960
+https://rkdy-linkgen.wasmer.app/play.php?s=4&id=7818277f56930377b074
 
 ABP News
 https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/abp-news-in.png
-https://rkdy-linkgen.wasmer.app/play.php?id=ec4860165ba4669c94c8
+https://rkdy-linkgen.wasmer.app/play.php?s=4&id=cb2d3607891048635b4c
 
 India TV
 https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/india/india-tv-in.png
-https://rkdy-linkgen.wasmer.app/play.php?id=99225138f98624038f7b
+https://rkdy-linkgen.wasmer.app/play.php?s=4&id=04510ee31e3e8321833f
