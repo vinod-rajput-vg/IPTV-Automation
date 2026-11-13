@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Build server JSON catalogs and category TXT playlists from the public catalog.
 
-Playback URLs are resolved by following the public play.php HTTP redirect.
-This does not imitate browser sessions or bypass access controls.
+Playback URLs point to the public play.php redirect endpoint. The generator
+does not resolve redirects, imitate browser sessions, or bypass access controls.
 """
 
 from __future__ import annotations
@@ -368,7 +368,11 @@ def build_server_files(server_catalogs: dict[int, list[dict]]) -> dict[Path, str
 
 
 def write_outputs_atomically(outputs: dict[Path, str]) -> None:
-    """Stage every output beside its destination, then replace destination files."""
+    """Stage every output, then atomically replace each destination file.
+
+    The replacement of an individual file is atomic; the complete set of files
+    is not a single filesystem transaction.
+    """
     for destination in outputs:
         destination.parent.mkdir(parents=True, exist_ok=True)
 
@@ -429,9 +433,14 @@ def main() -> int:
             full_catalog = build_full_server_json(catalog, server_id)
             full_catalogs[server_id] = full_catalog
             full_name = f"channels_server_{server_id}.json"
-            outputs[OUTPUT_DIR / full_name] = (
+            serialized_catalog = (
                 json.dumps(full_catalog, ensure_ascii=False, indent=2) + "\n"
             )
+            outputs[OUTPUT_DIR / full_name] = serialized_catalog
+            # Keep the historical channels.json path current for clients that
+            # still consume the default (Server 1) catalog.
+            if server_id == 1:
+                outputs[OUTPUT_DIR / "channels.json"] = serialized_catalog
             print(
                 f"Server {server_id} full catalog: "
                 f"{full_catalog['total_channels']} channels."
