@@ -149,8 +149,8 @@ def find_targets(catalog: list[dict]) -> list[tuple[str, dict, dict]]:
     return result
 
 
-def build_stream_url(channel_id: str) -> str:
-    return f"{BASE_URL}/play.php?{urlencode({'id': channel_id})}"
+def build_stream_url(channel_id: str, server_id: int) -> str:
+    return f"{BASE_URL}/play.php?{urlencode({'s': server_id, 'id': channel_id})}"
 
 
 def ensure_all_configured_channels_found(
@@ -189,7 +189,7 @@ def build_json(
                 "id": channel_id,
                 "group": str(channel.get("group", "")),
                 "logo": metadata["logo"],
-                "url": build_stream_url(channel_id),
+                "url": build_stream_url(channel_id, server_id),
             }
         )
 
@@ -274,7 +274,7 @@ def build_full_server_json(catalog: list[dict], server_id: int) -> dict:
             "id": channel_id,
             "group": group,
             "logo": str(channel.get("logo", "")).strip(),
-            "url": build_stream_url(channel_id),
+            "url": build_stream_url(channel_id, server_id),
         })
     now_ist = datetime.now(timezone.utc).astimezone(ZoneInfo("Asia/Kolkata"))
     return {
@@ -329,7 +329,7 @@ def build_category_playlists(
             seen_names.add(normalized_name)
 
             channel_id = str(channel["id"]).strip()
-            stream_url = build_stream_url(channel_id)
+            stream_url = build_stream_url(channel_id, server_id)
             channel_name = category_entry["name"]
             channel_logo = category_entry["logo"]
             display_name = (
