@@ -89,6 +89,7 @@ class GeneratorTests(unittest.TestCase):
         self.assertIn("/play.php?s=1&id=abc123", playlist)
 
     def test_unavailable_server_does_not_overwrite_existing_playlists(self):
+        self.write_category()
         destination = self.output_dir / "drama.txt"
         destination.write_text("last known good playlist\n", encoding="utf-8")
         with patch.object(generate, "fetch_server_list", return_value=[(1, "Server 1")]):
