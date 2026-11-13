@@ -8,6 +8,7 @@ does not resolve redirects, imitate browser sessions, or bypass access controls.
 from __future__ import annotations
 
 import json
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import os
 import re
 import sys
@@ -421,12 +422,16 @@ def main() -> int:
                 f"the catalog API: {ids}"
             )
 
-        for server_id, server_label in servers:
-            if server_id not in required_server_ids:
-                continue
+        required_servers = [
+            (server_id, server_label)
+            for server_id, server_label in servers
+            if server_id in required_server_ids
+        ]
 
-            # Reuse each complete catalog already fetched during this workflow
-            # run. If a server is unavailable, successful servers stay cached.
+        def load_server(server_id: int, server_label: str):
+            # Each required server is fetched independently and concurrently.
+            # A successful complete catalog is cached even if another server
+            # fails, so the next retry only needs to fetch the failed server.
             catalog = load_cached_catalog(server_id)
             from_cache = catalog is not None
             if catalog is None:
@@ -437,8 +442,28 @@ def main() -> int:
             if not from_cache:
                 save_cached_catalog(server_id, catalog)
 
-            server_targets[server_id] = targets
-            print(f"{server_label}: loaded {len(catalog)} channels.")
+            return server_id, server_label, catalog, targets
+
+        errors = []
+        with ThreadPoolExecutor(max_workers=max(1, len(required_servers))) as executor:
+            futures = {
+                executor.submit(load_server, server_id, server_label): server_id
+                for server_id, server_label in required_servers
+            }
+            for future in as_completed(futures):
+                server_id = futures[future]
+                try:
+                    loaded_id, server_label, catalog, targets = future.result()
+                    server_targets[loaded_id] = targets
+                    print(f"{server_label}: loaded {len(catalog)} channels.")
+                except Exception as exc:
+                    errors.append(f"Server {server_id}: {exc}")
+
+        if errors:
+            raise RuntimeError(
+                "One or more configured servers could not be loaded: "
+                + " | ".join(sorted(errors))
+            )
 
         ensure_all_configured_channels_found(server_targets)
 
