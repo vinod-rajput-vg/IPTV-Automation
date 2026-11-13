@@ -5,6 +5,14 @@ on:
     - cron: '30 18 * * *' # 12 AM IST
     - cron: '30 6 * * *'  # 12 PM IST
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "generate.py"
+      - "tests/**"
+      - "Sorted Channels/**"
+      - ".github/workflows/refresh-channels.yml"
 
 # The workflow defaults to read-only; only the refresh job can write to main.
 permissions:
@@ -16,6 +24,7 @@ concurrency:
 
 jobs:
   refresh:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
