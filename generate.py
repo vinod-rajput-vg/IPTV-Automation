@@ -8,15 +8,14 @@ This does not imitate browser sessions or bypass access controls.
 from __future__ import annotations
 
 import json
-import re
 import os
+import re
 import sys
 import tempfile
-import time
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlencode, urlsplit
+from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
@@ -28,6 +27,7 @@ SHOW_SERVER_IN_TXT = False
 
 # Channel metadata and category order are loaded from Sorted Channels/*.txt.
 CATEGORY_DIR = Path("Sorted Channels")
+
 
 def fetch_server_list() -> list[tuple[int, str]]:
     """Read server keys exposed by the website's public api.php endpoint."""
@@ -50,6 +50,7 @@ def fetch_server_list() -> list[tuple[int, str]]:
 
     if not isinstance(payload, list) or not payload:
         raise RuntimeError("Server list must be a non-empty JSON array.")
+
     servers = []
     seen = set()
     for item in payload:
@@ -62,11 +63,14 @@ def fetch_server_list() -> list[tuple[int, str]]:
         if server_id in seen:
             raise RuntimeError(f"Duplicate server key: {key}")
         seen.add(server_id)
-        servers.append((server_id, str(item.get("label", "")).strip() or f"Server {server_id}"))
+        label = str(item.get("label", "")).strip() or f"Server {server_id}"
+        servers.append((server_id, label))
+
     return servers
 
 
 def fetch_catalog(server_id: int) -> list[dict]:
+    """Fetch one server's public channel catalog."""
     catalog_url = f"{BASE_URL}/api.php?server={server_id}"
     request = Request(
         catalog_url,
@@ -96,7 +100,9 @@ def fetch_catalog(server_id: int) -> list[dict]:
     if not isinstance(payload, list):
         raise RuntimeError("Catalog JSON must be an array.")
     if not payload:
-        raise RuntimeError(f"Server {server_id} returned an empty catalog; preserving existing outputs.")
+        raise RuntimeError(
+            f"Server {server_id} returned an empty catalog; preserving existing outputs."
+        )
 
     return payload
 
@@ -104,6 +110,57 @@ def fetch_catalog(server_id: int) -> list[dict]:
 def normalize_name(value: object) -> str:
     """Normalize channel names without changing meaningful punctuation."""
     return " ".join(str(value or "").split()).upper()
+
+
+def load_category_files() -> dict[str, list[dict]]:
+    """Load every category and channel entry from Sorted Channels/*.txt."""
+    categories = {}
+
+    if not CATEGORY_DIR.is_dir():
+        raise RuntimeError(f"Category directory not found: {CATEGORY_DIR}")
+
+    for category_file in sorted(CATEGORY_DIR.glob("*.txt")):
+        lines = [
+            line.strip()
+            for line in category_file.read_text(encoding="utf-8").splitlines()
+            if line.strip()
+        ]
+        if len(lines) % 3:
+            raise ValueError(
+                f"{category_file} must contain three non-empty lines per channel."
+            )
+
+        entries = []
+        for index in range(0, len(lines), 3):
+            header, display_name, logo = lines[index:index + 3]
+            match = re.fullmatch(r'"(.+?)"\s+([0-9]+)', header)
+            if not match:
+                raise ValueError(
+                    f"Invalid channel header in {category_file}: {header}"
+                )
+
+            catalog_name, server = match.groups()
+            catalog_name = " ".join(catalog_name.split())
+            if not display_name:
+                raise ValueError(
+                    f"Missing display name in {category_file}: {header}"
+                )
+            if not re.fullmatch(r"https?://\S+", logo):
+                raise ValueError(f"Invalid logo URL in {category_file}: {logo}")
+
+            entries.append({
+                "key": catalog_name,
+                "server": int(server),
+                "name": display_name,
+                "logo": logo,
+            })
+
+        categories[category_file.stem] = entries
+
+    if not categories:
+        raise RuntimeError(f"No category TXT files found in {CATEGORY_DIR}")
+
+    return categories
 
 
 def find_targets(catalog: list[dict]) -> list[tuple[str, dict, dict]]:
@@ -158,7 +215,7 @@ def build_stream_url(channel_id: str, server_id: int) -> str:
 def ensure_all_configured_channels_found(
     server_targets: dict[int, list[tuple[str, dict, dict]]],
 ) -> list[str]:
-    """Report channels absent from all catalogs without aborting other output."""
+    """Report configured channels absent from all server catalogs."""
     configured = {
         normalize_name(entry["key"]): entry["name"]
         for entries in load_category_files().values()
@@ -170,80 +227,57 @@ def ensure_all_configured_channels_found(
         for catalog_name, _channel, _metadata in targets
     }
     missing = sorted(name for key, name in configured.items() if key not in found)
+
     if missing:
         print(
             "Configured channels not present in any discovered server catalog: "
             + ", ".join(missing)
         )
+
     return missing
 
 
-def build_json(
-    targets: list[tuple[str, dict, dict]],
-    server_id: int,
-) -> dict:
+def build_full_server_json(catalog: list[dict], server_id: int) -> dict:
+    """Build a JSON catalog containing every valid channel returned by a server."""
     channels = []
-    for _, channel, metadata in targets:
-        channel_id = str(channel["id"]).strip()
-        channels.append(
-            {
-                "name": metadata["name"],
-                "id": channel_id,
-                "group": str(channel.get("group", "")),
-                "logo": metadata["logo"],
-                "url": build_stream_url(channel_id, server_id),
-            }
-        )
+    seen_ids = set()
 
-    now_utc = datetime.now(timezone.utc)
-    now_ist = now_utc.astimezone(ZoneInfo("Asia/Kolkata"))
+    for channel in catalog:
+        if not isinstance(channel, dict):
+            continue
 
+        channel_name = " ".join(str(channel.get("name", "")).split())
+        channel_id = str(channel.get("id", "")).strip()
+        if not channel_name or not channel_id or any(
+            character.isspace() for character in channel_id
+        ):
+            continue
+        if channel_id in seen_ids:
+            continue
+
+        seen_ids.add(channel_id)
+        channels.append({
+            "name": channel_name,
+            "id": channel_id,
+            "group": str(channel.get("group", "")),
+            "logo": str(channel.get("logo", "")),
+            "url": build_stream_url(channel_id, server_id),
+        })
+
+    now_ist = datetime.now(timezone.utc).astimezone(ZoneInfo("Asia/Kolkata"))
     return {
         "updated_at": now_ist.isoformat(timespec="seconds"),
         "source": f"{BASE_URL}/api.php?server={server_id}",
+        "server_id": server_id,
+        "total_channels": len(channels),
         "channels": channels,
     }
-
-
-def load_category_files() -> dict[str, list[dict]]:
-    """Load every category and channel entry from Sorted Channels/*.txt."""
-    categories = {}
-
-    if not CATEGORY_DIR.is_dir():
-        raise RuntimeError(f"Category directory not found: {CATEGORY_DIR}")
-
-        entries = []
-        for index in range(0, len(lines), 3):
-            header, display_name, logo = lines[index:index + 3]
-            match = re.fullmatch(r'"(.+?)"\s+([0-9]+)', header)
-            if not match:
-                raise ValueError(
-                    f'Invalid channel header in {category_file}: {header}'
-                )
-
-            catalog_name, server = match.groups()
-            catalog_name = " ".join(catalog_name.split())
-            if not display_name:
-                raise ValueError(f"Missing display name in {category_file}: {header}")
-            if not re.fullmatch(r"https?://\S+", logo):
-                raise ValueError(f"Invalid logo URL in {category_file}: {logo}")
-
-            entries.append({
-                "key": catalog_name,
-                "server": int(server),
-                "name": display_name,
-                "logo": logo,
-            })
-
-        categories[category_file.stem] = entries
-
-    return categories
 
 
 def build_category_playlists(
     server_targets: dict[int, list[tuple[str, dict, dict]]],
 ) -> dict[Path, str]:
-    """Use configured server preference without probing or retrying stream URLs."""
+    """Use configured server preference and fall back to other available catalogs."""
     targets_by_server = {
         server_id: {
             catalog_name: (channel, metadata)
@@ -267,13 +301,13 @@ def build_category_playlists(
             selected = None
             server_id = preferred_server
 
-            # Use the configured server first; fall back only when its catalog lacks the channel.
             for candidate_id in server_order:
                 candidate = targets_by_server.get(candidate_id, {}).get(catalog_name)
                 if candidate is not None:
                     selected = candidate
                     server_id = candidate_id
                     break
+
             if selected is None:
                 continue
 
@@ -301,33 +335,44 @@ def build_category_playlists(
 
 
 def build_server_files(server_catalogs: dict[int, list[dict]]) -> dict[Path, str]:
-    """Generate server_N.txt files for newly discovered servers; preserve files 1 and 2."""
+    """Generate server_N.txt files for discovered servers; preserve files 1 and 2."""
     outputs = {}
+
     for server_id, catalog in server_catalogs.items():
         if server_id in (1, 2):
             continue
+
         entries = []
         seen_names = set()
         for channel in catalog:
             if not isinstance(channel, dict):
                 continue
+
+            name = " ".join(str(channel.get("name", "")).split())
             if not name or any(char in name for char in '\r\n"'):
                 continue
+
             normalized = normalize_name(name)
             if normalized in seen_names:
                 continue
+
             seen_names.add(normalized)
             entries.append(f'"{normalized}" {server_id}\n{name}')
+
         if entries:
-            outputs[Path("Servers") / f"server_{server_id}.txt"] = "\n\n".join(entries) + "\n\n"
+            outputs[Path("Servers") / f"server_{server_id}.txt"] = (
+                "\n\n".join(entries) + "\n\n"
+            )
+
     return outputs
 
 
 def write_outputs_atomically(outputs: dict[Path, str]) -> None:
     """Stage every output beside its destination, then replace destination files."""
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    staged: dict[Path, Path] = {}
+    for destination in outputs:
+        destination.parent.mkdir(parents=True, exist_ok=True)
 
+    staged: dict[Path, Path] = {}
     try:
         for destination, data in outputs.items():
             with tempfile.NamedTemporaryFile(
@@ -349,8 +394,6 @@ def write_outputs_atomically(outputs: dict[Path, str]) -> None:
             temporary.unlink(missing_ok=True)
 
 
-
-
 def main() -> int:
     try:
         outputs = {}
@@ -366,17 +409,21 @@ def main() -> int:
                 print(f"{server_label}: loaded {len(catalog)} channels.")
             except Exception as exc:
                 if server_id == 4:
-                    raise RuntimeError(f"Required Server 4 catalog failed: {exc}") from exc
-                print(f"WARNING: Skipping unavailable {server_label}: {exc}", file=sys.stderr)
+                    raise RuntimeError(
+                        f"Required Server 4 catalog failed: {exc}"
+                    ) from exc
+                print(
+                    f"WARNING: Skipping unavailable {server_label}: {exc}",
+                    file=sys.stderr,
+                )
 
         if 4 not in server_catalogs:
-            raise RuntimeError("Server 4 was not discovered; existing Server 4 output was preserved.")
+            raise RuntimeError(
+                "Server 4 was not discovered; existing Server 4 output was preserved."
+            )
 
         missing_channels = ensure_all_configured_channels_found(server_targets)
 
-        # Export the full non-explicit catalog for every server that returned data.
-        # Keep the established Server 4 filename; use a separate *_full.json file
-        # for other servers so existing configured-channel outputs are preserved.
         full_catalogs = {}
         for server_id, catalog in server_catalogs.items():
             full_catalog = build_full_server_json(catalog, server_id)
@@ -387,16 +434,8 @@ def main() -> int:
             )
             print(
                 f"Server {server_id} full catalog: "
-                f"{full_catalog['total_channels']} non-explicit channels."
+                f"{full_catalog['total_channels']} channels."
             )
-
-        generated_count = sum(
-            catalog["total_channels"] for catalog in full_catalogs.values()
-        )
-        for server_id, targets in server_targets.items():
-            result = build_json(targets, server_id)
-            # Full per-server catalogs above are the canonical JSON outputs.
-            # Keep the configured category TXT playlists as separate outputs.
 
         missing_names = {normalize_name(name) for name in missing_channels}
         missing_metadata = [
@@ -418,16 +457,21 @@ def main() -> int:
         outputs.update(build_category_playlists(server_targets))
         write_outputs_atomically(outputs)
 
+        generated_count = sum(
+            catalog["total_channels"] for catalog in full_catalogs.values()
+        )
         print(
             f"Discovered {len(servers)} servers. Wrote {generated_count} "
-            "configured/full-catalog channel entries. Stream validation and retry loops are disabled."
+            "full-catalog channel entries. No channel content filtering is applied."
         )
         for path in outputs:
             print(f"Wrote {path}.")
+
         return 0
     except Exception as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 1
+
 
 if __name__ == "__main__":
     raise SystemExit(main())
