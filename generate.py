@@ -431,11 +431,7 @@ def main() -> int:
         for server_id, catalog in server_catalogs.items():
             full_catalog = build_full_server_json(catalog, server_id)
             full_catalogs[server_id] = full_catalog
-            full_name = (
-                "channels_server_4.json"
-                if server_id == 4
-                else f"channels_server_{server_id}_full.json"
-            )
+            full_name = f"channels_server_{server_id}.json"
             outputs[OUTPUT_DIR / full_name] = (
                 json.dumps(full_catalog, ensure_ascii=False, indent=2) + "\n"
             )
@@ -447,44 +443,10 @@ def main() -> int:
         generated_count = sum(
             catalog["total_channels"] for catalog in full_catalogs.values()
         )
-        # Combined master catalog: all available servers in one JSON output.
-        combined_channels = []
-        seen_combined = set()
-        for server_id, full_catalog in full_catalogs.items():
-            for channel in full_catalog["channels"]:
-                unique_key = (server_id, channel["id"])
-                if unique_key in seen_combined:
-                    continue
-                seen_combined.add(unique_key)
-                combined_channels.append({
-                    **channel,
-                    "server_id": server_id,
-                })
-
-        combined_output = {
-            "updated_at": datetime.now(timezone.utc).astimezone(
-                ZoneInfo("Asia/Kolkata")
-            ).isoformat(timespec="seconds"),
-            "total_channels": len(combined_channels),
-            "servers_included": sorted(full_catalogs),
-            "channels": combined_channels,
-        }
-        outputs[OUTPUT_DIR / "channels_all_servers.json"] = (
-            json.dumps(combined_output, ensure_ascii=False, indent=2) + "\\n"
-        )
-        print(
-            f"Combined catalog: {combined_output['total_channels']} channels "
-            f"from {len(full_catalogs)} available servers."
-        )
-
         for server_id, targets in server_targets.items():
             result = build_json(targets, server_id)
-            json_path = OUTPUT_DIR / (
-                "channels.json" if server_id == 1 else f"channels_server_{server_id}.json"
-            )
-            if server_id == 4:
-                continue
-            outputs[json_path] = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
+            # Full per-server catalogs above are the canonical JSON outputs.
+            # Keep the configured category TXT playlists as separate outputs.
 
         missing_names = {normalize_name(name) for name in missing_channels}
         missing_metadata = [
