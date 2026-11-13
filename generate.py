@@ -346,11 +346,29 @@ def write_outputs_atomically(outputs: dict[Path, str]) -> None:
 def main() -> int:
     try:
         server_targets = {}
+        categories = load_category_files()
+        required_server_ids = {
+            entry["server"]
+            for category_entries in categories.values()
+            for entry in category_entries
+        }
 
         servers = fetch_server_list()
+        available_server_ids = {server_id for server_id, _label in servers}
+        missing_servers = required_server_ids - available_server_ids
+        if missing_servers:
+            ids = ", ".join(str(server_id) for server_id in sorted(missing_servers))
+            raise RuntimeError(
+                f"Category configuration references server IDs not advertised by "
+                f"the catalog API: {ids}"
+            )
+
         for server_id, server_label in servers:
-            # Every advertised server must be readable. A partial run must never
-            # replace a complete set of playlists with incomplete data.
+            if server_id not in required_server_ids:
+                continue
+
+            # Only fetch servers used by the category configuration. A partial
+            # result must never replace a complete set of playlists.
             catalog = fetch_catalog(server_id)
             server_targets[server_id] = find_targets(catalog)
             print(f"{server_label}: loaded {len(catalog)} channels.")
