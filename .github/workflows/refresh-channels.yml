@@ -55,11 +55,28 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
 
-            # Keep retrying transient catalog/API failures. The generator only
-            # writes playlists after every configured channel has been found.
-            until python generate.py; do
-              echo "Catalog is not ready yet; retrying in 5 minutes."
+            # Publish any successful server updates immediately, then retry
+            # failed servers. Existing entries for failed servers are preserved.
+            while true; do
+              if python generate.py; then
+                break
+              fi
+
+              git add Output/
+              if ! git diff --cached --quiet; then
+                git commit -m "Partially refresh available channel URLs"
+                until git push origin HEAD:main; do
+                  echo "Push failed; rebasing the saved playlist updates onto latest main."
+                  git fetch origin main
+                  git rebase origin/main
+                  sleep 10
+                done
+              fi
+
+              echo "Some servers are unavailable; retrying in 5 minutes."
               sleep 300
+              git fetch origin main
+              git rebase origin/main
             done
 
             git add Output/
