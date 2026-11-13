@@ -428,12 +428,13 @@ def main() -> int:
             # Reuse each complete catalog already fetched during this workflow
             # run. If a server is unavailable, successful servers stay cached.
             catalog = load_cached_catalog(server_id)
+            from_cache = catalog is not None
             if catalog is None:
                 catalog = fetch_catalog(server_id)
 
             targets = find_targets(catalog)
             ensure_server_channels_found(server_id, targets, categories)
-            if load_cached_catalog(server_id) is None:
+            if not from_cache:
                 save_cached_catalog(server_id, catalog)
 
             server_targets[server_id] = targets
