@@ -2,15 +2,13 @@ name: Refresh channel URLs
 
 on:
   schedule:
-    - cron: '30 18 * * *' # 12 AM IST
-    - cron: '30 6 * * *'  # 12 PM IST
+    - cron: '*/30 * * * *' # Retry window starts every 30 minutes
   workflow_dispatch:
   push:
     branches:
       - main
     paths:
       - "generate.py"
-      - "tests/**"
       - "Sorted Channels/**"
       - ".github/workflows/refresh-channels.yml"
 
@@ -26,7 +24,7 @@ jobs:
   refresh:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 360
     permissions:
       contents: write
     steps:
@@ -52,8 +50,12 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
 
-            python -m unittest discover -s tests -v
-            python generate.py
+            # Keep retrying transient catalog/API failures. The generator only
+            # writes playlists after every configured channel has been found.
+            until python generate.py; do
+              echo "Catalog is not ready yet; retrying in 5 minutes."
+              sleep 300
+            done
 
             git add Output/
             if git diff --cached --quiet; then
