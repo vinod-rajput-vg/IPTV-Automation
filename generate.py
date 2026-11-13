@@ -335,36 +335,58 @@ def build_category_playlists(
     }
 
     playlists = {}
-    for category, category_entries in load_category_files().items():
+    categories = load_category_files()
+    available_server_ids = set(server_targets)
+
+    for category, category_entries in categories.items():
+        destination = OUTPUT_DIR / f"{category}.txt"
+        previous_entries = {}
+        if destination.is_file():
+            previous_blocks = destination.read_text(encoding="utf-8").strip().split("\\n\\n")
+            for block in previous_blocks:
+                lines = block.splitlines()
+                if len(lines) == 3:
+                    previous_entries[normalize_name(lines[0])] = block
+
         entries = []
         seen_names: set[str] = set()
 
         for category_entry in category_entries:
             catalog_name = category_entry["key"]
             preferred_server = category_entry["server"]
-            selected = targets_by_server.get(preferred_server, {}).get(catalog_name)
-            if selected is None:
-                continue
-
-            channel, _metadata = selected
-            server_id = preferred_server
-            normalized_name = normalize_name(category_entry["name"])
+            channel_name = category_entry["name"]
+            normalized_name = normalize_name(channel_name)
             if normalized_name in seen_names:
                 continue
             seen_names.add(normalized_name)
 
+            selected = targets_by_server.get(preferred_server, {}).get(catalog_name)
+            if selected is None:
+                # A failed server must not remove its last published channel URL.
+                # Keep the existing entry until that server returns successfully.
+                if preferred_server not in available_server_ids:
+                    old_display_name = (
+                        f"{channel_name} (Server {preferred_server})"
+                        if SHOW_SERVER_IN_TXT else channel_name
+                    )
+                    previous = previous_entries.get(normalize_name(old_display_name))
+                    if previous:
+                        entries.append(previous)
+                continue
+
+            channel, _metadata = selected
             channel_id = str(channel["id"]).strip()
-            stream_url = build_stream_url(channel_id, server_id)
-            channel_name = category_entry["name"]
-            channel_logo = category_entry["logo"]
+            stream_url = build_stream_url(channel_id, preferred_server)
             display_name = (
-                f"{channel_name} (Server {server_id})"
+                f"{channel_name} (Server {preferred_server})"
                 if SHOW_SERVER_IN_TXT else channel_name
             )
-            entries.append(f"{display_name}\n{channel_logo}\n{stream_url}")
+            entries.append(
+                f"{display_name}\\n{category_entry['logo']}\\n{stream_url}"
+            )
 
-        playlists[OUTPUT_DIR / f"{category}.txt"] = (
-            "\n\n".join(entries) + ("\n" if entries else "")
+        playlists[destination] = (
+            "\\n\\n".join(entries) + ("\\n" if entries else "")
         )
 
     return playlists
@@ -459,20 +481,23 @@ def main() -> int:
                 except Exception as exc:
                     errors.append(f"Server {server_id}: {exc}")
 
-        if errors:
-            raise RuntimeError(
-                "One or more configured servers could not be loaded: "
-                + " | ".join(sorted(errors))
-            )
-
-        ensure_all_configured_channels_found(server_targets)
-
+        # Publish successful servers immediately. For failed servers, retain
+        # their previous playlist entries and retry them in the workflow loop.
         outputs = build_category_playlists(server_targets)
         write_outputs_atomically(outputs)
 
         print(f"Discovered {len(servers)} servers.")
         for path in outputs:
             print(f"Wrote {path}.")
+
+        if errors:
+            print(
+                "Some servers are still unavailable; successful server updates "
+                "were saved and failed servers will be retried: "
+                + " | ".join(sorted(errors)),
+                file=sys.stderr,
+            )
+            return 1
 
         return 0
     except Exception as exc:
