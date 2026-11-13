@@ -13,7 +13,6 @@ import os
 import sys
 import tempfile
 import time
-from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.error import HTTPError, URLError
@@ -30,18 +29,6 @@ SHOW_SERVER_IN_TXT = False
 # Channel metadata and category order are loaded from Sorted Channels/*.txt.
 CATEGORY_DIR = Path("Sorted Channels")
 
-# Stream validation uses response headers only; it does not download or play media.
-STREAM_TIMEOUT = 7
-VALIDATION_ATTEMPTS = 4
-VALIDATION_RETRY_BASE_SECONDS = 5
-VALIDATION_RETRY_MAX_SECONDS = 20
-# Keep requests gentle on the public endpoint; high concurrency can trigger HTTP 5xx.
-VALIDATION_WORKERS = 8
-
-# Re-fetch every server catalog when current IDs produce failed links.
-# Bounded retries prevent scheduled runs from looping indefinitely.
-CATALOG_REFRESH_ROUNDS = 3
-CATALOG_REFRESH_RETRY_SECONDS = 10
 def fetch_server_list() -> list[tuple[int, str]]:
     """Read server keys exposed by the website's public api.php endpoint."""
     request = Request(
@@ -166,200 +153,6 @@ def build_stream_url(channel_id: str) -> str:
     return f"{BASE_URL}/play.php?{urlencode({'id': channel_id})}"
 
 
-class StreamValidationError(RuntimeError):
-    """A stream validation failure with reportable HTTP and redirect details."""
-
-    def __init__(
-        self,
-        message: str,
-        *,
-        status: int | None = None,
-        final_url: str | None = None,
-        retryable: bool = True,
-    ) -> None:
-        super().__init__(message)
-        self.status = status
-        self.final_url = final_url
-        self.retryable = retryable
-
-
-class PermanentStreamError(StreamValidationError):
-    """An HTTP response indicating that retrying the same endpoint is not useful."""
-
-
-def validate_stream_url(url: str) -> dict:
-    """Check response headers and return the final redirect and response details."""
-    request = Request(
-        url,
-        headers={
-            "Accept": "application/vnd.apple.mpegurl, application/x-mpegURL, "
-            "audio/*, video/*, application/octet-stream, */*",
-            "User-Agent": "IPTV-Automation/1.0",
-        },
-        method="GET",
-    )
-
-    try:
-        with urlopen(request, timeout=STREAM_TIMEOUT) as response:
-            status = getattr(response, "status", response.getcode())
-            final_url = response.geturl()
-            if not 200 <= status < 300:
-                raise StreamValidationError(
-                    f"HTTP {status}", status=status, final_url=final_url,
-                )
-            if urlsplit(final_url).scheme not in ("http", "https"):
-                raise StreamValidationError(
-                    "Redirect did not resolve to HTTP(S)",
-                    status=status,
-                    final_url=final_url,
-                )
-
-            content_type = response.headers.get_content_type().lower()
-            if content_type in ("text/html", "application/json", "application/problem+json"):
-                raise StreamValidationError(
-                    f"Unexpected response type: {content_type}",
-                    status=status,
-                    final_url=final_url,
-                )
-            return {
-                "status": status,
-                "final_url": final_url,
-                "content_type": content_type,
-            }
-    except HTTPError as exc:
-        message = f"HTTP {exc.code}"
-        details = {
-            "status": exc.code,
-            "final_url": exc.geturl() or url,
-        }
-        if exc.code in (400, 401, 403, 404, 410):
-            raise PermanentStreamError(
-                f"{message} (non-retryable)", **details, retryable=False,
-            ) from exc
-        raise StreamValidationError(message, **details) from exc
-    except URLError as exc:
-        raise StreamValidationError(f"Connection failed: {exc.reason}") from exc
-
-
-def write_validation_report(
-    streams: dict[str, str],
-    validated: dict[str, dict],
-    failures: dict[str, tuple[str, dict]],
-    attempts: int,
-) -> None:
-    """Persist validation diagnostics separately from generated playlists."""
-    report = {
-        "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-        "result": "passed" if not failures else "failed",
-        "total_streams": len(streams),
-        "validated_streams": len(validated),
-        "failed_streams": len(failures),
-        "attempts": attempts,
-        "failures": [
-            {
-                "channel": name,
-                "requested_url": url,
-                **details,
-            }
-            for url, (name, details) in sorted(failures.items(), key=lambda item: item[1][0])
-        ],
-    }
-    report_path = OUTPUT_DIR / "stream-validation-report.json"
-    write_outputs_atomically({
-        report_path: json.dumps(report, ensure_ascii=False, indent=2) + "\n",
-    })
-    print(f"Wrote validation diagnostics to {report_path}.")
-
-
-def validate_streams(server_targets: dict[int, list[tuple[str, dict, dict]]]) -> set[str]:
-    """Retry failed streams and return the endpoints that passed validation."""
-    streams = {}
-    for targets in server_targets.values():
-        for catalog_name, channel, metadata in targets:
-            channel_id = str(channel["id"]).strip()
-            url = build_stream_url(channel_id)
-            streams.setdefault(url, metadata["name"])
-
-    if not streams:
-        write_validation_report({}, {}, {}, 0)
-        print("No configured stream endpoints were found; channel metadata will still be saved.")
-        return set()
-
-    pending = dict(streams)
-    permanent = {}
-    validated = {}
-    attempts_used = 0
-    failed = {}
-    for attempt in range(1, VALIDATION_ATTEMPTS + 1):
-        attempts_used = attempt
-        failed = {}
-        newly_permanent = {}
-        with ThreadPoolExecutor(max_workers=VALIDATION_WORKERS) as executor:
-            futures = {
-                executor.submit(validate_stream_url, url): (url, name)
-                for url, name in pending.items()
-            }
-            for future in as_completed(futures):
-                url, name = futures[future]
-                try:
-                    validated[url] = future.result()
-                except StreamValidationError as exc:
-                    details = {
-                        "status": exc.status,
-                        "final_url": exc.final_url,
-                        "error": str(exc),
-                        "retryable": exc.retryable,
-                    }
-                    if exc.retryable:
-                        failed[url] = (name, details)
-                    else:
-                        newly_permanent[url] = (name, details)
-                except Exception as exc:
-                    failed[url] = (name, {
-                        "status": None,
-                        "final_url": None,
-                        "error": str(exc),
-                        "retryable": True,
-                    })
-
-        permanent.update(newly_permanent)
-        passed = len(pending) - len(failed) - len(newly_permanent)
-        print(
-            f"Stream validation attempt {attempt}/{VALIDATION_ATTEMPTS}: "
-            f"{passed}/{len(pending)} passed; "
-            f"{len(newly_permanent)} non-retryable."
-        )
-        if not failed and not permanent:
-            write_validation_report(streams, validated, {}, attempts_used)
-            print(f"Validated all {len(streams)} unique configured stream endpoints.")
-            return set(validated)
-
-        for name, details in newly_permanent.values():
-            print(f"Stream rejected: {name} ({details['error']})")
-        for name, details in failed.values():
-            print(f"Stream temporarily unavailable: {name} ({details['error']})")
-
-        pending = {url: name for url, (name, _details) in failed.items()}
-        if not pending:
-            break
-        if attempt < VALIDATION_ATTEMPTS:
-            delay = min(
-                VALIDATION_RETRY_BASE_SECONDS * (2 ** (attempt - 1)),
-                VALIDATION_RETRY_MAX_SECONDS,
-            )
-            print(f"Retrying {len(pending)} temporary failures in {delay} seconds.")
-            time.sleep(delay)
-
-    remaining = {**permanent, **failed}
-    write_validation_report(streams, validated, remaining, attempts_used)
-    failed_names = ", ".join(sorted({name for name, _details in remaining.values()}))
-    print(
-        f"Validation finished: {len(validated)}/{len(streams)} streams passed; "
-        f"{len(remaining)} failed after {attempts_used} attempts: {failed_names}."
-    )
-    return set(validated)
-
-
 def ensure_all_configured_channels_found(
     server_targets: dict[int, list[tuple[str, dict, dict]]],
 ) -> list[str]:
@@ -386,7 +179,6 @@ def ensure_all_configured_channels_found(
 def build_json(
     targets: list[tuple[str, dict, dict]],
     server_id: int,
-    validated_urls: set[str],
 ) -> dict:
     channels = []
     for _, channel, metadata in targets:
@@ -398,10 +190,6 @@ def build_json(
                 "group": str(channel.get("group", "")),
                 "logo": metadata["logo"],
                 "url": build_stream_url(channel_id),
-                "validation_status": (
-                    "valid" if build_stream_url(channel_id) in validated_urls
-                    else "unavailable"
-                ),
             }
         )
 
@@ -423,6 +211,8 @@ def load_category_files() -> dict[str, list[dict]]:
         raise RuntimeError(f"Category directory not found: {CATEGORY_DIR}")
 
     for category_file in sorted(CATEGORY_DIR.glob("*.txt")):
+        if is_adult_channel(category_file.stem):
+            continue
         lines = [line.strip() for line in category_file.read_text(encoding="utf-8").splitlines() if line.strip()]
         if len(lines) % 3:
             raise ValueError(
@@ -457,9 +247,46 @@ def load_category_files() -> dict[str, list[dict]]:
     return categories
 
 
+def is_adult_channel(value: object) -> bool:
+    """Exclude explicitly adult/18+ catalog entries and categories."""
+    normalized = normalize_name(value)
+    return bool(re.search(r"(^|[^A-Z0-9])(ADULT|18\s*\+|XXX|PORN)([^A-Z0-9]|$)", normalized))
+
+
+def build_full_server_json(catalog: list[dict], server_id: int) -> dict:
+    """Export the full non-adult catalog without probing stream URLs."""
+    channels = []
+    seen_ids = set()
+    for channel in catalog:
+        if not isinstance(channel, dict):
+            continue
+        name = " ".join(str(channel.get("name", "")).split())
+        group = " ".join(str(channel.get("group", "")).split())
+        category = " ".join(str(channel.get("category", "")).split())
+        if not name or is_adult_channel(name) or is_adult_channel(group) or is_adult_channel(category):
+            continue
+        channel_id = str(channel.get("id", "")).strip()
+        if not channel_id or any(character.isspace() for character in channel_id) or channel_id in seen_ids:
+            continue
+        seen_ids.add(channel_id)
+        channels.append({
+            "name": name,
+            "id": channel_id,
+            "group": group,
+            "logo": str(channel.get("logo", "")).strip(),
+            "url": build_stream_url(channel_id),
+        })
+    now_ist = datetime.now(timezone.utc).astimezone(ZoneInfo("Asia/Kolkata"))
+    return {
+        "updated_at": now_ist.isoformat(timespec="seconds"),
+        "source": f"{BASE_URL}/api.php?server={server_id}",
+        "total_channels": len(channels),
+        "channels": channels,
+    }
+
+
 def build_category_playlists(
     server_targets: dict[int, list[tuple[str, dict, dict]]],
-    validated_urls: set[str],
 ) -> dict[Path, str]:
     """Prefer validated streams, then retain the configured-server fallback."""
     targets_by_server = {
@@ -485,26 +312,13 @@ def build_category_playlists(
             selected = None
             server_id = preferred_server
 
-            # Prefer a working stream, including a fallback server when needed.
+            # Use the configured server first; fall back only when its catalog lacks the channel.
             for candidate_id in server_order:
                 candidate = targets_by_server.get(candidate_id, {}).get(catalog_name)
-                if candidate is None:
-                    continue
-                candidate_channel, _candidate_metadata = candidate
-                candidate_url = build_stream_url(str(candidate_channel["id"]).strip())
-                if candidate_url in validated_urls:
+                if candidate is not None:
                     selected = candidate
                     server_id = candidate_id
                     break
-
-            # Preserve the configured server's channel when no endpoint validates.
-            if selected is None:
-                for candidate_id in server_order:
-                    candidate = targets_by_server.get(candidate_id, {}).get(catalog_name)
-                    if candidate is not None:
-                        selected = candidate
-                        server_id = candidate_id
-                        break
             if selected is None:
                 continue
 
@@ -543,6 +357,8 @@ def build_server_files(server_catalogs: dict[int, list[dict]]) -> dict[Path, str
             if not isinstance(channel, dict):
                 continue
             name = " ".join(str(channel.get("name", "")).split())
+            if is_adult_channel(name) or is_adult_channel(channel.get("group", "")):
+                continue
             if not name or any(char in name for char in '\r\n"'):
                 continue
             normalized = normalize_name(name)
@@ -594,47 +410,25 @@ def main() -> int:
             server_targets[server_id] = find_targets(catalog)
 
         missing_channels = ensure_all_configured_channels_found(server_targets)
-        validated_urls = validate_streams(server_targets)
 
-        # Refresh every server catalog when current IDs still produce failures.
-        # The newest catalog is retained even if some links remain unavailable.
-        for refresh_round in range(1, CATALOG_REFRESH_ROUNDS + 1):
-            current_urls = {
-                build_stream_url(str(channel["id"]).strip())
-                for targets in server_targets.values()
-                for _name, channel, _metadata in targets
-            }
-            if not current_urls or current_urls.issubset(validated_urls):
-                break
-
-            print(
-                f"Refreshing all server catalogs "
-                f"(round {refresh_round}/{CATALOG_REFRESH_ROUNDS})."
+        # Export all Server 4 catalog entries except explicitly adult categories.
+        if 4 in server_catalogs:
+            full_server_4 = build_full_server_json(server_catalogs[4], 4)
+            outputs[OUTPUT_DIR / "channels_server_4.json"] = (
+                json.dumps(full_server_4, ensure_ascii=False, indent=2) + "\n"
             )
-            time.sleep(CATALOG_REFRESH_RETRY_SECONDS)
-            refreshed_catalogs = {}
-            refreshed_targets = {}
-            for server_id, _server_label in servers:
-                catalog = fetch_catalog(server_id)
-                refreshed_catalogs[server_id] = catalog
-                refreshed_targets[server_id] = find_targets(catalog)
+            print(f"Server 4 catalog: {full_server_4['total_channels']} non-adult channels.")
 
-            server_catalogs = refreshed_catalogs
-            server_targets = refreshed_targets
-            missing_channels = ensure_all_configured_channels_found(server_targets)
-            validated_urls = validate_streams(server_targets)
-
-        # Keep every discovered configured channel, including failed endpoints.
-        total_count = sum(len(targets) for targets in server_targets.values())
         generated_count = 0
         for server_id, targets in server_targets.items():
-            result = build_json(targets, server_id, validated_urls)
+            if server_id == 4:
+                generated_count += full_server_4["total_channels"]
+                continue
+            result = build_json(targets, server_id)
             json_path = OUTPUT_DIR / (
                 "channels.json" if server_id == 1 else f"channels_server_{server_id}.json"
             )
-            outputs[json_path] = json.dumps(
-                result, ensure_ascii=False, indent=2,
-            ) + "\n"
+            outputs[json_path] = json.dumps(result, ensure_ascii=False, indent=2) + "\n"
             generated_count += len(result["channels"])
 
         missing_names = {normalize_name(name) for name in missing_channels}
@@ -654,19 +448,12 @@ def main() -> int:
         )
 
         outputs.update(build_server_files(server_catalogs))
-        outputs.update(build_category_playlists(server_targets, validated_urls))
+        outputs.update(build_category_playlists(server_targets))
         write_outputs_atomically(outputs)
 
-        unavailable_count = sum(
-            1
-            for targets in server_targets.values()
-            for _name, channel, _metadata in targets
-            if build_stream_url(str(channel["id"]).strip()) not in validated_urls
-        )
         print(
             f"Discovered {len(servers)} servers. Wrote {generated_count} "
-            f"configured channel entries (including unavailable links); "
-            f"{unavailable_count} links currently unavailable."
+            "configured/full-catalog channel entries. Stream validation and retry loops are disabled."
         )
         for path in outputs:
             print(f"Wrote {path}.")
