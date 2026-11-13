@@ -578,89 +578,24 @@ def main() -> int:
             server_catalogs[server_id] = catalog
             server_targets[server_id] = find_targets(catalog)
 
-        missing_channels = ensure_all_configured_channels_found(server_targets)
-        validated_urls = validate_streams(server_targets)
-
-        # Refresh catalogs when stream IDs may be stale, but never discard
-        # the last successfully fetched catalogs if the upstream API is down.
-        for refresh_round in range(1, CATALOG_REFRESH_ROUNDS + 1):
-            current_urls = {
-                build_stream_url(str(channel["id"]).strip())
-                for targets in server_targets.values()
-                for _name, channel, _metadata in targets
-            }
-            if not current_urls or current_urls.issubset(validated_urls):
-                break
-
-            print(
-                f"Refreshing all server catalogs "
-                f"(round {refresh_round}/{CATALOG_REFRESH_ROUNDS})."
-            )
-            time.sleep(CATALOG_REFRESH_RETRY_SECONDS)
-            refreshed_catalogs = {}
-            refreshed_targets = {}
-            try:
-                for server_id, _server_label in servers:
-                    catalog = fetch_catalog(server_id)
-                    refreshed_catalogs[server_id] = catalog
-                    refreshed_targets[server_id] = find_targets(catalog)
-            except Exception as exc:
-                print(
-                    "WARNING: Catalog refresh failed "
-                    f"({exc}). Keeping the last successful catalogs and "
-                    "continuing with generated channel files."
-                )
-                break
-
-            server_catalogs = refreshed_catalogs
-            server_targets = refreshed_targets
-            missing_channels = ensure_all_configured_channels_found(server_targets)
-            validated_urls = validate_streams(server_targets)
-
-        # Keep every discovered configured channel, including failed endpoints.
-        total_count = sum(len(targets) for targets in server_targets.values())
-        generated_count = 0
-        for server_id, targets in server_targets.items():
-            result = build_json(targets, server_id, validated_urls)
-            json_path = OUTPUT_DIR / (
-                "channels.json" if server_id == 1 else f"channels_server_{server_id}.json"
-            )
-            outputs[json_path] = json.dumps(
-                result, ensure_ascii=False, indent=2,
-            ) + "\n"
-            generated_count += len(result["channels"])
-
-        missing_names = {normalize_name(name) for name in missing_channels}
-        missing_metadata = [
-            {
-                "name": entry["name"],
-                "catalog_name": entry["key"],
-                "logo": entry["logo"],
-                "status": "missing_from_all_servers",
-            }
-            for entries in load_category_files().values()
-            for entry in entries
-            if normalize_name(entry["key"]) in missing_names
-        ]
-        outputs[OUTPUT_DIR / "missing-channels.json"] = (
-            json.dumps(missing_metadata, ensure_ascii=False, indent=2) + "\n"
-        )
-
+        # Generate only the TXT outputs requested by the repository owner.
         outputs.update(build_server_files(server_catalogs))
         outputs.update(build_category_playlists(server_targets))
         write_outputs_atomically(outputs)
 
-        unavailable_count = sum(
-            1
-            for targets in server_targets.values()
-            for _name, channel, _metadata in targets
-            if build_stream_url(str(channel["id"]).strip()) not in validated_urls
-        )
+        # Remove legacy JSON artifacts from earlier workflow runs.
+        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+        removed_json = 0
+        for json_file in OUTPUT_DIR.glob("*.json"):
+            json_file.unlink()
+            removed_json += 1
+
         print(
-            f"Discovered {len(servers)} servers. Wrote {generated_count} "
-            f"configured channel entries (including unavailable links); "
-            f"{unavailable_count} links currently unavailable."
+            f"Discovered {len(servers)} servers. "
+            f"Generated {len(outputs)} TXT files."
         )
+        if removed_json:
+            print(f"Removed {removed_json} obsolete JSON files from {OUTPUT_DIR}.")
         for path in outputs:
             print(f"Wrote {path}.")
         return 0
