@@ -389,23 +389,7 @@ def main() -> int:
                 "Server 4 was not discovered; existing Server 4 output was preserved."
             )
 
-        missing_channels = ensure_all_configured_channels_found(server_targets)
-
-        missing_names = {normalize_name(name) for name in missing_channels}
-        missing_metadata = [
-            {
-                "name": entry["name"],
-                "catalog_name": entry["key"],
-                "logo": entry["logo"],
-                "status": "missing_from_all_servers",
-            }
-            for entries in load_category_files().values()
-            for entry in entries
-            if normalize_name(entry["key"]) in missing_names
-        ]
-        outputs[OUTPUT_DIR / "missing-channels.json"] = (
-            json.dumps(missing_metadata, ensure_ascii=False, indent=2) + "\n"
-        )
+        ensure_all_configured_channels_found(server_targets)
 
         outputs.update(build_server_files(server_catalogs))
         outputs.update(build_category_playlists(server_targets))
