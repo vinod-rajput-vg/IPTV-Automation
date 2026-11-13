@@ -580,8 +580,8 @@ def main() -> int:
         missing_channels = ensure_all_configured_channels_found(server_targets)
         validated_urls = validate_streams(server_targets)
 
-        # Refresh every server catalog when current IDs still produce failures.
-        # The newest catalog is retained even if some links remain unavailable.
+        # Refresh catalogs when stream IDs may be stale, but never discard
+        # the last successfully fetched catalogs if the upstream API is down.
         for refresh_round in range(1, CATALOG_REFRESH_ROUNDS + 1):
             current_urls = {
                 build_stream_url(str(channel["id"]).strip())
@@ -598,10 +598,18 @@ def main() -> int:
             time.sleep(CATALOG_REFRESH_RETRY_SECONDS)
             refreshed_catalogs = {}
             refreshed_targets = {}
-            for server_id, _server_label in servers:
-                catalog = fetch_catalog(server_id)
-                refreshed_catalogs[server_id] = catalog
-                refreshed_targets[server_id] = find_targets(catalog)
+            try:
+                for server_id, _server_label in servers:
+                    catalog = fetch_catalog(server_id)
+                    refreshed_catalogs[server_id] = catalog
+                    refreshed_targets[server_id] = find_targets(catalog)
+            except Exception as exc:
+                print(
+                    "WARNING: Catalog refresh failed "
+                    f"({exc}). Keeping the last successful catalogs and "
+                    "continuing with generated channel files."
+                )
+                break
 
             server_catalogs = refreshed_catalogs
             server_targets = refreshed_targets
