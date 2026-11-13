@@ -26,6 +26,9 @@ SHOW_SERVER_IN_TXT = False
 # Channel metadata and category order are loaded from Sorted Channels/*.txt.
 CATEGORY_DIR = Path("Sorted Channels")
 
+# Workflow retries reuse complete server catalogs from this run-level cache.
+CACHE_DIR = Path(os.environ.get("IPTV_RETRY_CACHE", ".retry-cache"))
+
 
 def fetch_server_list() -> list[tuple[int, str]]:
     """Read server keys exposed by the website's public api.php endpoint."""
@@ -105,6 +108,61 @@ def fetch_catalog(server_id: int) -> list[dict]:
         )
 
     return payload
+
+
+def load_cached_catalog(server_id: int) -> list[dict] | None:
+    """Load a previously completed server catalog from the retry cache."""
+    cache_file = CACHE_DIR / f"server-{server_id}.json"
+    if not cache_file.is_file():
+        return None
+
+    try:
+        payload = json.loads(cache_file.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        cache_file.unlink(missing_ok=True)
+        return None
+
+    if not isinstance(payload, list) or not payload or not all(
+        isinstance(item, dict) for item in payload
+    ):
+        cache_file.unlink(missing_ok=True)
+        return None
+
+    print(f"Server {server_id}: reusing saved catalog ({len(payload)} channels).")
+    return payload
+
+
+def save_cached_catalog(server_id: int, catalog: list[dict]) -> None:
+    """Atomically save a complete server catalog for the next retry."""
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    destination = CACHE_DIR / f"server-{server_id}.json"
+    temporary = destination.with_suffix(".json.tmp")
+    temporary.write_text(
+        json.dumps(catalog, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    os.replace(temporary, destination)
+
+
+def ensure_server_channels_found(
+    server_id: int,
+    targets: list[tuple[str, dict, dict]],
+    categories: dict[str, list[dict]],
+) -> None:
+    """Cache a server only after all channels assigned to it are present."""
+    expected = {
+        normalize_name(entry["key"])
+        for entries in categories.values()
+        for entry in entries
+        if entry["server"] == server_id
+    }
+    found = {normalize_name(name) for name, _channel, _metadata in targets}
+    missing = sorted(expected - found)
+    if missing:
+        raise RuntimeError(
+            f"Server {server_id} catalog is incomplete; missing configured "
+            f"channels: {', '.join(missing)}"
+        )
 
 
 def normalize_name(value: object) -> str:
@@ -367,10 +425,18 @@ def main() -> int:
             if server_id not in required_server_ids:
                 continue
 
-            # Only fetch servers used by the category configuration. A partial
-            # result must never replace a complete set of playlists.
-            catalog = fetch_catalog(server_id)
-            server_targets[server_id] = find_targets(catalog)
+            # Reuse each complete catalog already fetched during this workflow
+            # run. If a server is unavailable, successful servers stay cached.
+            catalog = load_cached_catalog(server_id)
+            if catalog is None:
+                catalog = fetch_catalog(server_id)
+
+            targets = find_targets(catalog)
+            ensure_server_channels_found(server_id, targets, categories)
+            if load_cached_catalog(server_id) is None:
+                save_cached_catalog(server_id, catalog)
+
+            server_targets[server_id] = targets
             print(f"{server_label}: loaded {len(catalog)} channels.")
 
         ensure_all_configured_channels_found(server_targets)
