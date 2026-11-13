@@ -95,6 +95,8 @@ def fetch_catalog(server_id: int) -> list[dict]:
 
     if not isinstance(payload, list):
         raise RuntimeError("Catalog JSON must be an array.")
+    if not payload:
+        raise RuntimeError(f"Server {server_id} returned an empty catalog; preserving existing outputs.")
 
     return payload
 
@@ -407,9 +409,18 @@ def main() -> int:
 
         servers = fetch_server_list()
         for server_id, server_label in servers:
-            catalog = fetch_catalog(server_id)
-            server_catalogs[server_id] = catalog
-            server_targets[server_id] = find_targets(catalog)
+            try:
+                catalog = fetch_catalog(server_id)
+                server_catalogs[server_id] = catalog
+                server_targets[server_id] = find_targets(catalog)
+                print(f"{server_label}: loaded {len(catalog)} channels.")
+            except Exception as exc:
+                if server_id == 4:
+                    raise RuntimeError(f"Required Server 4 catalog failed: {exc}") from exc
+                print(f"WARNING: Skipping unavailable {server_label}: {exc}", file=sys.stderr)
+
+        if 4 not in server_catalogs:
+            raise RuntimeError("Server 4 was not discovered; existing Server 4 output was preserved.")
 
         missing_channels = ensure_all_configured_channels_found(server_targets)
 
