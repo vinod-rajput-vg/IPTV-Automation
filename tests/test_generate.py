@@ -12,10 +12,8 @@ class GeneratorTests(unittest.TestCase):
         self.root = Path(self.temp_dir.name)
         self.category_dir = self.root / "Sorted Channels"
         self.output_dir = self.root / "Output"
-        self.server_dir = self.root / "Servers"
         self.category_dir.mkdir()
         self.output_dir.mkdir()
-        self.server_dir.mkdir()
         self.category_patch = patch.object(generate, "CATEGORY_DIR", self.category_dir)
         self.output_patch = patch.object(generate, "OUTPUT_DIR", self.output_dir)
         self.category_patch.start()
@@ -72,19 +70,19 @@ class GeneratorTests(unittest.TestCase):
 
     def test_output_writer_replaces_existing_playlist(self):
         destination = self.output_dir / "drama.txt"
-        destination.write_text("old playlist\\n", encoding="utf-8")
-        generate.write_outputs_atomically({destination: "new playlist\\n"})
-        self.assertEqual(destination.read_text(encoding="utf-8"), "new playlist\\n")
+        destination.write_text("old playlist\n", encoding="utf-8")
+        generate.write_outputs_atomically({destination: "new playlist\n"})
+        self.assertEqual(destination.read_text(encoding="utf-8"), "new playlist\n")
 
     def test_unavailable_server_does_not_overwrite_existing_playlists(self):
         destination = self.output_dir / "drama.txt"
-        destination.write_text("last known good playlist\\n", encoding="utf-8")
+        destination.write_text("last known good playlist\n", encoding="utf-8")
         with patch.object(generate, "fetch_server_list", return_value=[(1, "Server 1")]):
             with patch.object(generate, "fetch_catalog", side_effect=RuntimeError("empty catalog")):
                 self.assertEqual(generate.main(), 1)
         self.assertEqual(
             destination.read_text(encoding="utf-8"),
-            "last known good playlist\\n",
+            "last known good playlist\n",
         )
 
 
