@@ -237,43 +237,6 @@ def ensure_all_configured_channels_found(
     return missing
 
 
-def build_full_server_json(catalog: list[dict], server_id: int) -> dict:
-    """Build a JSON catalog containing every valid channel returned by a server."""
-    channels = []
-    seen_ids = set()
-
-    for channel in catalog:
-        if not isinstance(channel, dict):
-            continue
-
-        channel_name = " ".join(str(channel.get("name", "")).split())
-        channel_id = str(channel.get("id", "")).strip()
-        if not channel_name or not channel_id or any(
-            character.isspace() for character in channel_id
-        ):
-            continue
-        if channel_id in seen_ids:
-            continue
-
-        seen_ids.add(channel_id)
-        channels.append({
-            "name": channel_name,
-            "id": channel_id,
-            "group": str(channel.get("group", "")),
-            "logo": str(channel.get("logo", "")),
-            "url": build_stream_url(channel_id, server_id),
-        })
-
-    now_ist = datetime.now(timezone.utc).astimezone(ZoneInfo("Asia/Kolkata"))
-    return {
-        "updated_at": now_ist.isoformat(timespec="seconds"),
-        "source": f"{BASE_URL}/api.php?server={server_id}",
-        "server_id": server_id,
-        "total_channels": len(channels),
-        "channels": channels,
-    }
-
-
 def build_category_playlists(
     server_targets: dict[int, list[tuple[str, dict, dict]]],
 ) -> dict[Path, str]:
@@ -428,24 +391,6 @@ def main() -> int:
 
         missing_channels = ensure_all_configured_channels_found(server_targets)
 
-        full_catalogs = {}
-        for server_id, catalog in server_catalogs.items():
-            full_catalog = build_full_server_json(catalog, server_id)
-            full_catalogs[server_id] = full_catalog
-            full_name = f"channels_server_{server_id}.json"
-            serialized_catalog = (
-                json.dumps(full_catalog, ensure_ascii=False, indent=2) + "\n"
-            )
-            outputs[OUTPUT_DIR / full_name] = serialized_catalog
-            # Keep the historical channels.json path current for clients that
-            # still consume the default (Server 1) catalog.
-            if server_id == 1:
-                outputs[OUTPUT_DIR / "channels.json"] = serialized_catalog
-            print(
-                f"Server {server_id} full catalog: "
-                f"{full_catalog['total_channels']} channels."
-            )
-
         missing_names = {normalize_name(name) for name in missing_channels}
         missing_metadata = [
             {
@@ -466,13 +411,7 @@ def main() -> int:
         outputs.update(build_category_playlists(server_targets))
         write_outputs_atomically(outputs)
 
-        generated_count = sum(
-            catalog["total_channels"] for catalog in full_catalogs.values()
-        )
-        print(
-            f"Discovered {len(servers)} servers. Wrote {generated_count} "
-            "full-catalog channel entries. No channel content filtering is applied."
-        )
+        print(f"Discovered {len(servers)} servers.")
         for path in outputs:
             print(f"Wrote {path}.")
 
