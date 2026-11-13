@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build server JSON catalogs and category TXT playlists from the public catalog.
+"""Build server channel catalogs and category TXT playlists from the public catalog.
 
 Playback URLs point to the public play.php redirect endpoint. The generator
 does not resolve redirects, imitate browser sessions, or bypass access controls.
@@ -12,12 +12,10 @@ import os
 import re
 import sys
 import tempfile
-from datetime import datetime, timezone
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
-from zoneinfo import ZoneInfo
 
 BASE_URL = "https://rkdy-linkgen.wasmer.app"
 OUTPUT_DIR = Path("Output")
@@ -60,6 +58,8 @@ def fetch_server_list() -> list[tuple[int, str]]:
         if not re.fullmatch(r"[0-9]+", key):
             raise RuntimeError(f"Invalid server key: {key!r}")
         server_id = int(key)
+        if server_id <= 0:
+            raise RuntimeError(f"Server key must be a positive integer: {key!r}")
         if server_id in seen:
             raise RuntimeError(f"Duplicate server key: {key}")
         seen.add(server_id)
@@ -115,6 +115,8 @@ def normalize_name(value: object) -> str:
 def load_category_files() -> dict[str, list[dict]]:
     """Load every category and channel entry from Sorted Channels/*.txt."""
     categories = {}
+    seen_keys: dict[str, str] = {}
+    seen_display_names: dict[str, str] = {}
 
     if not CATEGORY_DIR.is_dir():
         raise RuntimeError(f"Category directory not found: {CATEGORY_DIR}")
@@ -141,6 +143,25 @@ def load_category_files() -> dict[str, list[dict]]:
 
             catalog_name, server = match.groups()
             catalog_name = " ".join(catalog_name.split())
+            server_id = int(server)
+            if not catalog_name or server_id <= 0:
+                raise ValueError(f"Invalid channel key or server in {category_file}: {header}")
+
+            normalized_key = normalize_name(catalog_name)
+            normalized_display = normalize_name(display_name)
+            if normalized_key in seen_keys:
+                raise ValueError(
+                    f"Duplicate configured channel key {catalog_name!r} in "
+                    f"{seen_keys[normalized_key]} and {category_file}."
+                )
+            if normalized_display in seen_display_names:
+                raise ValueError(
+                    f"Duplicate configured display name {display_name!r} in "
+                    f"{seen_display_names[normalized_display]} and {category_file}."
+                )
+            seen_keys[normalized_key] = str(category_file)
+            seen_display_names[normalized_display] = str(category_file)
+
             if not display_name:
                 raise ValueError(
                     f"Missing display name in {category_file}: {header}"
@@ -150,7 +171,7 @@ def load_category_files() -> dict[str, list[dict]]:
 
             entries.append({
                 "key": catalog_name,
-                "server": int(server),
+                "server": server_id,
                 "name": display_name,
                 "logo": logo,
             })
@@ -233,9 +254,10 @@ def ensure_all_configured_channels_found(
                 )
 
     if missing:
-        print(
-            "Configured channels missing from their assigned server catalogs: "
-            + ", ".join(sorted(set(missing)))
+        details = ", ".join(sorted(set(missing)))
+        raise RuntimeError(
+            "Refusing to overwrite generated files because configured channels "
+            f"are missing from their assigned server catalogs: {details}"
         )
 
     return missing
@@ -290,12 +312,10 @@ def build_category_playlists(
 
 
 def build_server_files(server_catalogs: dict[int, list[dict]]) -> dict[Path, str]:
-    """Generate server_N.txt files for discovered servers; preserve files 1 and 2."""
+    """Generate a current server_N.txt catalog for every discovered server."""
     outputs = {}
 
     for server_id, catalog in server_catalogs.items():
-        if server_id in (1, 2):
-            continue
 
         entries = []
         seen_names = set()
@@ -322,8 +342,11 @@ def build_server_files(server_catalogs: dict[int, list[dict]]) -> dict[Path, str
     return outputs
 
 
-def write_outputs_atomically(outputs: dict[Path, str]) -> None:
-    """Stage every output, then atomically replace each destination file.
+def write_outputs_atomically(
+    outputs: dict[Path, str],
+    delete_paths: list[Path] | None = None,
+) -> None:
+    """Stage every output, replace destinations, then remove stale generated files.
 
     The replacement of an individual file is atomic; the complete set of files
     is not a single filesystem transaction.
@@ -348,6 +371,9 @@ def write_outputs_atomically(outputs: dict[Path, str]) -> None:
 
         for destination, temporary in staged.items():
             os.replace(temporary, destination)
+
+        for stale_path in delete_paths or []:
+            stale_path.unlink(missing_ok=True)
     finally:
         for temporary in staged.values():
             temporary.unlink(missing_ok=True)
@@ -355,41 +381,40 @@ def write_outputs_atomically(outputs: dict[Path, str]) -> None:
 
 def main() -> int:
     try:
-        outputs = {}
         server_targets = {}
         server_catalogs = {}
 
         servers = fetch_server_list()
         for server_id, server_label in servers:
-            try:
-                catalog = fetch_catalog(server_id)
-                server_catalogs[server_id] = catalog
-                server_targets[server_id] = find_targets(catalog)
-                print(f"{server_label}: loaded {len(catalog)} channels.")
-            except Exception as exc:
-                if server_id == 4:
-                    raise RuntimeError(
-                        f"Required Server 4 catalog failed: {exc}"
-                    ) from exc
-                print(
-                    f"WARNING: Skipping unavailable {server_label}: {exc}",
-                    file=sys.stderr,
-                )
-
-        if 4 not in server_catalogs:
-            raise RuntimeError(
-                "Server 4 was not discovered; existing Server 4 output was preserved."
-            )
+            # Every advertised server must be readable. A partial run must never
+            # replace a complete set of playlists with incomplete data.
+            catalog = fetch_catalog(server_id)
+            server_catalogs[server_id] = catalog
+            server_targets[server_id] = find_targets(catalog)
+            print(f"{server_label}: loaded {len(catalog)} channels.")
 
         ensure_all_configured_channels_found(server_targets)
 
-        outputs.update(build_server_files(server_catalogs))
+        outputs = build_server_files(server_catalogs)
         outputs.update(build_category_playlists(server_targets))
-        write_outputs_atomically(outputs)
+
+        active_server_files = {
+            Path("Servers") / f"server_{server_id}.txt"
+            for server_id in server_catalogs
+        }
+        stale_server_files = [
+            path
+            for path in Path("Servers").glob("server_*.txt")
+            if path not in active_server_files
+        ]
+
+        write_outputs_atomically(outputs, stale_server_files)
 
         print(f"Discovered {len(servers)} servers.")
         for path in outputs:
             print(f"Wrote {path}.")
+        for path in stale_server_files:
+            print(f"Removed stale {path}.")
 
         return 0
     except Exception as exc:
