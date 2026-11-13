@@ -334,10 +334,14 @@ def build_server_files(server_catalogs: dict[int, list[dict]]) -> dict[Path, str
             seen_names.add(normalized)
             entries.append(f'"{normalized}" {server_id}\n{name}')
 
-        if entries:
-            outputs[Path("Servers") / f"server_{server_id}.txt"] = (
-                "\n\n".join(entries) + "\n\n"
+        if not entries:
+            raise RuntimeError(
+                f"Server {server_id} catalog contained no usable channel names."
             )
+
+        outputs[Path("Servers") / f"server_{server_id}.txt"] = (
+            "\n\n".join(entries) + "\n\n"
+        )
 
     return outputs
 
