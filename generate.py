@@ -288,7 +288,7 @@ def build_full_server_json(catalog: list[dict], server_id: int) -> dict:
 def build_category_playlists(
     server_targets: dict[int, list[tuple[str, dict, dict]]],
 ) -> dict[Path, str]:
-    """Prefer validated streams, then retain the configured-server fallback."""
+    """Use configured server preference without probing or retrying stream URLs."""
     targets_by_server = {
         server_id: {
             catalog_name: (channel, metadata)
