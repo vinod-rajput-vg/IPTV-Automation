@@ -447,6 +447,36 @@ def main() -> int:
         generated_count = sum(
             catalog["total_channels"] for catalog in full_catalogs.values()
         )
+        # Combined master catalog: all available servers in one JSON output.
+        combined_channels = []
+        seen_combined = set()
+        for server_id, full_catalog in full_catalogs.items():
+            for channel in full_catalog["channels"]:
+                unique_key = (server_id, channel["id"])
+                if unique_key in seen_combined:
+                    continue
+                seen_combined.add(unique_key)
+                combined_channels.append({
+                    **channel,
+                    "server_id": server_id,
+                })
+
+        combined_output = {
+            "updated_at": datetime.now(timezone.utc).astimezone(
+                ZoneInfo("Asia/Kolkata")
+            ).isoformat(timespec="seconds"),
+            "total_channels": len(combined_channels),
+            "servers_included": sorted(full_catalogs),
+            "channels": combined_channels,
+        }
+        outputs[OUTPUT_DIR / "channels_all_servers.json"] = (
+            json.dumps(combined_output, ensure_ascii=False, indent=2) + "\\n"
+        )
+        print(
+            f"Combined catalog: {combined_output['total_channels']} channels "
+            f"from {len(full_catalogs)} available servers."
+        )
+
         for server_id, targets in server_targets.items():
             result = build_json(targets, server_id)
             json_path = OUTPUT_DIR / (
