@@ -6,8 +6,7 @@ on:
     - cron: '30 6 * * *'  # 12 PM IST
   workflow_dispatch:
 
-# Pull requests receive read-only permissions. The write-capable refresh job
-# never checks out or executes pull-request code.
+# The workflow defaults to read-only; only the refresh job can write to main.
 permissions:
   contents: read
 
@@ -33,34 +32,29 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Generate channel playlists
-        run: python generate.py
-
-      - name: Commit and push generated files
+      - name: Validate, generate, and publish
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add Output/ Servers/
-
-          if git diff --cached --quiet; then
-            echo "No generated playlist changes detected."
-            exit 0
-          fi
-
-          git commit -m "Refresh channel URLs"
-
-          # Retry against the latest main if another writer pushed concurrently.
+          # Regenerate from the newest main on every retry. Never resolve output
+          # conflicts by overwriting a newer commit with an older playlist.
           for attempt in 1 2 3; do
             git fetch origin main
+            git reset --hard origin/main
 
-            if git rebase -X theirs origin/main; then
-              if git push origin HEAD:main; then
-                exit 0
-              fi
-              git rebase --abort || true
-            else
-              git rebase --abort || true
+            python -m unittest discover -s tests -v
+            python generate.py
+
+            git add Output/ Servers/
+            if git diff --cached --quiet; then
+              echo "No generated playlist changes detected."
+              exit 0
+            fi
+
+            git commit -m "Refresh channel URLs"
+            if git push origin HEAD:main; then
+              exit 0
             fi
 
             echo "Push attempt $attempt failed; retrying from latest main."
