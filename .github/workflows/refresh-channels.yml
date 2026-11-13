@@ -44,6 +44,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+          # Keep successful server catalogs for this retry window only.
+          export IPTV_RETRY_CACHE="$RUNNER_TEMP/iptv-catalog-cache"
+          rm -rf "$IPTV_RETRY_CACHE"
+          mkdir -p "$IPTV_RETRY_CACHE"
+
           # Regenerate from the newest main on every retry. Never resolve output
           # conflicts by overwriting a newer commit with an older playlist.
           for attempt in 1 2 3; do
