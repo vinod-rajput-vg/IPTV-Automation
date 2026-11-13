@@ -74,6 +74,20 @@ class GeneratorTests(unittest.TestCase):
         generate.write_outputs_atomically({destination: "new playlist\n"})
         self.assertEqual(destination.read_text(encoding="utf-8"), "new playlist\n")
 
+    def test_main_skips_servers_not_used_by_categories(self):
+        self.write_category()
+        catalog = [{"name": "CHANNEL ONE", "id": "abc123"}]
+        with patch.object(
+            generate,
+            "fetch_server_list",
+            return_value=[(1, "Server 1"), (3, "Unused Server 3")],
+        ):
+            with patch.object(generate, "fetch_catalog", return_value=catalog) as fetch:
+                self.assertEqual(generate.main(), 0)
+                fetch.assert_called_once_with(1)
+        playlist = (self.output_dir / "drama.txt").read_text(encoding="utf-8")
+        self.assertIn("/play.php?s=1&id=abc123", playlist)
+
     def test_unavailable_server_does_not_overwrite_existing_playlists(self):
         destination = self.output_dir / "drama.txt"
         destination.write_text("last known good playlist\n", encoding="utf-8")
