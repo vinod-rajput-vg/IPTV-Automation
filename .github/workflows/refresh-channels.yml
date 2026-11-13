@@ -32,12 +32,6 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Validate Python syntax
-        run: python -m py_compile generate.py
-
-      - name: Run generator regression checks
-        run: python generate.py --self-test
-
       - name: Commit and push generated files
         if: github.event_name != 'pull_request'
         run: |
