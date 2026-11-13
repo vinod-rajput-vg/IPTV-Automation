@@ -70,30 +70,22 @@ class GeneratorTests(unittest.TestCase):
         self.assertIn("Channel One\nhttps://example.com/logo.png", playlist)
         self.assertIn("/play.php?s=1&id=abc123", playlist)
 
-    def test_server_files_are_generated_for_all_server_ids(self):
-        outputs = generate.build_server_files({
-            1: [{"name": "First Channel"}],
-            2: [{"name": "Second Channel"}],
-            3: [{"name": "Third Channel"}],
-            4: [{"name": "Fourth Channel"}],
-        })
-        self.assertEqual(set(outputs), {
-            Path("Servers/server_1.txt"),
-            Path("Servers/server_2.txt"),
-            Path("Servers/server_3.txt"),
-            Path("Servers/server_4.txt"),
-        })
-
-    def test_output_writer_removes_stale_server_files(self):
-        stale = self.server_dir / "server_9.txt"
-        stale.write_text("old catalog", encoding="utf-8")
+    def test_output_writer_replaces_existing_playlist(self):
         destination = self.output_dir / "drama.txt"
-        generate.write_outputs_atomically(
-            {destination: "new playlist\n"},
-            [stale],
+        destination.write_text("old playlist\\n", encoding="utf-8")
+        generate.write_outputs_atomically({destination: "new playlist\\n"})
+        self.assertEqual(destination.read_text(encoding="utf-8"), "new playlist\\n")
+
+    def test_unavailable_server_does_not_overwrite_existing_playlists(self):
+        destination = self.output_dir / "drama.txt"
+        destination.write_text("last known good playlist\\n", encoding="utf-8")
+        with patch.object(generate, "fetch_server_list", return_value=[(1, "Server 1")]):
+            with patch.object(generate, "fetch_catalog", side_effect=RuntimeError("empty catalog")):
+                self.assertEqual(generate.main(), 1)
+        self.assertEqual(
+            destination.read_text(encoding="utf-8"),
+            "last known good playlist\\n",
         )
-        self.assertEqual(destination.read_text(encoding="utf-8"), "new playlist\n")
-        self.assertFalse(stale.exists())
 
 
 if __name__ == "__main__":
