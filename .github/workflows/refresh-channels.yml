@@ -1,10 +1,6 @@
 name: Refresh channel URLs
 
 on:
-  schedule:
-    - cron: '0 18 * * *'  # 12 AM IST
-    - cron: '0 6 * * *'   # 12 PM IST
-      
   workflow_dispatch:
   pull_request:
 
