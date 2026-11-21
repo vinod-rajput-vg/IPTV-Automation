@@ -516,57 +516,49 @@ def build_category_playlists(
 
 
 def build_server_files(server_catalogs: dict[int, list[dict]]) -> dict[Path, str]:
-    """Generate server_N.txt only from channels assigned in Sorted Channels/*.txt."""
-    catalogs_by_server = {}
+    """Generate server_N.txt with every channel returned by each server catalog."""
+    outputs = {}
+
     for server_id, catalog in server_catalogs.items():
-        by_name = {}
+        entries = []
+        seen_names: set[str] = set()
         duplicates = set()
+
+        # Use the complete API catalog, not only channels configured in Sorted Channels/.
+        # Keep the API's channel order and include each channel name once.
         for channel in catalog:
             if not isinstance(channel, dict):
                 continue
-            name = normalize_name(channel.get("name", ""))
-            if not name:
+
+            catalog_name = " ".join(str(channel.get("name", "")).split())
+            normalized_name = normalize_name(catalog_name)
+            if not normalized_name:
                 continue
-            if name in by_name:
-                duplicates.add(name)
-            else:
-                by_name[name] = channel
+            if any(char in catalog_name for char in '\\r\\n"'):
+                print(
+                    f"WARNING: Skipping invalid channel name in Server {server_id}: "
+                    f"{catalog_name!r}"
+                )
+                continue
+            if normalized_name in seen_names:
+                duplicates.add(normalized_name)
+                continue
+
+            seen_names.add(normalized_name)
+            entries.append(
+                f'"{catalog_name}" {server_id}\\n{catalog_name}'
+            )
+
         if duplicates:
             print(
                 f"WARNING: Server {server_id} has duplicate catalog names: "
                 + ", ".join(sorted(duplicates))
             )
-        catalogs_by_server[server_id] = by_name
 
-    entries_by_server = {server_id: [] for server_id in server_catalogs}
-    seen_by_server = {server_id: set() for server_id in server_catalogs}
-
-    # Preserve the exact order and server assignment from the sorted category files.
-    for category_entries in load_category_files().values():
-        for entry in category_entries:
-            server_id = entry["server"]
-            catalog = catalogs_by_server.get(server_id)
-            if catalog is None:
-                continue
-
-            configured_name = normalize_name(entry["key"])
-            channel = catalog.get(configured_name)
-            if channel is None or configured_name in seen_by_server[server_id]:
-                continue
-
-            seen_by_server[server_id].add(configured_name)
-            catalog_name = " ".join(str(channel.get("name", "")).split())
-            if not catalog_name or any(char in catalog_name for char in '\r\n"'):
-                continue
-            entries_by_server[server_id].append(
-                f'"{configured_name}" {server_id}\n{catalog_name}'
-            )
-
-    outputs = {}
-    for server_id, entries in entries_by_server.items():
         outputs[Path("Servers") / f"server_{server_id}.txt"] = (
-            "\n\n".join(entries) + ("\n\n" if entries else "")
+            "\\n\\n".join(entries) + ("\\n\\n" if entries else "")
         )
+
     return outputs
 
 
