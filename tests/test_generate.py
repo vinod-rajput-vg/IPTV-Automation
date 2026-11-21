@@ -17,7 +17,7 @@ class CategoryConfigurationTests(unittest.TestCase):
 
     def test_loads_valid_category_entries(self):
         self.category_file.write_text(
-            '"NEWS ONE" 1\\nNews One\\nhttps://example.com/logo.png\\n',
+            '"NEWS ONE" 1\nNews One\nhttps://example.com/logo.png\n',
             encoding="utf-8",
         )
         with patch.object(generate, "CATEGORY_DIR", self.category_dir):
@@ -27,11 +27,11 @@ class CategoryConfigurationTests(unittest.TestCase):
 
     def test_rejects_duplicate_channel_keys_across_categories(self):
         self.category_file.write_text(
-            '"NEWS ONE" 1\\nNews One\\nhttps://example.com/logo.png\\n',
+            '"NEWS ONE" 1\nNews One\nhttps://example.com/logo.png\n',
             encoding="utf-8",
         )
         (self.category_dir / "other.txt").write_text(
-            '"news one" 2\\nNews One HD\\nhttps://example.com/other.png\\n',
+            '"news one" 2\nNews One HD\nhttps://example.com/other.png\n',
             encoding="utf-8",
         )
         with patch.object(generate, "CATEGORY_DIR", self.category_dir):
@@ -39,7 +39,7 @@ class CategoryConfigurationTests(unittest.TestCase):
                 generate.load_category_files()
 
     def test_rejects_incomplete_three_line_entry(self):
-        self.category_file.write_text('"NEWS ONE" 1\\nNews One\\n', encoding="utf-8")
+        self.category_file.write_text('"NEWS ONE" 1\nNews One\n', encoding="utf-8")
         with patch.object(generate, "CATEGORY_DIR", self.category_dir):
             with self.assertRaisesRegex(ValueError, "three non-empty lines"):
                 generate.load_category_files()
@@ -50,7 +50,7 @@ class PlaylistValidationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             category_dir = Path(directory)
             (category_dir / "news.txt").write_text(
-                '"NEWS ONE" 1\\nNews One\\nhttps://example.com/logo.png\\n',
+                '"NEWS ONE" 1\nNews One\nhttps://example.com/logo.png\n',
                 encoding="utf-8",
             )
             server_targets = {
@@ -68,7 +68,7 @@ class PlaylistValidationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             category_dir = Path(directory)
             (category_dir / "news.txt").write_text(
-                '"NEWS ONE" 1\\nNews One\\nhttps://example.com/logo.png\\n',
+                '"NEWS ONE" 1\nNews One\nhttps://example.com/logo.png\n',
                 encoding="utf-8",
             )
             server_targets = {
