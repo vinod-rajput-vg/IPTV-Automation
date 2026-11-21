@@ -516,24 +516,58 @@ def build_category_playlists(
 
 
 def build_server_files(server_catalogs: dict[int, list[dict]]) -> dict[Path, str]:
-    """Generate or refresh server_N.txt files for every discovered server."""
-    outputs = {}
+    """Generate server_N.txt only from channels assigned in Sorted Channels/*.txt."""
+    catalogs_by_server = {}
     for server_id, catalog in server_catalogs.items():
-        entries = []
-        seen_names = set()
+        by_name = {}
+        duplicates = set()
         for channel in catalog:
             if not isinstance(channel, dict):
                 continue
-            name = " ".join(str(channel.get("name", "")).split())
-            if not name or any(char in name for char in '\r\n"'):
+            name = normalize_name(channel.get("name", ""))
+            if not name:
                 continue
-            normalized = normalize_name(name)
-            if normalized in seen_names:
+            if name in by_name:
+                duplicates.add(name)
+            else:
+                by_name[name] = channel
+        if duplicates:
+            print(
+                f"WARNING: Server {server_id} has duplicate catalog names: "
+                + ", ".join(sorted(duplicates))
+            )
+        catalogs_by_server[server_id] = by_name
+
+    entries_by_server = {server_id: [] for server_id in server_catalogs}
+    seen_by_server = {server_id: set() for server_id in server_catalogs}
+
+    # Preserve the exact order and server assignment from the sorted category files.
+    for category_entries in load_category_files().values():
+        for entry in category_entries:
+            server_id = entry["server"]
+            catalog = catalogs_by_server.get(server_id)
+            if catalog is None:
                 continue
-            seen_names.add(normalized)
-            entries.append(f'"{normalized}" {server_id}\n{name}')
+
+            configured_name = normalize_name(entry["key"])
+            channel = catalog.get(configured_name)
+            if channel is None or configured_name in seen_by_server[server_id]:
+                continue
+
+            seen_by_server[server_id].add(configured_name)
+            catalog_name = " ".join(str(channel.get("name", "")).split())
+            if not catalog_name or any(char in catalog_name for char in '\\r\\n"'):
+                continue
+            entries_by_server[server_id].append(
+                f'"{configured_name}" {server_id}\\n{catalog_name}'
+            )
+
+    outputs = {}
+    for server_id, entries in entries_by_server.items():
         if entries:
-            outputs[Path("Servers") / f"server_{server_id}.txt"] = "\n\n".join(entries) + "\n\n"
+            outputs[Path("Servers") / f"server_{server_id}.txt"] = (
+                "\\n\\n".join(entries) + "\\n\\n"
+            )
     return outputs
 
 
