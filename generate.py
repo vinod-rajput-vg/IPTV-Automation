@@ -422,6 +422,7 @@ def load_category_files() -> dict[str, list[dict]]:
     if not CATEGORY_DIR.is_dir():
         raise RuntimeError(f"Category directory not found: {CATEGORY_DIR}")
 
+    seen_channel_keys: dict[str, str] = {}
     for category_file in sorted(CATEGORY_DIR.glob("*.txt")):
         lines = [line.strip() for line in category_file.read_text(encoding="utf-8").splitlines() if line.strip()]
         if len(lines) % 3:
@@ -442,6 +443,13 @@ def load_category_files() -> dict[str, list[dict]]:
             catalog_name = " ".join(catalog_name.split())
             if not display_name:
                 raise ValueError(f"Missing display name in {category_file}: {header}")
+            normalized_key = normalize_name(catalog_name)
+            if normalized_key in seen_channel_keys:
+                raise ValueError(
+                    f"Duplicate channel key {catalog_name!r} in "
+                    f"{category_file} and {seen_channel_keys[normalized_key]}"
+                )
+            seen_channel_keys[normalized_key] = str(category_file)
             if not re.fullmatch(r"https?://\S+", logo):
                 raise ValueError(f"Invalid logo URL in {category_file}: {logo}")
 
@@ -458,7 +466,8 @@ def load_category_files() -> dict[str, list[dict]]:
 
 
 def build_category_playlists(
-    server_targets: dict[int, list[tuple[str, dict, dict]]],
+    server_targets: dict[int, list[tuple[str, dict, dict]]]],
+    validated_urls: set[str],
 ) -> dict[Path, str]:
     """Generate playlists, preferring the configured server then available fallbacks."""
     targets_by_server = {
@@ -486,9 +495,12 @@ def build_category_playlists(
             for candidate_id in server_order:
                 candidate = targets_by_server.get(candidate_id, {}).get(catalog_name)
                 if candidate is not None:
-                    selected = candidate
-                    server_id = candidate_id
-                    break
+                    candidate_channel, _candidate_metadata = candidate
+                    candidate_url = build_stream_url(str(candidate_channel["id"]).strip())
+                    if candidate_url in validated_urls:
+                        selected = candidate
+                        server_id = candidate_id
+                        break
             if selected is None:
                 continue
 
@@ -578,24 +590,23 @@ def main() -> int:
             server_catalogs[server_id] = catalog
             server_targets[server_id] = find_targets(catalog)
 
-        # Generate only the TXT outputs requested by the repository owner.
-        outputs.update(build_server_files(server_catalogs))
-        outputs.update(build_category_playlists(server_targets))
-        write_outputs_atomically(outputs)
+        missing = ensure_all_configured_channels_found(server_targets)
+        if missing:
+            print(f"Warning: {len(missing)} configured channels were not found in any server catalog.")
 
-        # Remove legacy JSON artifacts from earlier workflow runs.
-        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-        removed_json = 0
-        for json_file in OUTPUT_DIR.glob("*.json"):
-            json_file.unlink()
-            removed_json += 1
+        # Validate every unique configured endpoint before publishing playlists.
+        validated_urls = validate_streams(server_targets)
+
+        # Publish only validated streams; server fallback also considers validation.
+        outputs.update(build_server_files(server_catalogs))
+        outputs.update(build_category_playlists(server_targets, validated_urls))
+        write_outputs_atomically(outputs)
 
         print(
             f"Discovered {len(servers)} servers. "
-            f"Generated {len(outputs)} TXT files."
+            f"Generated {len(outputs)} TXT files from "
+            f"{len(validated_urls)} validated stream endpoints."
         )
-        if removed_json:
-            print(f"Removed {removed_json} obsolete JSON files from {OUTPUT_DIR}.")
         for path in outputs:
             print(f"Wrote {path}.")
         return 0
