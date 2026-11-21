@@ -556,17 +556,17 @@ def build_server_files(server_catalogs: dict[int, list[dict]]) -> dict[Path, str
 
             seen_by_server[server_id].add(configured_name)
             catalog_name = " ".join(str(channel.get("name", "")).split())
-            if not catalog_name or any(char in catalog_name for char in '\\r\\n"'):
+            if not catalog_name or any(char in catalog_name for char in '\r\n"'):
                 continue
             entries_by_server[server_id].append(
-                f'"{configured_name}" {server_id}\\n{catalog_name}'
+                f'"{configured_name}" {server_id}\n{catalog_name}'
             )
 
     outputs = {}
     for server_id, entries in entries_by_server.items():
         if entries:
             outputs[Path("Servers") / f"server_{server_id}.txt"] = (
-                "\\n\\n".join(entries) + "\\n\\n"
+                "\n\n".join(entries) + "\n\n"
             )
     return outputs
 
