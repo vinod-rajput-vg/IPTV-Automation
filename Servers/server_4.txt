@@ -9901,41 +9901,41 @@ UFC TV
 "UFC FIGHT PASS" 4
 UFC FIGHT PASS
 
-"8:30am ONE Friday Fights 179 Chartpayak v Klarob" 4
-8:30am ONE Friday Fights 179 Chartpayak v Klarob
+"EVENTS 1" 4
+EVENTS 1
 
-"1:30pm ARES 45" 4
-1:30pm ARES 45
+"EVENTS 2" 4
+EVENTS 2
 
-"1:30pm Price v Kotaskova" 4
-1:30pm Price v Kotaskova
+"EVENTS 3" 4
+EVENTS 3
 
-"5pm Jones v Pettus" 4
-5pm Jones v Pettus
+"EVENTS 4" 4
+EVENTS 4
 
-"6pm Bison Kombat 11" 4
-6pm Bison Kombat 11
+"EVENTS 5" 4
+EVENTS 5
 
-"7:30pm Influencer Fight Night Butterbean v Campbell" 4
-7:30pm Influencer Fight Night Butterbean v Campbell
+"EVENTS 6" 4
+EVENTS 6
 
-"8pm Jones v Pettus" 4
-8pm Jones v Pettus
+"EVENTS 7" 4
+EVENTS 7
 
-"9pm BKFC Fight Night Richardson v Oxendine" 4
-9pm BKFC Fight Night Richardson v Oxendine
+"EVENTS 8" 4
+EVENTS 8
 
-"9pm Fury Challenger Series 18" 4
-9pm Fury Challenger Series 18
+"EVENTS 9" 4
+EVENTS 9
 
-"10pm UWC 60" 4
-10pm UWC 60
+"EVENTS 10" 4
+EVENTS 10
 
-"4:45pm USAC Chase Johnson Classic Merced" 4
-4:45pm USAC Chase Johnson Classic Merced
+"EVENTS 11" 4
+EVENTS 11
 
-"7:30pm Southern Thunder Super Dirt Series Championship" 4
-7:30pm Southern Thunder Super Dirt Series Championship
+"EVENTS 12" 4
+EVENTS 12
 
 "EVENTS 13" 4
 EVENTS 13
