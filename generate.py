@@ -564,10 +564,9 @@ def build_server_files(server_catalogs: dict[int, list[dict]]) -> dict[Path, str
 
     outputs = {}
     for server_id, entries in entries_by_server.items():
-        if entries:
-            outputs[Path("Servers") / f"server_{server_id}.txt"] = (
-                "\n\n".join(entries) + "\n\n"
-            )
+        outputs[Path("Servers") / f"server_{server_id}.txt"] = (
+            "\n\n".join(entries) + ("\n\n" if entries else "")
+        )
     return outputs
 
 
@@ -614,6 +613,16 @@ def main() -> int:
         outputs.update(build_server_files(server_catalogs))
         outputs.update(build_category_playlists(server_targets))
         write_outputs_atomically(outputs)
+
+        # Remove server catalogs for server IDs no longer exposed by the public API.
+        active_server_ids = set(server_catalogs)
+        servers_dir = Path("Servers")
+        if servers_dir.is_dir():
+            for server_file in servers_dir.glob("server_*.txt"):
+                match = re.fullmatch(r"server_([0-9]+)\\.txt", server_file.name)
+                if match and int(match.group(1)) not in active_server_ids:
+                    server_file.unlink()
+                    print(f"Removed obsolete server catalog {server_file}.")
 
         # Remove legacy JSON artifacts from earlier workflow runs.
         OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
