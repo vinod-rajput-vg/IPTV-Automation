@@ -14,12 +14,11 @@ import sys
 import tempfile
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, timezone
+from datetime import datetime
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode, urlsplit
 from urllib.request import Request, urlopen
-from zoneinfo import ZoneInfo
 
 BASE_URL = "https://rkdy-linkgen.wasmer.app"
 OUTPUT_DIR = Path("Output")
@@ -38,10 +37,6 @@ VALIDATION_RETRY_MAX_SECONDS = 20
 # Keep requests gentle on the public endpoint; high concurrency can trigger HTTP 5xx.
 VALIDATION_WORKERS = 8
 
-# Re-fetch every server catalog when current IDs produce failed links.
-# Bounded retries prevent scheduled runs from looping indefinitely.
-CATALOG_REFRESH_ROUNDS = 3
-CATALOG_REFRESH_RETRY_SECONDS = 10
 def fetch_server_list() -> list[tuple[int, str]]:
     """Read server keys exposed by the website's public api.php endpoint."""
     request = Request(
@@ -383,38 +378,6 @@ def ensure_all_configured_channels_found(
     return missing
 
 
-def build_json(
-    targets: list[tuple[str, dict, dict]],
-    server_id: int,
-    validated_urls: set[str],
-) -> dict:
-    channels = []
-    for _, channel, metadata in targets:
-        channel_id = str(channel["id"]).strip()
-        channels.append(
-            {
-                "name": metadata["name"],
-                "id": channel_id,
-                "group": str(channel.get("group", "")),
-                "logo": metadata["logo"],
-                "url": build_stream_url(channel_id),
-                "validation_status": (
-                    "valid" if build_stream_url(channel_id) in validated_urls
-                    else "unavailable"
-                ),
-            }
-        )
-
-    now_utc = datetime.now(timezone.utc)
-    now_ist = now_utc.astimezone(ZoneInfo("Asia/Kolkata"))
-
-    return {
-        "updated_at": now_ist.isoformat(timespec="seconds"),
-        "source": f"{BASE_URL}/api.php?server={server_id}",
-        "channels": channels,
-    }
-
-
 def load_category_files() -> dict[str, list[dict]]:
     """Load every category and channel entry from Sorted Channels/*.txt."""
     categories = {}
@@ -585,7 +548,7 @@ def main() -> int:
         server_catalogs = {}
 
         servers = fetch_server_list()
-        for server_id, server_label in servers:
+        for server_id, _server_label in servers:
             catalog = fetch_catalog(server_id)
             server_catalogs[server_id] = catalog
             server_targets[server_id] = find_targets(catalog)
