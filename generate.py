@@ -534,7 +534,7 @@ def build_server_files(server_catalogs: dict[int, list[dict]]) -> dict[Path, str
             normalized_name = normalize_name(catalog_name)
             if not normalized_name:
                 continue
-            if any(char in catalog_name for char in '\\r\\n"'):
+            if any(char in catalog_name for char in '\r\n"'):
                 print(
                     f"WARNING: Skipping invalid channel name in Server {server_id}: "
                     f"{catalog_name!r}"
@@ -546,7 +546,7 @@ def build_server_files(server_catalogs: dict[int, list[dict]]) -> dict[Path, str
 
             seen_names.add(normalized_name)
             entries.append(
-                f'"{catalog_name}" {server_id}\\n{catalog_name}'
+                f'"{catalog_name}" {server_id}\n{catalog_name}'
             )
 
         if duplicates:
@@ -556,7 +556,7 @@ def build_server_files(server_catalogs: dict[int, list[dict]]) -> dict[Path, str
             )
 
         outputs[Path("Servers") / f"server_{server_id}.txt"] = (
-            "\\n\\n".join(entries) + ("\\n\\n" if entries else "")
+            "\n\n".join(entries) + ("\n\n" if entries else "")
         )
 
     return outputs
