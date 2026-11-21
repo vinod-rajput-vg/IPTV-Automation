@@ -619,7 +619,7 @@ def main() -> int:
         servers_dir = Path("Servers")
         if servers_dir.is_dir():
             for server_file in servers_dir.glob("server_*.txt"):
-                match = re.fullmatch(r"server_([0-9]+)\\.txt", server_file.name)
+                match = re.fullmatch(r"server_([0-9]+)\.txt", server_file.name)
                 if match and int(match.group(1)) not in active_server_ids:
                     server_file.unlink()
                     print(f"Removed obsolete server catalog {server_file}.")
