@@ -559,6 +559,14 @@ def main() -> int:
 
         # Validate every unique configured endpoint before publishing playlists.
         validated_urls = validate_streams(server_targets)
+        configured_channel_count = sum(
+            len(entries) for entries in load_category_files().values()
+        )
+        if configured_channel_count and not validated_urls:
+            raise RuntimeError(
+                "No configured stream endpoint passed validation; "
+                "existing playlists were preserved."
+            )
 
         # Publish only validated streams; server fallback also considers validation.
         outputs.update(build_server_files(server_catalogs))
