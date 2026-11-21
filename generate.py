@@ -519,8 +519,6 @@ def build_server_files(server_catalogs: dict[int, list[dict]]) -> dict[Path, str
     """Generate server_N.txt files for newly discovered servers; preserve files 1 and 2."""
     outputs = {}
     for server_id, catalog in server_catalogs.items():
-        if server_id in (1, 2):
-            continue
         entries = []
         seen_names = set()
         for channel in catalog:
