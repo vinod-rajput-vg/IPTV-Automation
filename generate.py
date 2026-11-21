@@ -466,7 +466,7 @@ def load_category_files() -> dict[str, list[dict]]:
 
 
 def build_category_playlists(
-    server_targets: dict[int, list[tuple[str, dict, dict]]]],
+    server_targets: dict[int, list[tuple[str, dict, dict]]],
     validated_urls: set[str],
 ) -> dict[Path, str]:
     """Generate playlists, preferring the configured server then available fallbacks."""
