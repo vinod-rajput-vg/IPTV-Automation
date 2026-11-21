@@ -516,7 +516,7 @@ def build_category_playlists(
 
 
 def build_server_files(server_catalogs: dict[int, list[dict]]) -> dict[Path, str]:
-    """Generate server_N.txt files for newly discovered servers; preserve files 1 and 2."""
+    """Generate or refresh server_N.txt files for every discovered server."""
     outputs = {}
     for server_id, catalog in server_catalogs.items():
         entries = []
